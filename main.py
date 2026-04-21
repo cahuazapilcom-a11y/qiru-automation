@@ -135,6 +135,11 @@ async def confirm_payment(data: PaymentConfirmation):
 
 # ── Admin Panel ───────────────────────────────────────────────────────────────
 
+@app.get("/contacto", response_class=HTMLResponse)
+async def contacto(request: Request):
+    return templates.TemplateResponse("contacto.html", {"request": request})
+
+
 @app.get("/admin", response_class=HTMLResponse)
 async def admin_panel(request: Request):
     return templates.TemplateResponse("admin.html", {
