@@ -15,12 +15,12 @@ class Settings(BaseSettings):
     sendgrid_from_name: str = "Qiru Center"
 
     # Owner
-    owner_email: str = "cahuazapilcom@gmail.com"
-    owner_whatsapp: str = "918156548"
+    owner_email: str = "Ocarrascop.09@gmail.com"
+    owner_whatsapp: str = "939975894"
 
     # Business
     business_name: str = "Qiru Center, Tu Hogar Bonito"
-    business_phone: str = "918156548"
+    business_phone: str = "939975894"
 
     # Meta WhatsApp Business API
     meta_whatsapp_token: str = ""
