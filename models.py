@@ -14,6 +14,7 @@ class LeadSource(str, Enum):
     tiktok = "tiktok"
     manual = "manual"
     email = "email"
+    whatsapp = "whatsapp"
 
 
 class Lead(BaseModel):

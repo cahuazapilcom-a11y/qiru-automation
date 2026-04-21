@@ -22,6 +22,11 @@ class Settings(BaseSettings):
     business_name: str = "Qiru Center, Tu Hogar Bonito"
     business_phone: str = "918156548"
 
+    # Meta WhatsApp Business API
+    meta_whatsapp_token: str = ""
+    meta_whatsapp_phone_id: str = ""
+    meta_verify_token: str = "qiru_verify_2024"
+
     # Security
     zapier_secret: str = ""
 
@@ -32,16 +37,22 @@ class Settings(BaseSettings):
 settings = Settings()
 
 PRODUCTS = [
-    {"name": "Colchón Queen Size", "category": "Colchones", "material": "Memory Foam", "price": 450.00},
-    {"name": "Sofá Cama 3 Plazas", "category": "Muebles", "material": "Tela Velvet", "price": 380.00},
-    {"name": "Colchón King Orthopedic", "category": "Colchones", "material": "Resortes Ensacados", "price": 620.00},
-    {"name": "Comedor para 4 personas", "category": "Muebles", "material": "Madera de Roble", "price": 550.00},
-    {"name": "Base de Cama Matrimonial", "category": "Muebles", "material": "Metal Reforzado", "price": 120.00},
-    {"name": "Colchón Individual", "category": "Colchones", "material": "Espuma de Alta Densidad", "price": 180.00},
-    {"name": "Sillón Reclinable", "category": "Muebles", "material": "Cuero Sintético", "price": 290.00},
-    {"name": "Escritorio de Oficina", "category": "Muebles", "material": "Vidrio y Acero", "price": 150.00},
-    {"name": "Cómoda de 6 Cajones", "category": "Muebles", "material": "Melamina", "price": 210.00},
-    {"name": "Colchón Híbrido Matrimonial", "category": "Colchones", "material": "Gel + Resortes", "price": 530.00},
+    {"name": "Colchón Pocket Star Negro King – Alm y Prot", "category": "Colchones", "material": "Pocket Star", "price": 789.00},
+    {"name": "Colchón Pocket Star King – Alm y Prot", "category": "Colchones", "material": "Pocket Star", "price": 1758.00},
+    {"name": "Almohada Anatómica de Napa Siliconada", "category": "Almohadas", "material": "Napa Siliconada", "price": 82.00},
+    {"name": "Cuna de Bebés", "category": "Cunas", "material": "Madera", "price": 650.00},
+    {"name": "Mesa Comedor de 3 Sillas", "category": "Comedores", "material": "Madera", "price": 750.00},
+    {"name": "Colchón Royal Abrazzo King – Alm Visce y Prot", "category": "Colchones", "material": "Royal Abrazzo", "price": 2557.78},
+    {"name": "Colchón Royal Prince King – Alm Visce y Prot", "category": "Colchones", "material": "Royal Prince", "price": 2486.66},
+    {"name": "Almohada Drimer", "category": "Almohadas", "material": "Drimer", "price": 50.00},
+    {"name": "Colchón Zebra 16 Ribeteado 16 kg/m3 2 Plazas 5\"", "category": "Colchones", "material": "Espuma 16 kg/m3", "price": 159.00},
+    {"name": "Colchón Medallón Ergosoft King – Alm y Prot", "category": "Colchones", "material": "Ergosoft", "price": 529.00},
+    {"name": "Colchón Super Star King – Alm y Prot", "category": "Colchones", "material": "Super Star", "price": 699.00},
+    {"name": "Cama de 2 Plazas", "category": "Camas", "material": "Madera", "price": 950.00},
+    {"name": "Cama de 2 Plazas + Sábana en Madera Huyruro", "category": "Camas", "material": "Madera Huyruro", "price": 1380.00},
+    {"name": "Cama de 2 Plazas y Media", "category": "Camas", "material": "Madera", "price": 1650.00},
+    {"name": "Cama Colonial 2 Plazas y Media", "category": "Camas", "material": "Madera Colonial", "price": 1680.00},
+    {"name": "Comedor de 6 Sillas", "category": "Comedores", "material": "Madera", "price": 2100.00},
 ]
 
 FOLLOWUP_DAYS = [3, 7]

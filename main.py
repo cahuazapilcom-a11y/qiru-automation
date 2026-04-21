@@ -16,6 +16,8 @@ from services.email_service import (
     send_hot_lead_alert,
 )
 from services.scheduler import get_scheduler, schedule_followups
+from services.whatsapp_service import send_whatsapp_message, extract_message
+from services.chat_service import process_message, parse_order, clear_conversation
 
 
 Path("data").mkdir(exist_ok=True)
@@ -36,7 +38,8 @@ app = FastAPI(
 )
 
 templates = Jinja2Templates(directory="templates")
-app.mount("/static", StaticFiles(directory="static"), name="static")
+if Path("static").exists():
+    app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 # ── Health check ─────────────────────────────────────────────────────────────
@@ -146,3 +149,65 @@ async def admin_panel(request: Request):
 @app.get("/products")
 async def list_products():
     return {"products": PRODUCTS}
+
+
+# ── WhatsApp Bot (Meta Business API) ─────────────────────────────────────────
+
+@app.get("/webhook/whatsapp")
+async def whatsapp_verify(request: Request):
+    """Meta webhook verification handshake."""
+    params = request.query_params
+    mode = params.get("hub.mode")
+    token = params.get("hub.verify_token")
+    challenge = params.get("hub.challenge")
+
+    if mode == "subscribe" and token == settings.meta_verify_token:
+        return int(challenge)
+    raise HTTPException(status_code=403, detail="Verificación fallida")
+
+
+@app.post("/webhook/whatsapp")
+async def whatsapp_incoming(request: Request):
+    """Receive and process incoming WhatsApp messages."""
+    body = await request.json()
+
+    phone, text, customer_name = extract_message(body)
+    if not phone or not text:
+        return {"status": "ignored"}
+
+    # Get Claude's reply
+    reply = await process_message(phone, text, customer_name)
+
+    # Check if Claude returned an order JSON
+    order = parse_order(reply)
+
+    if order:
+        # Send confirmation message to client
+        await send_whatsapp_message(phone, order["summary"])
+
+        # Create lead in the system
+        lead = Lead(
+            name=order["name"],
+            phone=order.get("phone", phone),
+            message=f"Pedido WhatsApp: {order['product']} — S/. {order['price']}",
+            interest=order["product"],
+            source=LeadSource.whatsapp,
+        )
+        classification = await classify_lead(lead.name, lead.message, lead.interest)
+        temperature = LeadTemperature(classification["temperature"])
+        score = classification["score"]
+        recommended_names = classification.get("recommended_products", [])
+
+        await create_or_update_contact(lead, temperature, score, recommended_names)
+        await send_hot_lead_alert(
+            lead.name,
+            "",
+            lead.phone or phone,
+            lead.message,
+            score,
+        )
+        clear_conversation(phone)
+    else:
+        await send_whatsapp_message(phone, reply)
+
+    return {"status": "ok"}

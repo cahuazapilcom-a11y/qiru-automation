@@ -16,7 +16,7 @@ async def create_or_update_contact(
     score: int,
     recommended_products: list[str],
 ) -> str | None:
-    if not settings.hubspot_api_key or settings.hubspot_api_key.startswith("CiR"):
+    if not settings.hubspot_api_key:
         return None
 
     properties = {
