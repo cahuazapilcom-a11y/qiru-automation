@@ -8,9 +8,11 @@ async def send_whatsapp_message(to: str, text: str) -> bool:
     if not settings.meta_whatsapp_token or not settings.meta_whatsapp_phone_id:
         return False
 
-    url = f"{GRAPH_URL}/{settings.meta_whatsapp_phone_id}/messages"
+    phone_id = settings.meta_whatsapp_phone_id.strip()
+    token = settings.meta_whatsapp_token.strip()
+    url = f"{GRAPH_URL}/{phone_id}/messages"
     headers = {
-        "Authorization": f"Bearer {settings.meta_whatsapp_token}",
+        "Authorization": f"Bearer {token}",
         "Content-Type": "application/json",
     }
     payload = {
