@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qiru Center — Muebles & Colchones Premium</title>
+    <meta name="description" content="Qiru Center · Colchones premium, camas artesanales y muebles de madera maciza para transformar tu hogar en Lima, Perú.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- LOADER -->
+    <div class="loader" id="loader">
+        <div class="loader-logo">QIRU CENTER</div>
+        <div class="loader-tagline">Muebles & Colchones Premium</div>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- CART OVERLAY -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-head">
+            <h3 class="cart-title">Tu Carrito</h3>
+            <button class="cart-close" id="cartClose">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="cart-empty" id="cartEmpty">Tu carrito está vacío</p>
+        </div>
+        <div class="cart-foot" id="cartFoot">
+            <div class="cart-total-row">
+                <span>Total</span>
+                <span class="cart-total-val" id="cartTotal">S/ 0</span>
+            </div>
+            <div class="cart-payment">
+                <p class="pay-title">Métodos de Pago</p>
+                <div class="pay-item">
+                    <span class="pay-bank">BCP Soles</span>
+                    <span class="pay-num">585-94710401040</span>
+                </div>
+                <div class="pay-item">
+                    <span class="pay-bank">CCI BCP</span>
+                    <span class="pay-num">00258519471040104081</span>
+                </div>
+                <div class="pay-item">
+                    <span class="pay-bank">BBVA Soles</span>
+                    <span class="pay-num">0011-0324-0200326549</span>
+                </div>
+                <div class="pay-item">
+                    <span class="pay-bank">CCI BBVA</span>
+                    <span class="pay-num">01132400020032654919</span>
+                </div>
+                <div class="pay-item yape">
+                    <span class="pay-bank">Yape</span>
+                    <span class="pay-num">901 922 728</span>
+                </div>
+                <p class="pay-name">A nombre de: <strong>Onan Carrasco Panduro</strong></p>
+            </div>
+            <a href="https://qiru-automation.onrender.com/contacto" target="_blank" class="btn-primary cart-confirm">
+                Confirmar pedido por WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- MOBILE NAV OVERLAY -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" id="mobileNavClose">✕</button>
+        <a href="#colchones" class="mobile-nav-link">Colchones</a>
+        <a href="#camas" class="mobile-nav-link">Camas</a>
+        <a href="#muebles" class="mobile-nav-link">Muebles</a>
+        <a href="#contacto" class="mobile-nav-link">Contacto</a>
+    </div>
+
+    <!-- NAV -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">
+            <img src="logo.jpeg" alt="Qiru Center" id="logoImg" style="display:none">
+            <span class="logo-text" id="logoText">QIRU CENTER</span>
+        </a>
+        <div class="nav-links">
+            <a href="#colchones" class="nav-link">Colchones</a>
+            <a href="#camas" class="nav-link">Camas</a>
+            <a href="#muebles" class="nav-link">Muebles</a>
+            <a href="#contacto" class="nav-link">Contacto</a>
+        </div>
+        <div class="nav-right">
+            <a href="https://wa.me/51931654320" class="nav-cta" target="_blank" rel="noopener">Cotizar</a>
+            <button class="nav-cart" id="navCart" aria-label="Carrito">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 01-8 0"/>
+                </svg>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </button>
+        </div>
+        <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- HERO -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-layer layer-warm" id="layerWarm"></div>
+        <div class="hero-layer layer-ambient" id="layerAmbient"></div>
+
+        <div class="hero-content" id="heroContent">
+            <span class="hero-tag">Qiru Center · Yurimaguas, Perú</span>
+            <h1 class="hero-title">
+                <span class="line-1">El Descanso</span>
+                <span class="line-2"><em>es un Arte</em></span>
+            </h1>
+            <p class="hero-desc">
+                Colchones premium, camas de madera maciza y muebles artesanales
+                para transformar tu hogar en el refugio que mereces.
+            </p>
+            <div class="hero-actions">
+                <a href="#colchones" class="btn-primary">Ver Colección</a>
+                <a href="#contacto" class="btn-ghost">Cotizar ahora</a>
+            </div>
+        </div>
+
+        <div class="hero-visual" id="heroVisual">
+            <div class="scene" id="scene">
+                <div class="mattress-float" id="mattressFloat">
+                    <img src="marron.jpeg" alt="Colchón Premium Qiru Center" class="mattress-img">
+                    <div class="mattress-glow"></div>
+                </div>
+                <!-- Floating dust particles -->
+                <div class="dust-particles" id="dustParticles"></div>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Desliza</span>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- STATEMENT -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="statement">
+        <div class="statement-wrap">
+            <div class="statement-line">
+                <span class="st-dash">—</span>
+                <h2 class="st-headline">Cada noche merece<br>ser perfecta.</h2>
+            </div>
+            <p class="st-body">
+                En Qiru Center encontrarás los mejores colchones premium, camas artesanales de madera maciza
+                y muebles para el hogar. Calidad, confort y elegancia al alcance de tu familia.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- COLCHONES -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="products-section dark-section" id="colchones">
+        <div class="section-header">
+            <div class="section-label">
+                <span class="section-num">01</span>
+                <span class="section-tag">Colchones</span>
+            </div>
+            <h2 class="section-title">Descanso <em>Premium</em></h2>
+            <p class="section-sub">Tecnología pocket y viscoelástica para el sueño ideal</p>
+        </div>
+        <div class="filter-tabs" id="colchonesTabs">
+            <button class="filter-tab active" data-filter="all">Todos</button>
+            <button class="filter-tab" data-filter="Colchón">Estándar</button>
+            <button class="filter-tab" data-filter="Colchón Premium">Premium</button>
+            <button class="filter-tab" data-filter="Colchón Económico">Económico</button>
+        </div>
+        <div class="products-grid" id="colchonesGrid"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- STATS STRIP -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="stats-strip">
+        <div class="stat-item">
+            <span class="stat-num">+200</span>
+            <span class="stat-label">Modelos disponibles</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-num">10+</span>
+            <span class="stat-label">Años de experiencia</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Garantía de calidad</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-num">Lima</span>
+            <span class="stat-label">Entrega a domicilio</span>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CAMAS -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="products-section light-section" id="camas">
+        <div class="section-header dark">
+            <div class="section-label">
+                <span class="section-num">02</span>
+                <span class="section-tag">Camas</span>
+            </div>
+            <h2 class="section-title dark">Madera <em>Maciza</em></h2>
+            <p class="section-sub dark">Artesanía en madera huyruro y acabados de lujo</p>
+        </div>
+        <div class="filter-tabs" id="camasTabs">
+            <button class="filter-tab active" data-filter="all">Todas</button>
+            <button class="filter-tab" data-filter="Cama">2 Plazas</button>
+            <button class="filter-tab" data-filter="Cama Artesanal">Artesanal</button>
+            <button class="filter-tab" data-filter="Cama Colonial">Colonial</button>
+        </div>
+        <div class="products-grid" id="camasGrid"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- MUEBLES & ACCESORIOS -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="products-section dark-section" id="muebles">
+        <div class="section-header">
+            <div class="section-label">
+                <span class="section-num">03</span>
+                <span class="section-tag">Muebles & Más</span>
+            </div>
+            <h2 class="section-title">Tu Hogar <em>Completo</em></h2>
+            <p class="section-sub">Comedores, cunas y accesorios para cada espacio</p>
+        </div>
+        <div class="filter-tabs" id="mueblesTabs">
+            <button class="filter-tab active" data-filter="all">Todos</button>
+            <button class="filter-tab" data-filter="Almohada">Almohadas</button>
+            <button class="filter-tab" data-filter="Comedor">Comedores</button>
+            <button class="filter-tab" data-filter="Bebés">Bebés</button>
+        </div>
+        <div class="products-grid" id="mueblesGrid"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- AMBIENTE SCENE -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="ambiente">
+        <div class="ambiente-content">
+            <span class="ambiente-tag">El ambiente perfecto</span>
+            <h2 class="ambiente-title">Tu dormitorio ideal,<br><em>diseñado para ti</em></h2>
+            <p class="ambiente-desc">
+                Combinamos estética y funcionalidad para crear espacios
+                que inspiran tranquilidad, bienestar y lujo accesible.
+            </p>
+            <a href="#contacto" class="btn-primary">Crear mi ambiente</a>
+        </div>
+        <div class="ambiente-visual">
+            <img src="sentro.jpeg" alt="Ambiente Qiru Center" class="ambiente-img">
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CTA / CONTACTO -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="contacto" id="contacto">
+        <div class="contacto-bg-glow"></div>
+        <div class="contacto-wrap">
+            <span class="contacto-tag">¿Listo para transformar tu hogar?</span>
+            <h2 class="contacto-title">Transforma tu<br><em>Descanso Hoy</em></h2>
+            <p class="contacto-desc">Visítanos o escríbenos. Te asesoramos sin compromiso.</p>
+            <div class="contacto-actions">
+                <a href="https://qiru-automation.onrender.com/contacto" class="btn-primary glow" target="_blank" rel="noopener">
+                    Escribir por WhatsApp
+                </a>
+                <a href="tel:+51939975894" class="btn-ghost light">Llamar ahora</a>
+            </div>
+            <div class="contacto-info">
+                <div class="info-block">
+                    <span class="info-label">Dirección</span>
+                    <span class="info-val">Lima, Perú</span>
+                </div>
+                <div class="info-sep"></div>
+                <div class="info-block">
+                    <span class="info-label">Horario</span>
+                    <span class="info-val">Lun – Sáb · 9am – 7pm</span>
+                </div>
+                <div class="info-sep"></div>
+                <div class="info-block">
+                    <span class="info-label">WhatsApp</span>
+                    <span class="info-val">+51 931 654 320</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-wrap">
+            <div class="footer-logo">QIRU CENTER</div>
+            <p class="footer-tagline">Donde el descanso se convierte en arte</p>
+            <nav class="footer-nav">
+                <a href="#colchones">Colchones</a>
+                <a href="#camas">Camas</a>
+                <a href="#muebles">Muebles</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+            <div class="footer-social">
+                <a href="https://www.tiktok.com/@qiru.center?_r=1&_t=ZS-95lLpYwz2gc" target="_blank" rel="noopener" class="social-link tiktok">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.26 8.26 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/>
+                    </svg>
+                    TikTok · @qiru.center
+                </a>
+            </div>
+            <p class="footer-copy">© 2026 Qiru Center · Todos los derechos reservados · Yurimaguas, Perú</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
