@@ -363,7 +363,8 @@ function createCard(p) {
                     thumb.classList.add('fc-thumb--active');
                 });
             });
-            card.querySelector('.btn-add-cart')?.addEventListener('click', () => addToCart(p));
+            const addBtn = card.querySelector('.btn-add-cart');
+            addBtn?.addEventListener('click', () => addToCart(p, addBtn));
         }, 0);
 
         return card;
@@ -384,7 +385,8 @@ function createCard(p) {
             </svg>
             Agregar al carrito
         </button>`;
-    card.querySelector('.btn-add-cart').addEventListener('click', () => addToCart(p));
+    const addBtnSimple = card.querySelector('.btn-add-cart');
+    addBtnSimple?.addEventListener('click', () => addToCart(p, addBtnSimple));
     return card;
 }
 
@@ -727,34 +729,52 @@ function renderCart() {
     }
 }
 
-function addToCart(product) {
-    const priceNum = parseFloat(product.price.replace('S/ ', '').replace(',', ''));
+function addToCart(product, btnEl) {
+    const priceNum = parseFloat(product.price.replace('S/ ', '').replace(',', '')) || 0;
     cart.push({ name: product.name, price: priceNum, priceStr: product.price + ' soles', img: product.images ? product.images[0] : '' });
     renderCart();
     openCart();
+    // Feedback visual en el botón
+    if (btnEl) {
+        const orig = btnEl.innerHTML;
+        btnEl.textContent = '✓ Agregado';
+        btnEl.style.background = '#22c55e';
+        btnEl.disabled = true;
+        setTimeout(() => {
+            btnEl.innerHTML = orig;
+            btnEl.style.background = '';
+            btnEl.disabled = false;
+        }, 1800);
+    }
 }
 
-// Delegación de eventos — un solo listener en document para todos los botones del carrito
+// Delegación de eventos — abrir/cerrar carrito desde nav e ícono
 document.addEventListener('click', function(e) {
-    // Abrir carrito desde ícono nav
-    if (e.target.closest('#navCart')) { openCart(); return; }
-    // Cerrar carrito
-    if (e.target.closest('#cartClose') || e.target.closest('#cartOverlay')) { closeCart(); return; }
-    // Agregar al carrito
-    const addBtn = e.target.closest('.btn-add-cart');
-    if (addBtn) {
-        const card = addBtn.closest('.product-card');
-        if (card) {
-            const productName = card.querySelector('.card-name')?.textContent || '';
-            const productPrice = card.querySelector('.card-price')?.childNodes[0]?.textContent?.trim() || 'S/ 0';
-            const productImg   = card.querySelector('.fc-main-img')?.src || '';
-            const priceNum = parseFloat(productPrice.replace('S/ ', '').replace(',', '')) || 0;
-            cart.push({ name: productName, price: priceNum, priceStr: productPrice + ' soles', img: productImg });
-            renderCart();
-            openCart();
-        }
-    }
+    if (e.target.closest('#navCart'))    { openCart();  return; }
+    if (e.target.closest('#cartClose') ||
+        e.target.closest('#cartOverlay')){ closeCart(); return; }
+    if (e.target.closest('#btnConfirmOrder')) { confirmOrder(); return; }
 });
+
+function confirmOrder() {
+    if (cart.length === 0) {
+        alert('Tu carrito está vacío. Agrega productos antes de confirmar.');
+        return;
+    }
+    const lines = cart.map((item, i) => `${i + 1}. ${item.name} — ${item.priceStr}`);
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    const msg = [
+        '¡Hola! Quiero realizar el siguiente pedido en Qiru Center:',
+        '',
+        ...lines,
+        '',
+        `*Total: S/ ${total.toLocaleString('es-PE')} soles*`,
+        '',
+        'Por favor, indíquenme cómo proceder con el pago. ¡Gracias!'
+    ].join('\n');
+    const url = 'https://wa.me/51939975894?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+}
 
 // ── FILTER TABS ───────────────────────────────────────────
 function initFilters(tabsId, gridId) {
