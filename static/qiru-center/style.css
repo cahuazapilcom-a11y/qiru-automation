@@ -114,8 +114,19 @@ body:has(.product-card:hover) .cursor-follower {
     border-bottom: 1px solid var(--brd);
 }
 .nav-logo {
-    margin-right: auto; text-decoration: none;
+    text-decoration: none;
     display: flex; align-items: center; gap: .75rem;
+}
+.nav-brand-name {
+    font-family: var(--fh);
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: .38em;
+    color: var(--tl);
+    text-transform: uppercase;
+    margin-right: auto;
+    padding-left: 1rem;
+    white-space: nowrap;
 }
 .logo-text {
     font-family: var(--fh); font-size: 1.2rem; font-weight: 500;
