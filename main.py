@@ -7,7 +7,7 @@ from fastapi.responses import HTMLResponse
 from pathlib import Path
 
 from config import settings, PRODUCTS
-from models import ZapierWebhook, PaymentConfirmation, LeadTemperature, Lead, LeadSource
+from models import ZapierWebhook, PaymentConfirmation, LeadTemperature, Lead, LeadSource, CheckoutLead
 from services.ai_classifier import classify_lead
 from services.hubspot_service import create_or_update_contact
 from services.email_service import (
@@ -106,6 +106,55 @@ async def tiktok_lead_webhook(payload: ZapierWebhook):
 async def add_manual_lead(payload: ZapierWebhook):
     payload.secret = settings.zapier_secret or payload.secret
     return await tiktok_lead_webhook(payload)
+
+
+# ── Checkout Lead (desde la web de Qiru Center) ───────────────────────────────
+
+@app.post("/checkout/lead")
+async def checkout_lead(data: CheckoutLead):
+    """
+    Llamado desde el checkout de la web cuando el usuario completa
+    sus datos personales (paso 2). Envía email de bienvenida + alerta CRM.
+    """
+    lead = Lead(
+        name=data.name,
+        email=data.email,
+        phone=data.phone,
+        message=f"Checkout web — {data.items} | Total: {data.total}",
+        interest=data.items,
+        source=LeadSource.manual,
+    )
+
+    # Clasificar lead con IA
+    classification = await classify_lead(lead.name, lead.message, lead.interest)
+    temperature = LeadTemperature(classification["temperature"])
+    score = classification["score"]
+    recommended_names = classification.get("recommended_products", [])
+
+    # Productos recomendados
+    recommended_products = [p for p in PRODUCTS if p["name"] in recommended_names]
+    if not recommended_products:
+        recommended_products = PRODUCTS[:3]
+
+    # Guardar en HubSpot
+    contact_id = await create_or_update_contact(lead, temperature, score, recommended_names)
+
+    # Email de bienvenida con productos recomendados
+    email_sent = await send_welcome_email(lead.name, lead.email, temperature, recommended_products)
+
+    # Alerta al dueño (siempre, porque es un comprador activo)
+    await send_hot_lead_alert(
+        lead.name, lead.email, lead.phone or "",
+        lead.message, score
+    )
+
+    return {
+        "status": "ok",
+        "email_sent": email_sent,
+        "temperature": temperature,
+        "score": score,
+        "hubspot_id": contact_id,
+    }
 
 
 # ── Payment confirmation ──────────────────────────────────────────────────────

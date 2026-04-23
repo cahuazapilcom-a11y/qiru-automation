@@ -852,14 +852,23 @@ function coGoStep(n) {
 };
 
 function coValidatePersonal() {
-    var email = document.getElementById('coEmail').value.trim();
+    var email  = document.getElementById('coEmail').value.trim();
     var nombre = document.getElementById('coNombre').value.trim();
-    var tel = document.getElementById('coTelefono').value.trim();
+    var tel    = document.getElementById('coTelefono').value.trim();
     if (!email || !nombre || !tel) {
         alert('Por favor completa todos los datos personales.');
         return;
     }
     coGoStep(3);
+
+    // Enviar lead al backend → email de bienvenida automático
+    var items = _cart.map(function(i) { return i.name; }).join(', ');
+    var total = 'S/ ' + _cart.reduce(function(s, i) { return s + i.price * (i.qty || 1); }, 0).toLocaleString('es-PE');
+    fetch('/checkout/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: nombre, email: email, phone: tel, items: items, total: total })
+    }).catch(function() {}); // silencioso — no interrumpe el flujo
 };
 
 function coValidateEntrega() {

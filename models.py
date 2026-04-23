@@ -56,3 +56,11 @@ class ZapierWebhook(BaseModel):
     ad_name: Optional[str] = ""
     form_name: Optional[str] = ""
     secret: Optional[str] = ""
+
+
+class CheckoutLead(BaseModel):
+    name: str
+    email: str
+    phone: str
+    items: Optional[str] = ""   # "Producto1, Producto2"
+    total: Optional[str] = ""   # "S/ 950"
