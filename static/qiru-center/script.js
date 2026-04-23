@@ -278,6 +278,82 @@ const PRODUCTS = {
     ],
 };
 
+// ── CART — definido aquí para estar disponible globalmente ─
+const cart = [];
+const PRODUCT_REGISTRY = [];
+
+function getEl(id) { return document.getElementById(id); }
+
+function openCart() {
+    getEl('cartSidebar').classList.add('open');
+    getEl('cartOverlay').classList.add('open');
+}
+function closeCart() {
+    getEl('cartSidebar').classList.remove('open');
+    getEl('cartOverlay').classList.remove('open');
+}
+function renderCart() {
+    var badge   = getEl('cartBadge');
+    var totalEl = getEl('cartTotal');
+    var itemsEl = getEl('cartItems');
+    var emptyEl = getEl('cartEmpty');
+    if (!badge || !totalEl || !itemsEl) return;
+    var total = 0;
+    for (var i = 0; i < cart.length; i++) total += cart[i].price;
+    totalEl.textContent = 'S/ ' + total.toLocaleString('es-PE');
+    badge.textContent   = cart.length;
+    var existing = itemsEl.querySelectorAll('.cart-item');
+    existing.forEach(function(e) { e.remove(); });
+    if (cart.length === 0) {
+        if (emptyEl) emptyEl.style.display = 'block';
+    } else {
+        if (emptyEl) emptyEl.style.display = 'none';
+        cart.forEach(function(item, idx) {
+            var el = document.createElement('div');
+            el.className = 'cart-item';
+            el.innerHTML =
+                '<img src="' + item.img + '" alt="' + item.name + '" class="cart-item-img">' +
+                '<div class="cart-item-info">' +
+                  '<div class="cart-item-name">' + item.name + '</div>' +
+                  '<div class="cart-item-price">' + item.priceStr + '</div>' +
+                '</div>' +
+                '<button class="cart-item-remove" onclick="cartRemove(' + idx + ')">✕</button>';
+            itemsEl.appendChild(el);
+        });
+    }
+    badge.classList.add('bump');
+    setTimeout(function() { badge.classList.remove('bump'); }, 300);
+}
+function cartRemove(idx) {
+    cart.splice(idx, 1);
+    renderCart();
+}
+function addToCart(product, btnEl) {
+    var priceNum = parseFloat(product.price.replace('S/ ', '').replace(',', '')) || 0;
+    cart.push({ name: product.name, price: priceNum, priceStr: product.price + ' soles', img: product.images ? product.images[0] : '' });
+    renderCart();
+    openCart();
+    if (btnEl) {
+        var orig = btnEl.innerHTML;
+        btnEl.textContent = '✓ Agregado';
+        btnEl.style.background = '#22c55e';
+        btnEl.disabled = true;
+        setTimeout(function() {
+            btnEl.innerHTML = orig;
+            btnEl.style.background = '';
+            btnEl.disabled = false;
+        }, 1800);
+    }
+}
+function confirmOrder() {
+    if (cart.length === 0) { alert('Tu carrito está vacío.'); return; }
+    var lines = cart.map(function(item, i) { return (i+1) + '. ' + item.name + ' — ' + item.priceStr; });
+    var total = 0; cart.forEach(function(i) { total += i.price; });
+    var msg = '¡Hola! Quiero realizar el siguiente pedido en Qiru Center:\n\n' +
+        lines.join('\n') + '\n\n*Total: S/ ' + total.toLocaleString('es-PE') + ' soles*\n\nPor favor indíquenme cómo proceder con el pago. ¡Gracias!';
+    window.open('https://wa.me/51939975894?text=' + encodeURIComponent(msg), '_blank');
+}
+
 // ── VISUAL THUMBNAILS ────────────────────────────────────
 function visualFor(cat) {
     const c = cat.toLowerCase();
@@ -320,9 +396,6 @@ function visualFor(cat) {
         </div>`;
 }
 
-// Registro plano de todos los productos — índice usado en data-pid
-const PRODUCT_REGISTRY = [];
-
 function createCard(p) {
     // Registrar producto y obtener su índice único
     const pid = PRODUCT_REGISTRY.length;
@@ -350,7 +423,7 @@ function createCard(p) {
                 <div class="card-name">${p.name}</div>
                 <div class="card-desc">${p.includes}</div>
                 <div class="card-price">${p.price} <span>soles</span></div>
-                <button class="btn-add-cart" data-pid="${pid}">${cartIconSVG} Agregar al carrito</button>
+                <button class="btn-add-cart" onclick="addToCart(PRODUCT_REGISTRY[${pid}], this)">${cartIconSVG} Agregar al carrito</button>
                 <div class="fc-specs-title">Especificaciones</div>
                 <table class="fc-specs"><tbody>${specsHTML}</tbody></table>
             </div>`;
@@ -375,7 +448,7 @@ function createCard(p) {
         <div class="card-name">${p.name}</div>
         <div class="card-desc">${p.includes}</div>
         <div class="card-price">${p.price} <span>soles</span></div>
-        <button class="btn-add-cart" data-pid="${pid}">${cartIconSVG} Agregar al carrito</button>`;
+        <button class="btn-add-cart" onclick="addToCart(PRODUCT_REGISTRY[${pid}], this)">${cartIconSVG} Agregar al carrito</button>`;
     return card;
 }
 
@@ -660,120 +733,12 @@ function spawnDust() {
 }
 spawnDust();
 
-// ── CART ─────────────────────────────────────────────────
-const cart = [];
-
-function getEl(id) { return document.getElementById(id); }
-
-function openCart() {
-    getEl('cartSidebar').classList.add('open');
-    getEl('cartOverlay').classList.add('open');
-}
-function closeCart() {
-    getEl('cartSidebar').classList.remove('open');
-    getEl('cartOverlay').classList.remove('open');
-}
-
-function renderCart() {
-    const badge    = getEl('cartBadge');
-    const totalEl  = getEl('cartTotal');
-    const itemsEl  = getEl('cartItems');
-    const emptyEl  = getEl('cartEmpty');
-    if (!badge || !totalEl || !itemsEl) return;
-
-    const total = cart.reduce((s, i) => s + i.price, 0);
-    totalEl.textContent  = 'S/ ' + total.toLocaleString('es-PE');
-    badge.textContent    = cart.length;
-
-    itemsEl.querySelectorAll('.cart-item').forEach(e => e.remove());
-
-    if (cart.length === 0) {
-        if (emptyEl) emptyEl.style.display = 'block';
-    } else {
-        if (emptyEl) emptyEl.style.display = 'none';
-        cart.forEach((item, idx) => {
-            const el = document.createElement('div');
-            el.className = 'cart-item';
-            el.innerHTML = `
-                <img src="${item.img}" alt="${item.name}" class="cart-item-img">
-                <div class="cart-item-info">
-                    <div class="cart-item-name">${item.name}</div>
-                    <div class="cart-item-price">${item.priceStr}</div>
-                </div>
-                <button class="cart-item-remove" data-idx="${idx}">✕</button>`;
-            itemsEl.appendChild(el);
-        });
-        itemsEl.querySelectorAll('.cart-item-remove').forEach(btn => {
-            btn.addEventListener('click', () => {
-                cart.splice(parseInt(btn.dataset.idx), 1);
-                renderCart();
-            });
-        });
-    }
-
-    // Badge bump
-    if (badge) {
-        badge.classList.add('bump');
-        setTimeout(() => badge.classList.remove('bump'), 300);
-    }
-}
-
-function addToCart(product, btnEl) {
-    const priceNum = parseFloat(product.price.replace('S/ ', '').replace(',', '')) || 0;
-    cart.push({ name: product.name, price: priceNum, priceStr: product.price + ' soles', img: product.images ? product.images[0] : '' });
-    renderCart();
-    openCart();
-    // Feedback visual en el botón
-    if (btnEl) {
-        const orig = btnEl.innerHTML;
-        btnEl.textContent = '✓ Agregado';
-        btnEl.style.background = '#22c55e';
-        btnEl.disabled = true;
-        setTimeout(() => {
-            btnEl.innerHTML = orig;
-            btnEl.style.background = '';
-            btnEl.disabled = false;
-        }, 1800);
-    }
-}
-
-// UN solo listener global — maneja todo lo relacionado al carrito
+// Listener nav cart / cerrar / confirmar
 document.addEventListener('click', function(e) {
-    // Abrir carrito
-    if (e.target.closest('#navCart'))    { openCart();  return; }
-    // Cerrar carrito
-    if (e.target.closest('#cartClose') || e.target.closest('#cartOverlay')) { closeCart(); return; }
-    // Confirmar pedido
-    if (e.target.closest('#btnConfirmOrder')) { confirmOrder(); return; }
-    // Agregar al carrito — usa data-pid para buscar el producto en PRODUCT_REGISTRY
-    const btn = e.target.closest('.btn-add-cart');
-    if (btn) {
-        const pid = parseInt(btn.dataset.pid, 10);
-        const product = PRODUCT_REGISTRY[pid];
-        if (product) addToCart(product, btn);
-        return;
-    }
+    if (e.target.closest('#navCart'))                                        { openCart();     return; }
+    if (e.target.closest('#cartClose') || e.target.closest('#cartOverlay')) { closeCart();    return; }
+    if (e.target.closest('#btnConfirmOrder'))                                { confirmOrder(); return; }
 });
-
-function confirmOrder() {
-    if (cart.length === 0) {
-        alert('Tu carrito está vacío. Agrega productos antes de confirmar.');
-        return;
-    }
-    const lines = cart.map((item, i) => `${i + 1}. ${item.name} — ${item.priceStr}`);
-    const total = cart.reduce((s, i) => s + i.price, 0);
-    const msg = [
-        '¡Hola! Quiero realizar el siguiente pedido en Qiru Center:',
-        '',
-        ...lines,
-        '',
-        `*Total: S/ ${total.toLocaleString('es-PE')} soles*`,
-        '',
-        'Por favor, indíquenme cómo proceder con el pago. ¡Gracias!'
-    ].join('\n');
-    const url = 'https://wa.me/51939975894?text=' + encodeURIComponent(msg);
-    window.open(url, '_blank');
-}
 
 // ── FILTER TABS ───────────────────────────────────────────
 function initFilters(tabsId, gridId) {
