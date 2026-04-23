@@ -773,6 +773,251 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     });
 });
 
+// ── CHECKOUT — 4 pasos ───────────────────────────────────
+
+// Datos de Peru (departamentos → provincias → distritos)
+var PERU = {
+    'Loreto': {
+        'Alto Amazonas': ['Yurimaguas','Balsapuerto','Jeberos','Lagunas','Santa Cruz','Teniente César López Rojas'],
+        'Loreto': ['Nauta','Parinari','Tigre','Trompeteros','Urarinas'],
+        'Maynas': ['Iquitos','Alto Nanay','Fernando Lores','Indiana','Las Amazonas','Mazan','Punchana','Torres Causana'],
+        'Ucayali': ['Contamana','Inahuaya','Padre Márquez','Pampa Hermosa','Sarayacu','Vargas Guerra']
+    },
+    'Lima': {
+        'Lima': ['Lima','Ate','Barranco','Breña','Carabayllo','Chorrillos','Comas','El Agustino','Independencia','Jesús María','La Molina','La Victoria','Lince','Los Olivos','Lurigancho','Lurín','Magdalena del Mar','Miraflores','Pachacámac','Puente Piedra','Pueblo Libre','Rímac','San Borja','San Isidro','San Juan de Lurigancho','San Juan de Miraflores','San Luis','San Martín de Porres','San Miguel','Santa Anita','Santiago de Surco','Surquillo','Villa El Salvador','Villa María del Triunfo'],
+        'Callao': ['Callao','Bellavista','Carmen de la Legua Reynoso','La Perla','La Punta','Mi Perú','Ventanilla']
+    },
+    'Arequipa': {
+        'Arequipa': ['Arequipa','Alto Selva Alegre','Cayma','Cerro Colorado','Characato','Hunter','José Luis Bustamante y Rivero','Mariano Melgar','Miraflores','Mollebaya','Paucarpata','Pocsi','Quequeña','Sabandía','Sachaca','San Juan de Siguas','San Juan de Tarucani','Santa Isabel de Siguas','Santa Rita de Siguas','Socabaya','Tiabaya','Uchumayo','Vítor','Yanahuara','Yarabamba','Yura']
+    },
+    'Cusco': {
+        'Cusco': ['Cusco','Ccorca','Poroy','San Jerónimo','San Sebastián','Santiago','Saylla','Wanchaq']
+    },
+    'La Libertad': {
+        'Trujillo': ['Trujillo','El Porvenir','Florencia de Mora','Huanchaco','La Esperanza','Laredo','Moche','Poroto','Salaverry','Simbal','Victor Larco Herrera']
+    },
+    'Piura': {
+        'Piura': ['Piura','Castilla','Catacaos','Cura Mori','El Tallan','La Arena','La Unión','Las Lomas','Tambogrande','Veintiseis de Octubre']
+    },
+    'Junín': {
+        'Huancayo': ['Huancayo','Carhuacallanga','Chacapampa','Chicche','Chilca','Chongos Alto','Chupuro','Colca','Cullhuas','El Tambo','Huacrapuquio','Hualhuas','Huancan','Huasicancha','Huayucachi','Ingenio','Pariahuanca','Pilcomayo','Pucará','Quichuay','Quilcas','San Agustín','San Jerónimo de Tunán','Santo Domingo de Acobamba','Sapallanga','Sicaya','Viques']
+    },
+    'Ucayali': {
+        'Coronel Portillo': ['Callería','Campoverde','Iparía','Masisea','Yarinacocha','Nueva Requena','Manantay']
+    },
+    'San Martín': {
+        'San Martín': ['Tarapoto','Alberto Leveau','Cacatachi','Chazuta','Chipurana','El Porvenir','Huimbayoc','Juan Guerra','La Banda de Shilcayo','Morales','Papaplaya','San Antonio','Santa Rosa','Sauce','Shapaja']
+    },
+    'Amazonas': {
+        'Chachapoyas': ['Chachapoyas','Asunción','Balsas','Cheto','Chiliquín','Chuquibamba','Granada','Huancas','La Jalca','Leimebamba','Levanto','Magdalena','Mariscal Castilla','Molinopampa','Montevideo','Olleros','Quinjalca','San Francisco de Daguas','San Isidro de Maino','Soloco','Sonche']
+    }
+};
+
+window.openCheckout = function() {
+    window.closeCart();
+    coRenderAll();
+    document.getElementById('coOverlay').classList.add('open');
+    document.getElementById('coModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Cargar departamentos
+    var sel = document.getElementById('coDpto');
+    if (sel && sel.options.length === 1) {
+        Object.keys(PERU).sort().forEach(function(d) {
+            var o = document.createElement('option');
+            o.value = d; o.textContent = d;
+            sel.appendChild(o);
+        });
+        // Pre-seleccionar Loreto
+        sel.value = 'Loreto';
+        window.coLoadProvincias();
+    }
+};
+
+window.closeCheckout = function() {
+    document.getElementById('coOverlay').classList.remove('open');
+    document.getElementById('coModal').classList.remove('open');
+    document.body.style.overflow = '';
+};
+
+window.coGoStep = function(n) {
+    [1,2,3,4].forEach(function(i) {
+        var pane = document.getElementById('coPane' + i);
+        var step = document.querySelector('.co-step[data-step="' + i + '"]');
+        if (pane) pane.classList.toggle('co-pane--hidden', i !== n);
+        if (step) {
+            step.classList.remove('co-step--active','co-step--done');
+            if (i === n) step.classList.add('co-step--active');
+            else if (i < n) step.classList.add('co-step--done');
+        }
+    });
+    document.querySelector('.co-modal').scrollTop = 0;
+};
+
+window.coValidatePersonal = function() {
+    var email = document.getElementById('coEmail').value.trim();
+    var nombre = document.getElementById('coNombre').value.trim();
+    var tel = document.getElementById('coTelefono').value.trim();
+    if (!email || !nombre || !tel) {
+        alert('Por favor completa todos los datos personales.');
+        return;
+    }
+    window.coGoStep(3);
+};
+
+window.coValidateEntrega = function() {
+    var dpto = document.getElementById('coDpto').value;
+    var prov = document.getElementById('coProv').value;
+    var dist = document.getElementById('coDist').value;
+    var dir  = document.getElementById('coDireccion').value.trim();
+    if (!dpto || !prov || !dist || !dir) {
+        alert('Por favor completa todos los datos de entrega.');
+        return;
+    }
+    window.coGoStep(4);
+};
+
+window.coLoadProvincias = function() {
+    var dpto = document.getElementById('coDpto').value;
+    var selP = document.getElementById('coProv');
+    var selD = document.getElementById('coDist');
+    selP.innerHTML = '<option value="">Selecciona provincia</option>';
+    selD.innerHTML = '<option value="">Selecciona distrito</option>';
+    if (dpto && PERU[dpto]) {
+        Object.keys(PERU[dpto]).sort().forEach(function(p) {
+            var o = document.createElement('option');
+            o.value = p; o.textContent = p;
+            selP.appendChild(o);
+        });
+        // Pre-seleccionar primera provincia
+        if (selP.options.length > 1) {
+            selP.selectedIndex = 1;
+            window.coLoadDistritos();
+        }
+    }
+};
+
+window.coLoadDistritos = function() {
+    var dpto = document.getElementById('coDpto').value;
+    var prov = document.getElementById('coProv').value;
+    var selD = document.getElementById('coDist');
+    selD.innerHTML = '<option value="">Selecciona distrito</option>';
+    if (dpto && prov && PERU[dpto] && PERU[dpto][prov]) {
+        PERU[dpto][prov].forEach(function(d) {
+            var o = document.createElement('option');
+            o.value = d; o.textContent = d;
+            selD.appendChild(o);
+        });
+        // Pre-seleccionar Yurimaguas si existe
+        var opts = Array.from(selD.options);
+        var yuri = opts.find(function(o) { return o.value === 'Yurimaguas'; });
+        if (yuri) selD.value = 'Yurimaguas';
+        else if (selD.options.length > 1) selD.selectedIndex = 1;
+    }
+};
+
+function coRenderAll() {
+    // Lista de productos en step 1
+    var list = document.getElementById('coCartList');
+    var empty = document.getElementById('coEmpty');
+    if (!list) return;
+    list.querySelectorAll('.co-cart-row').forEach(function(e) { e.remove(); });
+    if (window._cart.length === 0) {
+        if (empty) empty.style.display = 'block';
+    } else {
+        if (empty) empty.style.display = 'none';
+        window._cart.forEach(function(item, idx) {
+            var row = document.createElement('div');
+            row.className = 'co-cart-row';
+            row.innerHTML =
+                '<img src="' + item.img + '" alt="' + item.name + '" class="co-cart-row-img">' +
+                '<div class="co-cart-row-info">' +
+                  '<div class="co-cart-row-name">' + item.name + '</div>' +
+                  '<div class="co-cart-row-price">' + item.priceStr + '</div>' +
+                '</div>' +
+                '<div class="co-qty">' +
+                  '<button class="co-qty-btn" onclick="coQtyChange(' + idx + ',-1)">−</button>' +
+                  '<div class="co-qty-val" id="coQty' + idx + '">' + (item.qty || 1) + '</div>' +
+                  '<button class="co-qty-btn" onclick="coQtyChange(' + idx + ',1)">+</button>' +
+                '</div>' +
+                '<button class="co-cart-row-del" onclick="coCartDel(' + idx + ')" title="Eliminar">' +
+                  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">' +
+                  '<polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>' +
+                  '</svg></button>';
+            list.appendChild(row);
+        });
+    }
+    // Resumen aside
+    var asideItems = document.getElementById('coAsideItems');
+    var asideTotal = document.getElementById('coAsideTotal');
+    if (asideItems) {
+        asideItems.innerHTML = '';
+        window._cart.forEach(function(item) {
+            var el = document.createElement('div');
+            el.className = 'co-aside-item';
+            el.innerHTML =
+                '<img src="' + item.img + '" class="co-aside-img" alt="' + item.name + '">' +
+                '<span class="co-aside-item-name">' + item.name + '</span>' +
+                '<span class="co-aside-item-price">' + item.priceStr + '</span>';
+            asideItems.appendChild(el);
+        });
+    }
+    if (asideTotal) {
+        var total = 0; window._cart.forEach(function(i) { total += i.price * (i.qty || 1); });
+        asideTotal.textContent = 'S/ ' + total.toLocaleString('es-PE');
+    }
+}
+
+window.coQtyChange = function(idx, delta) {
+    if (!window._cart[idx]) return;
+    var q = (window._cart[idx].qty || 1) + delta;
+    if (q < 1) return;
+    window._cart[idx].qty = q;
+    var el = document.getElementById('coQty' + idx);
+    if (el) el.textContent = q;
+    // Actualizar precio en aside
+    var total = 0; window._cart.forEach(function(i) { total += i.price * (i.qty || 1); });
+    var asideTotal = document.getElementById('coAsideTotal');
+    if (asideTotal) asideTotal.textContent = 'S/ ' + total.toLocaleString('es-PE');
+};
+
+window.coCartDel = function(idx) {
+    window._cart.splice(idx, 1);
+    window.renderCart();
+    coRenderAll();
+};
+
+window.coConfirmar = function() {
+    var email  = document.getElementById('coEmail').value.trim();
+    var nombre = document.getElementById('coNombre').value.trim();
+    var tel    = document.getElementById('coTelefono').value.trim();
+    var dpto   = document.getElementById('coDpto').value;
+    var prov   = document.getElementById('coProv').value;
+    var dist   = document.getElementById('coDist').value;
+    var dir    = document.getElementById('coDireccion').value.trim();
+    var ref    = document.getElementById('coReferencia').value.trim();
+    if (window._cart.length === 0) { alert('Tu carrito está vacío.'); return; }
+    var lines = window._cart.map(function(item, i) {
+        return (i+1) + '. ' + item.name + ' x' + (item.qty||1) + ' — ' + item.priceStr;
+    });
+    var total = 0; window._cart.forEach(function(i) { total += i.price * (i.qty||1); });
+    var msg = '¡Hola Qiru Center! Quiero confirmar mi pedido:\n\n' +
+        lines.join('\n') + '\n\n' +
+        '*Total: S/ ' + total.toLocaleString('es-PE') + ' soles*\n\n' +
+        '📋 *Datos personales:*\n' +
+        '• Nombre: ' + nombre + '\n' +
+        '• Correo: ' + email + '\n' +
+        '• Teléfono: ' + tel + '\n\n' +
+        '📦 *Datos de entrega:*\n' +
+        '• ' + dpto + ' / ' + prov + ' / ' + dist + '\n' +
+        '• Dirección: ' + dir + (ref ? '\n• Referencia: ' + ref : '') + '\n\n' +
+        'Adjunto comprobante de pago. ¡Gracias!';
+    window.open('https://wa.me/51939975894?text=' + encodeURIComponent(msg), '_blank');
+};
+
+// Cerrar checkout con overlay o botón X
+document.getElementById('coClose').addEventListener('click', window.closeCheckout);
+document.getElementById('coOverlay').addEventListener('click', window.closeCheckout);
+
 // ── CTA FLOATING GLOW PULSE ───────────────────────────────
 const glowBtn = document.querySelector('.btn-primary.glow');
 if (glowBtn) {

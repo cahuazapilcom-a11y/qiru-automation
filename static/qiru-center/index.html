@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="checkout.css">
 </head>
 <body>
 
@@ -64,9 +65,167 @@
                 </div>
                 <p class="pay-name">A nombre de: <strong>Onan Carrasco Panduro</strong></p>
             </div>
-            <button class="btn-primary cart-confirm" id="btnConfirmOrder">
-                Confirmar pedido por WhatsApp
+            <button class="btn-primary cart-confirm" onclick="openCheckout()">
+                Proceder al pago →
             </button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CHECKOUT MODAL (4 pasos)              -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="co-overlay" id="coOverlay"></div>
+    <div class="co-modal" id="coModal">
+
+        <!-- Progress bar -->
+        <div class="co-progress">
+            <div class="co-step co-step--active" data-step="1">
+                <div class="co-step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                </div>
+                <span>Carrito</span>
+            </div>
+            <div class="co-line"></div>
+            <div class="co-step" data-step="2">
+                <div class="co-step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                </div>
+                <span>Datos personales</span>
+            </div>
+            <div class="co-line"></div>
+            <div class="co-step" data-step="3">
+                <div class="co-step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+                <span>Datos de entrega</span>
+            </div>
+            <div class="co-line"></div>
+            <div class="co-step" data-step="4">
+                <div class="co-step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                </div>
+                <span>Método de pago</span>
+            </div>
+            <button class="co-close" id="coClose">✕</button>
+        </div>
+
+        <!-- Body -->
+        <div class="co-body">
+            <div class="co-main">
+
+                <!-- STEP 1: CARRITO -->
+                <div class="co-pane" id="coPane1">
+                    <h2 class="co-pane-title">Tu carrito</h2>
+                    <div class="co-cart-list" id="coCartList">
+                        <p class="co-empty" id="coEmpty">Tu carrito está vacío</p>
+                    </div>
+                    <div class="co-pane-foot">
+                        <button class="co-btn-sec" onclick="closeCheckout()">← Seguir comprando</button>
+                        <button class="co-btn-primary" onclick="coGoStep(2)">Continuar →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: DATOS PERSONALES -->
+                <div class="co-pane co-pane--hidden" id="coPane2">
+                    <h2 class="co-pane-title">Datos personales</h2>
+                    <form class="co-form" id="coFormPersonal" onsubmit="return false">
+                        <div class="co-field">
+                            <label>Correo electrónico</label>
+                            <input type="email" id="coEmail" placeholder="tucorreo@email.com" required>
+                        </div>
+                        <div class="co-field">
+                            <label>Nombre completo</label>
+                            <input type="text" id="coNombre" placeholder="Nombre y apellidos" required>
+                        </div>
+                        <div class="co-field">
+                            <label>Teléfono / Celular</label>
+                            <input type="tel" id="coTelefono" placeholder="9XX XXX XXX" required>
+                        </div>
+                    </form>
+                    <div class="co-pane-foot">
+                        <button class="co-btn-sec" onclick="coGoStep(1)">← Atrás</button>
+                        <button class="co-btn-primary" onclick="coValidatePersonal()">Continuar →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: DATOS DE ENTREGA -->
+                <div class="co-pane co-pane--hidden" id="coPane3">
+                    <h2 class="co-pane-title">Datos de entrega</h2>
+                    <form class="co-form" onsubmit="return false">
+                        <div class="co-field">
+                            <label>Departamento</label>
+                            <select id="coDpto" onchange="coLoadProvincias()">
+                                <option value="">Selecciona departamento</option>
+                            </select>
+                        </div>
+                        <div class="co-field">
+                            <label>Provincia</label>
+                            <select id="coProv" onchange="coLoadDistritos()">
+                                <option value="">Selecciona provincia</option>
+                            </select>
+                        </div>
+                        <div class="co-field">
+                            <label>Distrito</label>
+                            <select id="coDist">
+                                <option value="">Selecciona distrito</option>
+                            </select>
+                        </div>
+                        <div class="co-field">
+                            <label>Dirección</label>
+                            <input type="text" id="coDireccion" placeholder="Av. / Jr. / Calle y número">
+                        </div>
+                        <div class="co-field">
+                            <label>Referencia (opcional)</label>
+                            <input type="text" id="coReferencia" placeholder="Cerca a...">
+                        </div>
+                    </form>
+                    <div class="co-pane-foot">
+                        <button class="co-btn-sec" onclick="coGoStep(2)">← Atrás</button>
+                        <button class="co-btn-primary" onclick="coValidateEntrega()">Continuar →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 4: MÉTODO DE PAGO -->
+                <div class="co-pane co-pane--hidden" id="coPane4">
+                    <h2 class="co-pane-title">Método de pago</h2>
+                    <p class="co-pay-intro">Realiza tu transferencia a una de estas cuentas y envíanos el comprobante por WhatsApp.</p>
+                    <div class="co-pay-methods">
+                        <div class="co-pay-card">
+                            <div class="co-pay-bank">BCP</div>
+                            <div class="co-pay-row"><span>Cuenta Soles</span><strong>585-94710401040</strong></div>
+                            <div class="co-pay-row"><span>CCI</span><strong>00258519471040104081</strong></div>
+                        </div>
+                        <div class="co-pay-card">
+                            <div class="co-pay-bank">BBVA</div>
+                            <div class="co-pay-row"><span>Cuenta Soles</span><strong>0011-0324-0200326549</strong></div>
+                            <div class="co-pay-row"><span>CCI</span><strong>01132400020032654919</strong></div>
+                        </div>
+                        <div class="co-pay-card co-pay-card--yape">
+                            <div class="co-pay-bank">Yape</div>
+                            <div class="co-pay-row"><span>Número</span><strong>901 922 728</strong></div>
+                        </div>
+                    </div>
+                    <p class="co-pay-name">A nombre de: <strong>Onan Carrasco Panduro</strong></p>
+                    <div class="co-pane-foot">
+                        <button class="co-btn-sec" onclick="coGoStep(3)">← Atrás</button>
+                        <button class="co-btn-whatsapp" onclick="coConfirmar()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 2C6.477 2 2 6.477 2 12c0 1.887.52 3.655 1.426 5.168L2 22l4.942-1.396A9.944 9.944 0 0011.998 22C17.52 22 22 17.523 22 12S17.52 2 11.998 2z"/></svg>
+                            Confirmar y enviar por WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Resumen lateral -->
+            <aside class="co-aside" id="coAside">
+                <h3 class="co-aside-title">Resumen de compra</h3>
+                <div class="co-aside-items" id="coAsideItems"></div>
+                <div class="co-aside-total">
+                    <span>Total</span>
+                    <strong id="coAsideTotal">S/ 0</strong>
+                </div>
+            </aside>
         </div>
     </div>
 
