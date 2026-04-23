@@ -278,37 +278,38 @@ const PRODUCTS = {
     ],
 };
 
-// ── CART — definido aquí para estar disponible globalmente ─
-const cart = [];
-const PRODUCT_REGISTRY = [];
+// ── CART — expuesto en window para que onclick lo encuentre ─
+window._cart = [];
+window.PRODUCT_REGISTRY = [];
 
-function getEl(id) { return document.getElementById(id); }
-
-function openCart() {
-    getEl('cartSidebar').classList.add('open');
-    getEl('cartOverlay').classList.add('open');
-}
-function closeCart() {
-    getEl('cartSidebar').classList.remove('open');
-    getEl('cartOverlay').classList.remove('open');
-}
-function renderCart() {
-    var badge   = getEl('cartBadge');
-    var totalEl = getEl('cartTotal');
-    var itemsEl = getEl('cartItems');
-    var emptyEl = getEl('cartEmpty');
+window.openCart = function() {
+    document.getElementById('cartSidebar').classList.add('open');
+    document.getElementById('cartOverlay').classList.add('open');
+};
+window.closeCart = function() {
+    document.getElementById('cartSidebar').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+};
+window.cartRemove = function(idx) {
+    window._cart.splice(idx, 1);
+    window.renderCart();
+};
+window.renderCart = function() {
+    var badge   = document.getElementById('cartBadge');
+    var totalEl = document.getElementById('cartTotal');
+    var itemsEl = document.getElementById('cartItems');
+    var emptyEl = document.getElementById('cartEmpty');
     if (!badge || !totalEl || !itemsEl) return;
     var total = 0;
-    for (var i = 0; i < cart.length; i++) total += cart[i].price;
+    window._cart.forEach(function(i) { total += i.price; });
     totalEl.textContent = 'S/ ' + total.toLocaleString('es-PE');
-    badge.textContent   = cart.length;
-    var existing = itemsEl.querySelectorAll('.cart-item');
-    existing.forEach(function(e) { e.remove(); });
-    if (cart.length === 0) {
+    badge.textContent   = window._cart.length;
+    itemsEl.querySelectorAll('.cart-item').forEach(function(e) { e.remove(); });
+    if (window._cart.length === 0) {
         if (emptyEl) emptyEl.style.display = 'block';
     } else {
         if (emptyEl) emptyEl.style.display = 'none';
-        cart.forEach(function(item, idx) {
+        window._cart.forEach(function(item, idx) {
             var el = document.createElement('div');
             el.className = 'cart-item';
             el.innerHTML =
@@ -323,16 +324,12 @@ function renderCart() {
     }
     badge.classList.add('bump');
     setTimeout(function() { badge.classList.remove('bump'); }, 300);
-}
-function cartRemove(idx) {
-    cart.splice(idx, 1);
-    renderCart();
-}
-function addToCart(product, btnEl) {
+};
+window.addToCart = function(product, btnEl) {
     var priceNum = parseFloat(product.price.replace('S/ ', '').replace(',', '')) || 0;
-    cart.push({ name: product.name, price: priceNum, priceStr: product.price + ' soles', img: product.images ? product.images[0] : '' });
-    renderCart();
-    openCart();
+    window._cart.push({ name: product.name, price: priceNum, priceStr: product.price + ' soles', img: product.images ? product.images[0] : '' });
+    window.renderCart();
+    window.openCart();
     if (btnEl) {
         var orig = btnEl.innerHTML;
         btnEl.textContent = '✓ Agregado';
@@ -344,15 +341,15 @@ function addToCart(product, btnEl) {
             btnEl.disabled = false;
         }, 1800);
     }
-}
-function confirmOrder() {
-    if (cart.length === 0) { alert('Tu carrito está vacío.'); return; }
-    var lines = cart.map(function(item, i) { return (i+1) + '. ' + item.name + ' — ' + item.priceStr; });
-    var total = 0; cart.forEach(function(i) { total += i.price; });
+};
+window.confirmOrder = function() {
+    if (window._cart.length === 0) { alert('Tu carrito está vacío.'); return; }
+    var lines = window._cart.map(function(item, i) { return (i+1) + '. ' + item.name + ' — ' + item.priceStr; });
+    var total = 0; window._cart.forEach(function(i) { total += i.price; });
     var msg = '¡Hola! Quiero realizar el siguiente pedido en Qiru Center:\n\n' +
         lines.join('\n') + '\n\n*Total: S/ ' + total.toLocaleString('es-PE') + ' soles*\n\nPor favor indíquenme cómo proceder con el pago. ¡Gracias!';
     window.open('https://wa.me/51939975894?text=' + encodeURIComponent(msg), '_blank');
-}
+};
 
 // ── VISUAL THUMBNAILS ────────────────────────────────────
 function visualFor(cat) {
