@@ -362,6 +362,11 @@ body:has(.product-card:hover) .cursor-follower {
     font-weight: 600; letter-spacing: .12em;
     text-transform: uppercase;
     transition: all .35s;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    user-select: none;
+    -webkit-user-select: none;
 }
 .btn-add-cart:hover {
     background: #bfe600; border-color: #bfe600; color: #000;

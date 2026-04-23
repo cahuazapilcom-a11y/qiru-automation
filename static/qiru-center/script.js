@@ -410,20 +410,25 @@ function createCard(p) {
                 <div class="card-name">${p.name}</div>
                 <div class="card-desc">${p.includes}</div>
                 <div class="card-price">${p.price} <span>soles</span></div>
-                <button class="btn-add-cart" onclick="addToCart(PRODUCT_REGISTRY[${pid}], this)">${cartIconSVG} Agregar al carrito</button>
+                <button class="btn-add-cart">${cartIconSVG} Agregar al carrito</button>
                 <div class="fc-specs-title">Especificaciones</div>
                 <table class="fc-specs"><tbody>${specsHTML}</tbody></table>
             </div>`;
 
-        // Thumbnail click
-        const mainImg = card.querySelector('.fc-main-img');
-        card.querySelectorAll('.fc-thumb').forEach(thumb => {
-            thumb.addEventListener('click', () => {
+        // Thumbnail click — mismo patrón para el carrito
+        var mainImg = card.querySelector('.fc-main-img');
+        card.querySelectorAll('.fc-thumb').forEach(function(thumb) {
+            thumb.addEventListener('click', function() {
                 mainImg.src = thumb.dataset.img;
-                card.querySelectorAll('.fc-thumb').forEach(t => t.classList.remove('fc-thumb--active'));
+                card.querySelectorAll('.fc-thumb').forEach(function(t) { t.classList.remove('fc-thumb--active'); });
                 thumb.classList.add('fc-thumb--active');
             });
         });
+
+        // Botón carrito — addEventListener directo, sin onclick, captura p por closure
+        var btn = card.querySelector('.btn-add-cart');
+        btn.addEventListener('click', function() { addToCart(p, btn); });
+
         return card;
     }
 
@@ -435,7 +440,10 @@ function createCard(p) {
         <div class="card-name">${p.name}</div>
         <div class="card-desc">${p.includes}</div>
         <div class="card-price">${p.price} <span>soles</span></div>
-        <button class="btn-add-cart" onclick="addToCart(PRODUCT_REGISTRY[${pid}], this)">${cartIconSVG} Agregar al carrito</button>`;
+        <button class="btn-add-cart">${cartIconSVG} Agregar al carrito</button>`;
+
+    var btnSimple = card.querySelector('.btn-add-cart');
+    btnSimple.addEventListener('click', function() { addToCart(p, btnSimple); });
     return card;
 }
 
