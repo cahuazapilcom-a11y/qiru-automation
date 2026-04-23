@@ -2,8 +2,6 @@
    QIRU CENTER — Animations & Interactions
    ============================================================ */
 
-'use strict';
-
 // ── PRODUCTS DATA ─────────────────────────────────────────
 const PRODUCTS = {
     colchones: [
@@ -278,38 +276,38 @@ const PRODUCTS = {
     ],
 };
 
-// ── CART — expuesto en window para que onclick lo encuentre ─
-window._cart = [];
-window.PRODUCT_REGISTRY = [];
+// ── CART ─────────────────────────────────────────────────
+var _cart = [];
+var PRODUCT_REGISTRY = [];
 
-window.openCart = function() {
+function openCart() {
     document.getElementById('cartSidebar').classList.add('open');
     document.getElementById('cartOverlay').classList.add('open');
-};
-window.closeCart = function() {
+}
+function closeCart() {
     document.getElementById('cartSidebar').classList.remove('open');
     document.getElementById('cartOverlay').classList.remove('open');
-};
-window.cartRemove = function(idx) {
-    window._cart.splice(idx, 1);
-    window.renderCart();
-};
-window.renderCart = function() {
+}
+function cartRemove(idx) {
+    _cart.splice(idx, 1);
+    renderCart();
+}
+function renderCart() {
     var badge   = document.getElementById('cartBadge');
     var totalEl = document.getElementById('cartTotal');
     var itemsEl = document.getElementById('cartItems');
     var emptyEl = document.getElementById('cartEmpty');
     if (!badge || !totalEl || !itemsEl) return;
     var total = 0;
-    window._cart.forEach(function(i) { total += i.price; });
+    _cart.forEach(function(i) { total += i.price * (i.qty || 1); });
     totalEl.textContent = 'S/ ' + total.toLocaleString('es-PE');
-    badge.textContent   = window._cart.length;
+    badge.textContent   = _cart.length;
     itemsEl.querySelectorAll('.cart-item').forEach(function(e) { e.remove(); });
-    if (window._cart.length === 0) {
+    if (_cart.length === 0) {
         if (emptyEl) emptyEl.style.display = 'block';
     } else {
         if (emptyEl) emptyEl.style.display = 'none';
-        window._cart.forEach(function(item, idx) {
+        _cart.forEach(function(item, idx) {
             var el = document.createElement('div');
             el.className = 'cart-item';
             el.innerHTML =
@@ -324,12 +322,12 @@ window.renderCart = function() {
     }
     badge.classList.add('bump');
     setTimeout(function() { badge.classList.remove('bump'); }, 300);
-};
-window.addToCart = function(product, btnEl) {
+}
+function addToCart(product, btnEl) {
     var priceNum = parseFloat(product.price.replace('S/ ', '').replace(',', '')) || 0;
-    window._cart.push({ name: product.name, price: priceNum, priceStr: product.price + ' soles', img: product.images ? product.images[0] : '' });
-    window.renderCart();
-    window.openCart();
+    _cart.push({ name: product.name, price: priceNum, priceStr: product.price + ' soles', img: product.images ? product.images[0] : '', qty: 1 });
+    renderCart();
+    openCart();
     if (btnEl) {
         var orig = btnEl.innerHTML;
         btnEl.textContent = '✓ Agregado';
@@ -341,15 +339,7 @@ window.addToCart = function(product, btnEl) {
             btnEl.disabled = false;
         }, 1800);
     }
-};
-window.confirmOrder = function() {
-    if (window._cart.length === 0) { alert('Tu carrito está vacío.'); return; }
-    var lines = window._cart.map(function(item, i) { return (i+1) + '. ' + item.name + ' — ' + item.priceStr; });
-    var total = 0; window._cart.forEach(function(i) { total += i.price; });
-    var msg = '¡Hola! Quiero realizar el siguiente pedido en Qiru Center:\n\n' +
-        lines.join('\n') + '\n\n*Total: S/ ' + total.toLocaleString('es-PE') + ' soles*\n\nPor favor indíquenme cómo proceder con el pago. ¡Gracias!';
-    window.open('https://wa.me/51939975894?text=' + encodeURIComponent(msg), '_blank');
-};
+}
 
 // ── VISUAL THUMBNAILS ────────────────────────────────────
 function visualFor(cat) {
@@ -813,8 +803,8 @@ var PERU = {
     }
 };
 
-window.openCheckout = function() {
-    window.closeCart();
+function openCheckout() {
+    closeCart();
     coRenderAll();
     document.getElementById('coOverlay').classList.add('open');
     document.getElementById('coModal').classList.add('open');
@@ -829,17 +819,17 @@ window.openCheckout = function() {
         });
         // Pre-seleccionar Loreto
         sel.value = 'Loreto';
-        window.coLoadProvincias();
+        coLoadProvincias();
     }
 };
 
-window.closeCheckout = function() {
+function closeCheckout() {
     document.getElementById('coOverlay').classList.remove('open');
     document.getElementById('coModal').classList.remove('open');
     document.body.style.overflow = '';
 };
 
-window.coGoStep = function(n) {
+function coGoStep(n) {
     [1,2,3,4].forEach(function(i) {
         var pane = document.getElementById('coPane' + i);
         var step = document.querySelector('.co-step[data-step="' + i + '"]');
@@ -853,7 +843,7 @@ window.coGoStep = function(n) {
     document.querySelector('.co-modal').scrollTop = 0;
 };
 
-window.coValidatePersonal = function() {
+function coValidatePersonal() {
     var email = document.getElementById('coEmail').value.trim();
     var nombre = document.getElementById('coNombre').value.trim();
     var tel = document.getElementById('coTelefono').value.trim();
@@ -861,10 +851,10 @@ window.coValidatePersonal = function() {
         alert('Por favor completa todos los datos personales.');
         return;
     }
-    window.coGoStep(3);
+    coGoStep(3);
 };
 
-window.coValidateEntrega = function() {
+function coValidateEntrega() {
     var dpto = document.getElementById('coDpto').value;
     var prov = document.getElementById('coProv').value;
     var dist = document.getElementById('coDist').value;
@@ -873,10 +863,10 @@ window.coValidateEntrega = function() {
         alert('Por favor completa todos los datos de entrega.');
         return;
     }
-    window.coGoStep(4);
+    coGoStep(4);
 };
 
-window.coLoadProvincias = function() {
+function coLoadProvincias() {
     var dpto = document.getElementById('coDpto').value;
     var selP = document.getElementById('coProv');
     var selD = document.getElementById('coDist');
@@ -891,12 +881,12 @@ window.coLoadProvincias = function() {
         // Pre-seleccionar primera provincia
         if (selP.options.length > 1) {
             selP.selectedIndex = 1;
-            window.coLoadDistritos();
+            coLoadDistritos();
         }
     }
 };
 
-window.coLoadDistritos = function() {
+function coLoadDistritos() {
     var dpto = document.getElementById('coDpto').value;
     var prov = document.getElementById('coProv').value;
     var selD = document.getElementById('coDist');
@@ -921,11 +911,11 @@ function coRenderAll() {
     var empty = document.getElementById('coEmpty');
     if (!list) return;
     list.querySelectorAll('.co-cart-row').forEach(function(e) { e.remove(); });
-    if (window._cart.length === 0) {
+    if (_cart.length === 0) {
         if (empty) empty.style.display = 'block';
     } else {
         if (empty) empty.style.display = 'none';
-        window._cart.forEach(function(item, idx) {
+        _cart.forEach(function(item, idx) {
             var row = document.createElement('div');
             row.className = 'co-cart-row';
             row.innerHTML =
@@ -951,7 +941,7 @@ function coRenderAll() {
     var asideTotal = document.getElementById('coAsideTotal');
     if (asideItems) {
         asideItems.innerHTML = '';
-        window._cart.forEach(function(item) {
+        _cart.forEach(function(item) {
             var el = document.createElement('div');
             el.className = 'co-aside-item';
             el.innerHTML =
@@ -962,31 +952,31 @@ function coRenderAll() {
         });
     }
     if (asideTotal) {
-        var total = 0; window._cart.forEach(function(i) { total += i.price * (i.qty || 1); });
+        var total = 0; _cart.forEach(function(i) { total += i.price * (i.qty || 1); });
         asideTotal.textContent = 'S/ ' + total.toLocaleString('es-PE');
     }
 }
 
-window.coQtyChange = function(idx, delta) {
-    if (!window._cart[idx]) return;
-    var q = (window._cart[idx].qty || 1) + delta;
+function coQtyChange(idx, delta) {
+    if (!_cart[idx]) return;
+    var q = (_cart[idx].qty || 1) + delta;
     if (q < 1) return;
-    window._cart[idx].qty = q;
+    _cart[idx].qty = q;
     var el = document.getElementById('coQty' + idx);
     if (el) el.textContent = q;
     // Actualizar precio en aside
-    var total = 0; window._cart.forEach(function(i) { total += i.price * (i.qty || 1); });
+    var total = 0; _cart.forEach(function(i) { total += i.price * (i.qty || 1); });
     var asideTotal = document.getElementById('coAsideTotal');
     if (asideTotal) asideTotal.textContent = 'S/ ' + total.toLocaleString('es-PE');
 };
 
-window.coCartDel = function(idx) {
-    window._cart.splice(idx, 1);
-    window.renderCart();
+function coCartDel(idx) {
+    _cart.splice(idx, 1);
+    renderCart();
     coRenderAll();
 };
 
-window.coConfirmar = function() {
+function coConfirmar() {
     var email  = document.getElementById('coEmail').value.trim();
     var nombre = document.getElementById('coNombre').value.trim();
     var tel    = document.getElementById('coTelefono').value.trim();
@@ -995,11 +985,11 @@ window.coConfirmar = function() {
     var dist   = document.getElementById('coDist').value;
     var dir    = document.getElementById('coDireccion').value.trim();
     var ref    = document.getElementById('coReferencia').value.trim();
-    if (window._cart.length === 0) { alert('Tu carrito está vacío.'); return; }
-    var lines = window._cart.map(function(item, i) {
+    if (_cart.length === 0) { alert('Tu carrito está vacío.'); return; }
+    var lines = _cart.map(function(item, i) {
         return (i+1) + '. ' + item.name + ' x' + (item.qty||1) + ' — ' + item.priceStr;
     });
-    var total = 0; window._cart.forEach(function(i) { total += i.price * (i.qty||1); });
+    var total = 0; _cart.forEach(function(i) { total += i.price * (i.qty||1); });
     var msg = '¡Hola Qiru Center! Quiero confirmar mi pedido:\n\n' +
         lines.join('\n') + '\n\n' +
         '*Total: S/ ' + total.toLocaleString('es-PE') + ' soles*\n\n' +
@@ -1015,8 +1005,8 @@ window.coConfirmar = function() {
 };
 
 // Cerrar checkout con overlay o botón X
-document.getElementById('coClose').addEventListener('click', window.closeCheckout);
-document.getElementById('coOverlay').addEventListener('click', window.closeCheckout);
+document.getElementById('coClose').addEventListener('click', closeCheckout);
+document.getElementById('coOverlay').addEventListener('click', closeCheckout);
 
 // ── CTA FLOATING GLOW PULSE ───────────────────────────────
 const glowBtn = document.querySelector('.btn-primary.glow');
