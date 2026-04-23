@@ -320,8 +320,16 @@ function visualFor(cat) {
         </div>`;
 }
 
+// Registro plano de todos los productos — índice usado en data-pid
+const PRODUCT_REGISTRY = [];
+
 function createCard(p) {
+    // Registrar producto y obtener su índice único
+    const pid = PRODUCT_REGISTRY.length;
+    PRODUCT_REGISTRY.push(p);
+
     const card = document.createElement('div');
+    const cartIconSVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>`;
 
     if (p.featured) {
         card.className = 'product-card product-card--featured reveal';
@@ -334,7 +342,7 @@ function createCard(p) {
         ).join('');
         card.innerHTML = `
             <div class="fc-gallery">
-                <img src="${p.images[0]}" alt="${p.name}" class="fc-main-img" id="fcMain_${p.name.replace(/\s/g,'_')}">
+                <img src="${p.images[0]}" alt="${p.name}" class="fc-main-img">
                 <div class="fc-thumbs">${thumbsHTML}</div>
             </div>
             <div class="fc-info">
@@ -342,31 +350,20 @@ function createCard(p) {
                 <div class="card-name">${p.name}</div>
                 <div class="card-desc">${p.includes}</div>
                 <div class="card-price">${p.price} <span>soles</span></div>
-                <button class="btn-add-cart">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
-                        <path d="M16 10a4 4 0 01-8 0"/>
-                    </svg>
-                    Agregar al carrito
-                </button>
+                <button class="btn-add-cart" data-pid="${pid}">${cartIconSVG} Agregar al carrito</button>
                 <div class="fc-specs-title">Especificaciones</div>
                 <table class="fc-specs"><tbody>${specsHTML}</tbody></table>
             </div>`;
 
-        // Thumbnail click + cart button
-        setTimeout(() => {
-            const mainImg = card.querySelector('.fc-main-img');
-            card.querySelectorAll('.fc-thumb').forEach(thumb => {
-                thumb.addEventListener('click', () => {
-                    mainImg.src = thumb.dataset.img;
-                    card.querySelectorAll('.fc-thumb').forEach(t => t.classList.remove('fc-thumb--active'));
-                    thumb.classList.add('fc-thumb--active');
-                });
+        // Thumbnail click
+        const mainImg = card.querySelector('.fc-main-img');
+        card.querySelectorAll('.fc-thumb').forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                mainImg.src = thumb.dataset.img;
+                card.querySelectorAll('.fc-thumb').forEach(t => t.classList.remove('fc-thumb--active'));
+                thumb.classList.add('fc-thumb--active');
             });
-            const addBtn = card.querySelector('.btn-add-cart');
-            addBtn?.addEventListener('click', () => addToCart(p, addBtn));
-        }, 0);
-
+        });
         return card;
     }
 
@@ -378,15 +375,7 @@ function createCard(p) {
         <div class="card-name">${p.name}</div>
         <div class="card-desc">${p.includes}</div>
         <div class="card-price">${p.price} <span>soles</span></div>
-        <button class="btn-add-cart">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
-                <path d="M16 10a4 4 0 01-8 0"/>
-            </svg>
-            Agregar al carrito
-        </button>`;
-    const addBtnSimple = card.querySelector('.btn-add-cart');
-    addBtnSimple?.addEventListener('click', () => addToCart(p, addBtnSimple));
+        <button class="btn-add-cart" data-pid="${pid}">${cartIconSVG} Agregar al carrito</button>`;
     return card;
 }
 
@@ -748,12 +737,22 @@ function addToCart(product, btnEl) {
     }
 }
 
-// Delegación de eventos — abrir/cerrar carrito desde nav e ícono
+// UN solo listener global — maneja todo lo relacionado al carrito
 document.addEventListener('click', function(e) {
+    // Abrir carrito
     if (e.target.closest('#navCart'))    { openCart();  return; }
-    if (e.target.closest('#cartClose') ||
-        e.target.closest('#cartOverlay')){ closeCart(); return; }
+    // Cerrar carrito
+    if (e.target.closest('#cartClose') || e.target.closest('#cartOverlay')) { closeCart(); return; }
+    // Confirmar pedido
     if (e.target.closest('#btnConfirmOrder')) { confirmOrder(); return; }
+    // Agregar al carrito — usa data-pid para buscar el producto en PRODUCT_REGISTRY
+    const btn = e.target.closest('.btn-add-cart');
+    if (btn) {
+        const pid = parseInt(btn.dataset.pid, 10);
+        const product = PRODUCT_REGISTRY[pid];
+        if (product) addToCart(product, btn);
+        return;
+    }
 });
 
 function confirmOrder() {
