@@ -119,7 +119,7 @@ body:has(.product-card:hover) .cursor-follower {
 }
 .nav-brand-name {
     font-family: var(--fh);
-    font-size: 1.1rem;
+    font-size: 1.6rem;
     font-weight: 400;
     letter-spacing: .38em;
     color: var(--tl);
