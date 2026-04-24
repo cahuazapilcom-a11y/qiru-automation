@@ -401,7 +401,7 @@ body:has(.product-card:hover) .cursor-follower {
 .btn-add-cart {
     display: flex; align-items: center; justify-content: center;
     gap: .5rem; width: 100%;
-    padding: .7rem 1rem; margin-top: auto;
+    padding: .7rem 1rem; margin-top: 0;
     background: #D3FF00;
     border: 1px solid #D3FF00;
     color: #111;
@@ -1123,6 +1123,7 @@ body:has(.product-card:hover) .cursor-follower {
     font-size: .62rem; letter-spacing: .3em;
     text-transform: uppercase; color: var(--gold);
     margin-bottom: .5rem;
+    height: 1rem; overflow: hidden;
 }
 .light-section .card-category { color: var(--wood-dk); }
 .card-name {
@@ -1132,18 +1133,20 @@ body:has(.product-card:hover) .cursor-follower {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    min-height: 2.6rem;
+    height: 2.7rem;
 }
 .light-section .card-name { color: var(--td); }
 .card-desc {
     font-size: .75rem; color: var(--tmu);
-    line-height: 1.5; margin-bottom: .5rem;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    line-height: 1.5; margin-bottom: .6rem;
+    height: 1.15rem;
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
 }
 .light-section .card-desc { color: var(--tm); }
 .card-price {
     font-family: var(--fh); font-size: 1.55rem; font-weight: 400;
-    color: var(--wood); line-height: 1; margin-bottom: .8rem;
+    color: var(--wood); line-height: 1; margin-bottom: .75rem;
+    height: 1.6rem;
 }
 .light-section .card-price { color: var(--wood-dk); }
 .card-price span {
