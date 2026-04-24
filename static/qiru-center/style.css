@@ -1507,10 +1507,10 @@ img {
     .filter-tabs::-webkit-scrollbar { display: none; }
     .tab-btn { flex-shrink: 0; font-size: .6rem; padding: .5rem 1rem; }
 
-    /* Products grid — 2 columnas en móvil */
+    /* Products grid — 1 columna en móvil */
     .products-grid {
         padding: 0 1rem;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 1rem;
     }
 
