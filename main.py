@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from pathlib import Path
 
 from config import settings, PRODUCTS
@@ -40,6 +40,13 @@ app = FastAPI(
 templates = Jinja2Templates(directory="templates")
 if Path("static").exists():
     app.mount("/static", StaticFiles(directory="static"), name="static")
+
+
+# ── Página web principal ──────────────────────────────────────────────────────
+
+@app.get("/", response_class=FileResponse)
+async def index():
+    return FileResponse("static/qiru-center/index.html")
 
 
 # ── Health check ─────────────────────────────────────────────────────────────
