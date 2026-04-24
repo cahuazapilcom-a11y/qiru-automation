@@ -858,6 +858,9 @@ body:has(.product-card:hover) .cursor-follower {
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     padding: 0 5rem 3rem;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .product-card {
     border-radius: 10px;
@@ -1451,9 +1454,12 @@ img {
     .st-stats { flex-wrap: wrap; gap: 2rem; }
 
     /* Sections */
-    .section-header { padding: 0 4rem; }
-    .filter-tabs { padding: 0 4rem; flex-wrap: wrap; gap: .6rem; }
-    .products-grid { padding: 0 3rem 2rem; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .section-header { padding: 0 3rem; }
+    .filter-dual { padding: 0 3rem 1.5rem; }
+    .filter-tabs { padding: 0 3rem; flex-wrap: wrap; gap: .5rem; }
+    .products-grid { padding: 0 3rem 2.5rem; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .card-name { font-size: .95rem; }
+    .card-price { font-size: 1.3rem; }
 
     /* Ambiente */
     .ambiente { grid-template-columns: 1fr; padding: 6rem 4rem; gap: 4rem; }
@@ -1508,37 +1514,38 @@ img {
     .sec-tag { font-size: .58rem; }
     .sec-title { font-size: clamp(2rem, 8vw, 3.5rem); }
 
-    /* Filter tabs — scrollable row */
+    /* Filter tabs — scrollable horizontal en móvil */
+    .filter-dual { padding: 0 1rem 1rem; gap: 0; }
+    .filter-group { gap: .6rem; padding-bottom: .6rem; margin-bottom: .6rem; }
+    .filter-group-label { font-size: .58rem; min-width: 44px; }
     .filter-tabs {
-        padding: 0 1.5rem;
+        padding: 0 1rem;
         flex-wrap: nowrap;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        gap: .5rem;
+        gap: .4rem;
         scrollbar-width: none;
-        margin-bottom: 2rem;
+        margin-bottom: .5rem;
     }
     .filter-tabs::-webkit-scrollbar { display: none; }
-    .tab-btn { flex-shrink: 0; font-size: .6rem; padding: .5rem 1rem; }
+    .filter-tab { flex-shrink: 0; font-size: .58rem; padding: .4rem .8rem; }
 
     /* Products grid — 1 columna en móvil */
     .products-grid {
         padding: 0 1rem 2rem;
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1.2rem;
     }
-    .fc-main-img { aspect-ratio: 4/3; }
-    .fc-thumbs { gap: .5rem; }
-    .fc-thumb { width: 60px; height: 45px; }
-    .fc-details { padding: 1.5rem; }
-    .fc-name { font-size: clamp(1.4rem, 6vw, 2.2rem); }
-    .fc-specs-table th,
-    .fc-specs-table td { font-size: .75rem; padding: .45rem .6rem; }
-    .btn-add-cart { width: 100%; text-align: center; padding: .9rem 1rem; font-size: .78rem; }
 
-    /* Regular cards */
-    .product-card { padding: 1.2rem; }
-    .product-card img { aspect-ratio: 4/3; }
+    /* Tarjetas móvil */
+    .card-body { padding: .85rem .85rem .7rem; }
+    .card-name { font-size: .95rem; min-height: auto; }
+    .card-desc { font-size: .72rem; }
+    .card-price { font-size: 1.35rem; margin-bottom: .6rem; }
+    .btn-add-cart { padding: .65rem .8rem; font-size: .72rem; }
+    .card-fav-btn { width: 30px; height: 30px; }
+    .card-thumbs-strip { opacity: 1; }
+    .card-thumb { width: 38px; height: 30px; }
 
     /* Ambiente */
     .ambiente { padding: 4rem 1.5rem; gap: 3rem; }
@@ -1584,14 +1591,17 @@ img {
     .ambiente,
     .contacto,
     .footer { padding-left: 1.2rem; padding-right: 1.2rem; }
-    .fc-details { padding: 1.2rem; }
 
     /* Touch: disable 3D tilt */
     .product-card { transform: none !important; }
+    .products-grid { grid-template-columns: 1fr; gap: 1rem; padding: 0 .8rem 1.5rem; }
+    .card-body { padding: .75rem; }
+    .card-name { font-size: .88rem; }
+    .card-price { font-size: 1.2rem; }
 }
 
-/* ── TOUCH DEVICES: disable tilt ───────────────────── */
+/* ── TOUCH DEVICES: mostrar miniaturas siempre ─────── */
 @media (pointer: coarse) {
-    .product-card { transform: none !important; transition: box-shadow .3s; }
-    .product-card:active { box-shadow: 0 8px 40px rgba(192,154,70,.18); }
+    .card-thumbs-strip { opacity: 1; }
+    .product-card:hover { transform: none; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
 }
