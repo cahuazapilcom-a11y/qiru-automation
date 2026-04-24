@@ -232,12 +232,14 @@
 
     <!-- PROMO BANNER -->
     <div class="promo-banner" id="promoBanner">
-        <div class="promo-banner-inner">
-            <span class="promo-icon">🚚</span>
-            <span class="promo-text"><strong>¡Oferta por tiempo limitado!</strong> Envío gratis a Yurimaguas</span>
-            <span class="promo-countdown" id="promoCountdown"></span>
-            <button class="promo-close" id="promoBannerClose" aria-label="Cerrar">✕</button>
+        <div class="promo-track-wrap">
+            <div class="promo-track" id="promoTrack">
+                <span class="promo-slide-item">🚚&nbsp; <strong>¡OFERTA POR TIEMPO LIMITADO!</strong> &nbsp;—&nbsp; Envío gratis a Yurimaguas &nbsp;<span class="promo-countdown-inline" id="promoCountdown"></span></span>
+                <span class="promo-slide-item">🚚&nbsp; <strong>¡OFERTA POR TIEMPO LIMITADO!</strong> &nbsp;—&nbsp; Envío gratis a Yurimaguas &nbsp;<span class="promo-countdown-inline" id="promoCountdown2"></span></span>
+                <span class="promo-slide-item">🚚&nbsp; <strong>¡OFERTA POR TIEMPO LIMITADO!</strong> &nbsp;—&nbsp; Envío gratis a Yurimaguas &nbsp;<span class="promo-countdown-inline" id="promoCountdown3"></span></span>
+            </div>
         </div>
+        <button class="promo-close" id="promoBannerClose" aria-label="Cerrar">✕</button>
     </div>
 
     <!-- MOBILE NAV OVERLAY -->
@@ -558,23 +560,31 @@
         var end   = new Date('2026-06-24T23:59:59');
         var now   = new Date();
         if (now < start || now > end) return;
-
-        var banner = document.getElementById('promoBanner');
-        var closeBtn = document.getElementById('promoBannerClose');
-        var countdown = document.getElementById('promoCountdown');
-
         if (sessionStorage.getItem('promoClosed')) return;
+
+        var banner   = document.getElementById('promoBanner');
+        var closeBtn = document.getElementById('promoBannerClose');
+        var els      = [
+            document.getElementById('promoCountdown'),
+            document.getElementById('promoCountdown2'),
+            document.getElementById('promoCountdown3')
+        ];
 
         banner.classList.add('is-visible');
         document.body.classList.add('promo-active');
 
         function updateCountdown() {
             var remaining = end - new Date();
-            if (remaining <= 0) { banner.style.display = 'none'; document.body.classList.remove('promo-active'); return; }
+            if (remaining <= 0) {
+                banner.style.display = 'none';
+                document.body.classList.remove('promo-active');
+                return;
+            }
             var d = Math.floor(remaining / 86400000);
             var h = Math.floor((remaining % 86400000) / 3600000);
             var m = Math.floor((remaining % 3600000) / 60000);
-            countdown.textContent = 'Termina en: ' + d + 'd ' + h + 'h ' + m + 'm';
+            var txt = '⏱ ' + d + 'd ' + h + 'h ' + m + 'm';
+            els.forEach(function(el) { if (el) el.textContent = txt; });
         }
         updateCountdown();
         setInterval(updateCountdown, 60000);

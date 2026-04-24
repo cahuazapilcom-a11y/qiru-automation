@@ -1751,60 +1751,83 @@ img {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 10001;
-    background: linear-gradient(90deg, #8B4513 0%, #C09A46 50%, #8B4513 100%);
-    background-size: 200% 100%;
-    animation: promoBannerShift 4s linear infinite;
-    color: #fff;
+    background: #E1F82F;
+    color: #0C0B09;
     font-family: var(--fb);
-    font-size: 0.82rem;
-    font-weight: 400;
-    letter-spacing: 0.03em;
     padding: 0;
     display: none;
+    overflow: hidden;
+    height: 44px;
+    box-shadow: 0 2px 12px rgba(225,248,47,0.35);
 }
-.promo-banner.is-visible { display: block; }
-@keyframes promoBannerShift {
-    0%   { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
+.promo-banner.is-visible { display: flex; align-items: center; }
+
+/* Marquee track */
+.promo-track-wrap {
+    flex: 1;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
-.promo-banner-inner {
-    max-width: 900px;
-    margin: 0 auto;
+.promo-track {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: promoMarquee 22s linear infinite;
+}
+.promo-track:hover { animation-play-state: paused; }
+@keyframes promoMarquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-33.333%); }
+}
+.promo-slide-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 0 60px;
+    text-transform: uppercase;
+}
+.promo-slide-item strong {
+    font-weight: 800;
+    font-size: 0.92rem;
+    letter-spacing: 0.06em;
+}
+.promo-countdown-inline {
+    display: inline-block;
+    background: #0C0B09;
+    color: #E1F82F;
+    border-radius: 4px;
+    padding: 2px 9px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-left: 4px;
+}
+.promo-close {
+    flex-shrink: 0;
+    width: 36px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 9px 48px 9px 16px;
-    position: relative;
-}
-.promo-icon { font-size: 1rem; flex-shrink: 0; }
-.promo-text { text-align: center; }
-.promo-text strong { font-weight: 600; }
-.promo-countdown {
-    background: rgba(0,0,0,0.25);
-    border-radius: 4px;
-    padding: 2px 8px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-.promo-close {
-    position: absolute;
-    right: 12px; top: 50%;
-    transform: translateY(-50%);
-    background: none;
+    background: rgba(0,0,0,0.12);
     border: none;
-    color: rgba(255,255,255,0.8);
-    font-size: 0.85rem;
-    line-height: 1;
-    padding: 4px;
+    color: #0C0B09;
+    font-size: 0.9rem;
+    font-weight: 700;
     cursor: pointer;
+    transition: background 0.2s;
 }
-.promo-close:hover { color: #fff; }
-body.promo-active { padding-top: 38px; }
+.promo-close:hover { background: rgba(0,0,0,0.22); }
+body.promo-active { padding-top: 44px; }
 @media (max-width: 600px) {
-    .promo-banner-inner { gap: 6px; padding: 8px 36px 8px 10px; flex-wrap: wrap; }
-    .promo-text { font-size: 0.78rem; }
-    .promo-countdown { font-size: 0.72rem; }
+    .promo-banner { height: 38px; }
+    .promo-slide-item { font-size: 0.78rem; padding: 0 32px; }
+    .promo-slide-item strong { font-size: 0.82rem; }
+    .promo-countdown-inline { font-size: 0.7rem; padding: 1px 6px; }
+    body.promo-active { padding-top: 38px; }
 }
