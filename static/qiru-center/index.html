@@ -253,8 +253,8 @@
             <a href="#contacto" class="nav-link">Contacto</a>
         </div>
 
-        <!-- BÚSQUEDA RÁPIDA -->
-        <div class="nav-search" id="navSearch">
+        <!-- BÚSQUEDA RÁPIDA (desktop/tablet inline) -->
+        <div class="nav-search nav-search-inline" id="navSearch">
             <div class="nav-search-box">
                 <svg class="nav-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 <input type="text" id="searchInput" class="nav-search-input" placeholder="¿Qué estás buscando?" autocomplete="off">
@@ -265,6 +265,10 @@
 
         <div class="nav-right">
             <a href="https://wa.me/51931654320" class="nav-cta" target="_blank" rel="noopener">Cotizar</a>
+            <!-- Botón búsqueda móvil -->
+            <button class="nav-search-toggle" id="searchToggle" aria-label="Buscar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
             <button class="nav-cart" id="navCart" aria-label="Carrito">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
@@ -277,6 +281,15 @@
             <span></span><span></span><span></span>
         </button>
     </nav>
+    <!-- BÚSQUEDA MÓVIL (barra desplegable debajo del nav) -->
+    <div class="nav-search-mobile" id="navSearchMobile">
+        <div class="nav-search-box">
+            <svg class="nav-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="searchInputMobile" class="nav-search-input" placeholder="¿Qué estás buscando?" autocomplete="off">
+            <button class="nav-search-clear" id="searchClearMobile" style="display:none">✕</button>
+        </div>
+        <div class="search-results" id="searchResultsMobile"></div>
+    </div>
 
     <!-- ═══════════════════════════════════════ -->
     <!-- HERO -->

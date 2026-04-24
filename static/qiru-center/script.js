@@ -1297,6 +1297,86 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
     });
 })();
 
+// ── BÚSQUEDA MÓVIL (barra desplegable) ────────────────────────────────────
+(function() {
+    var toggle   = document.getElementById('searchToggle');
+    var bar      = document.getElementById('navSearchMobile');
+    var inputM   = document.getElementById('searchInputMobile');
+    var resultsM = document.getElementById('searchResultsMobile');
+    var clearM   = document.getElementById('searchClearMobile');
+    if (!toggle || !bar || !inputM) return;
+
+    var ALL_PRODUCTS = []
+        .concat(PRODUCTS.colchones || [])
+        .concat(PRODUCTS.camas     || [])
+        .concat(PRODUCTS.muebles   || []);
+
+    var SECTION_MAP = {};
+    (PRODUCTS.colchones || []).forEach(function(p) { SECTION_MAP[p.name] = 'colchones'; });
+    (PRODUCTS.camas     || []).forEach(function(p) { SECTION_MAP[p.name] = 'camas'; });
+    (PRODUCTS.muebles   || []).forEach(function(p) { SECTION_MAP[p.name] = 'muebles'; });
+
+    function showResultsM(query) {
+        query = query.trim().toLowerCase();
+        resultsM.innerHTML = '';
+        if (!query) { resultsM.classList.remove('open'); return; }
+        var matches = ALL_PRODUCTS.filter(function(p) {
+            return p.name.toLowerCase().includes(query) ||
+                   p.cat.toLowerCase().includes(query)  ||
+                   (p.includes && p.includes.toLowerCase().includes(query));
+        }).slice(0, 8);
+        if (matches.length === 0) {
+            resultsM.innerHTML = '<div class="sr-empty">No se encontraron productos</div>';
+            resultsM.classList.add('open'); return;
+        }
+        matches.forEach(function(p) {
+            var img = p.images && p.images[0] ? p.images[0] : '';
+            var section = SECTION_MAP[p.name] || 'colchones';
+            var item = document.createElement('div');
+            item.className = 'sr-item';
+            item.innerHTML =
+                (img ? '<img src="' + img + '" class="sr-img" alt="' + p.name + '">' : '<div class="sr-img sr-img--placeholder"></div>') +
+                '<div class="sr-info"><div class="sr-name">' + p.name + '</div><div class="sr-cat">' + p.cat + '</div></div>' +
+                '<div class="sr-price">' + p.price + '</div>';
+            item.addEventListener('click', function() {
+                var target = document.getElementById(section);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                inputM.value = ''; clearM.style.display = 'none';
+                resultsM.classList.remove('open'); resultsM.innerHTML = '';
+                bar.classList.remove('open');
+                addToCart(p, null);
+            });
+            resultsM.appendChild(item);
+        });
+        resultsM.classList.add('open');
+    }
+
+    toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bar.classList.toggle('open');
+        if (bar.classList.contains('open')) { inputM.focus(); }
+        else { inputM.value = ''; clearM.style.display = 'none'; resultsM.classList.remove('open'); }
+    });
+
+    inputM.addEventListener('input', function() {
+        clearM.style.display = inputM.value ? 'flex' : 'none';
+        showResultsM(inputM.value);
+    });
+
+    clearM.addEventListener('click', function() {
+        inputM.value = ''; clearM.style.display = 'none';
+        resultsM.classList.remove('open'); resultsM.innerHTML = '';
+        inputM.focus();
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('#navSearchMobile') && !e.target.closest('#searchToggle')) {
+            bar.classList.remove('open');
+            resultsM.classList.remove('open');
+        }
+    });
+})();
+
 // ── CTA FLOATING GLOW PULSE ───────────────────────────────
 const glowBtn = document.querySelector('.btn-primary.glow');
 if (glowBtn) {
