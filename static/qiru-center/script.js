@@ -524,70 +524,77 @@ function visualFor(cat) {
 }
 
 function createCard(p) {
-    // Registrar producto y obtener su índice único
-    const pid = PRODUCT_REGISTRY.length;
     PRODUCT_REGISTRY.push(p);
 
     const card = document.createElement('div');
-    const cartIconSVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>`;
-
-    if (p.featured) {
-        card.className = 'product-card product-card--featured reveal';
-        card.dataset.cat  = p.cat;
-        card.dataset.size = p.size || '';
-        card.dataset.line = p.line || '';
-        const thumbsHTML = p.images.map((img, i) =>
-            `<img src="${img}" alt="${p.name} ${i+1}" class="fc-thumb${i===0?' fc-thumb--active':''}" data-img="${img}">`
-        ).join('');
-        const specsHTML = p.specs.map(([k, v]) =>
-            `<tr><td class="spec-key">${k}</td><td class="spec-val">${v}</td></tr>`
-        ).join('');
-        card.innerHTML = `
-            <div class="fc-gallery">
-                <img src="${p.images[0]}" alt="${p.name}" class="fc-main-img">
-                <div class="fc-thumbs">${thumbsHTML}</div>
-            </div>
-            <div class="fc-info">
-                <div class="card-category">${p.cat}</div>
-                <div class="card-name">${p.name}</div>
-                <div class="card-desc">${p.includes}</div>
-                <div class="card-price">${p.price} <span>soles</span></div>
-                <button class="btn-add-cart">${cartIconSVG} Agregar al carrito</button>
-                <div class="fc-specs-title">Especificaciones</div>
-                <table class="fc-specs"><tbody>${specsHTML}</tbody></table>
-            </div>`;
-
-        // Thumbnail click — mismo patrón para el carrito
-        var mainImg = card.querySelector('.fc-main-img');
-        card.querySelectorAll('.fc-thumb').forEach(function(thumb) {
-            thumb.addEventListener('click', function() {
-                mainImg.src = thumb.dataset.img;
-                card.querySelectorAll('.fc-thumb').forEach(function(t) { t.classList.remove('fc-thumb--active'); });
-                thumb.classList.add('fc-thumb--active');
-            });
-        });
-
-        // Botón carrito — addEventListener directo, sin onclick, captura p por closure
-        var btn = card.querySelector('.btn-add-cart');
-        btn.addEventListener('click', function() { addToCart(p, btn); });
-
-        return card;
-    }
-
     card.className = 'product-card reveal';
     card.dataset.cat  = p.cat;
     card.dataset.size = p.size || '';
     card.dataset.line = p.line || '';
-    card.innerHTML = `
-        <div class="card-visual">${visualFor(p.cat)}</div>
-        <div class="card-category">${p.cat}</div>
-        <div class="card-name">${p.name}</div>
-        <div class="card-desc">${p.includes}</div>
-        <div class="card-price">${p.price} <span>soles</span></div>
-        <button class="btn-add-cart">${cartIconSVG} Agregar al carrito</button>`;
 
-    var btnSimple = card.querySelector('.btn-add-cart');
-    btnSimple.addEventListener('click', function() { addToCart(p, btnSimple); });
+    const cartIconSVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>`;
+    const heartSVG   = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`;
+
+    const mainImg   = p.images && p.images[0] ? p.images[0] : '';
+    const specsHTML = p.specs ? p.specs.map(([k,v]) =>
+        `<tr><td class="spec-key">${k}</td><td class="spec-val">${v}</td></tr>`
+    ).join('') : '';
+
+    const thumbsHTML = p.images && p.images.length > 1
+        ? p.images.map((img, i) =>
+            `<img src="${img}" class="card-thumb${i===0?' card-thumb--active':''}" data-img="${img}" alt="${p.name}">`
+          ).join('')
+        : '';
+
+    card.innerHTML = `
+        <div class="card-img-wrap">
+            ${mainImg
+                ? `<img src="${mainImg}" alt="${p.name}" class="card-main-img">`
+                : `<div class="card-img-placeholder">${visualFor(p.cat)}</div>`}
+            ${thumbsHTML ? `<div class="card-thumbs-strip">${thumbsHTML}</div>` : ''}
+            <button class="card-fav-btn" title="Favorito">${heartSVG}</button>
+        </div>
+        <div class="card-body">
+            <div class="card-category">${p.cat}</div>
+            <div class="card-name">${p.name}</div>
+            <div class="card-desc">${p.includes}</div>
+            <div class="card-price">${p.price} <span>soles</span></div>
+            <button class="btn-add-cart">${cartIconSVG} Agregar al carrito</button>
+            ${specsHTML ? `
+            <button class="btn-specs-toggle">Especificaciones ▾</button>
+            <table class="card-specs-table hidden"><tbody>${specsHTML}</tbody></table>` : ''}
+        </div>`;
+
+    // Cambiar imagen al pasar por miniatura
+    var mainImgEl = card.querySelector('.card-main-img');
+    card.querySelectorAll('.card-thumb').forEach(function(thumb) {
+        thumb.addEventListener('click', function() {
+            if (mainImgEl) mainImgEl.src = thumb.dataset.img;
+            card.querySelectorAll('.card-thumb').forEach(function(t) { t.classList.remove('card-thumb--active'); });
+            thumb.classList.add('card-thumb--active');
+        });
+    });
+
+    // Favorito
+    var favBtn = card.querySelector('.card-fav-btn');
+    favBtn && favBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        favBtn.classList.toggle('active');
+    });
+
+    // Agregar al carrito
+    var addBtn = card.querySelector('.btn-add-cart');
+    addBtn && addBtn.addEventListener('click', function() { addToCart(p, addBtn); });
+
+    // Toggle especificaciones
+    var specsToggle = card.querySelector('.btn-specs-toggle');
+    var specsTable  = card.querySelector('.card-specs-table');
+    specsToggle && specsToggle.addEventListener('click', function() {
+        specsTable.classList.toggle('hidden');
+        specsToggle.textContent = specsTable.classList.contains('hidden')
+            ? 'Especificaciones ▾' : 'Especificaciones ▴';
+    });
+
     return card;
 }
 
