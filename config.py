@@ -37,22 +37,37 @@ class Settings(BaseSettings):
 settings = Settings()
 
 PRODUCTS = [
-    {"name": "Colchón Pocket Star Negro King – Alm y Prot", "category": "Colchones", "material": "Pocket Star", "price": 789.00},
-    {"name": "Colchón Pocket Star King – Alm y Prot", "category": "Colchones", "material": "Pocket Star", "price": 1758.00},
-    {"name": "Almohada Anatómica de Napa Siliconada", "category": "Almohadas", "material": "Napa Siliconada", "price": 82.00},
-    {"name": "Cuna de Bebés", "category": "Cunas", "material": "Madera", "price": 650.00},
-    {"name": "Mesa Comedor de 3 Sillas", "category": "Comedores", "material": "Madera", "price": 750.00},
-    {"name": "Colchón Royal Abrazzo King – Alm Visce y Prot", "category": "Colchones", "material": "Royal Abrazzo", "price": 2557.78},
-    {"name": "Colchón Royal Prince King – Alm Visce y Prot", "category": "Colchones", "material": "Royal Prince", "price": 2486.66},
+    # Colchones — Línea Premium (Medallón Ergosoft)
+    {"name": "Medallón 2 Plaza Ergosoft Queen", "category": "Colchones", "material": "Ergosoft", "price": 790.00},
+    {"name": "Medallón Ergosoft 2 Plazas", "category": "Colchones", "material": "Ergosoft", "price": 660.00},
+    {"name": "Medallón Ergosoft 1.5 Plaza", "category": "Colchones", "material": "Ergosoft", "price": 530.00},
+    # Colchones — Línea Pocket
+    {"name": "Pocket Star 2 Plazas Negro King", "category": "Colchones", "material": "Pocket Star", "price": 930.00},
+    {"name": "Pocket Star King", "category": "Colchones", "material": "Pocket Star", "price": 1420.00},
+    # Colchones — Línea Standard (Super Star)
+    {"name": "Super Star King 2 Plazas", "category": "Colchones", "material": "Super Star", "price": 740.00},
+    {"name": "Super Star King", "category": "Colchones", "material": "Super Star", "price": 1100.00},
+    # Colchones — Línea Royal
+    {"name": "Royal Prince 2 Plazas", "category": "Colchones", "material": "Royal Prince", "price": 1770.00},
+    {"name": "Royal Abrazzo King", "category": "Colchones", "material": "Royal Abrazzo", "price": 2820.00},
+    {"name": "Royal Abrazzo Queen", "category": "Colchones", "material": "Royal Abrazzo", "price": 2210.00},
+    {"name": "Royal Prince Queen", "category": "Colchones", "material": "Royal Prince", "price": 1400.00},
+    # Colchones — Zebra 16 Ribeteado
+    {"name": "Zebra 16 Ribeteado 2 Plazas 5'' Acolchado", "category": "Colchones", "material": "Espuma 16 kg/m3", "price": 220.00},
+    {"name": "Zebra 16 Ribeteado 2 Plazas 7'' Acolchado", "category": "Colchones", "material": "Espuma 16 kg/m3", "price": 270.00},
+    {"name": "Zebra 16 Ribeteado 1.5 Plaza 5'' Acolchado", "category": "Colchones", "material": "Espuma 16 kg/m3", "price": 180.00},
+    {"name": "Zebra 16 Ribeteado 1.5 Plaza 7'' Acolchado", "category": "Colchones", "material": "Espuma 16 kg/m3", "price": 220.00},
+    # Camas
+    {"name": "Cama 2 Plazas", "category": "Camas", "material": "Madera", "price": 950.00},
+    {"name": "Cama 2 Plazas + Sábana", "category": "Camas", "material": "Madera Huyruro", "price": 1380.00},
+    {"name": "Cama 2½ Plazas", "category": "Camas", "material": "Madera", "price": 1650.00},
+    {"name": "Cama Colonial 2½ Plazas", "category": "Camas", "material": "Madera Colonial", "price": 1680.00},
+    # Muebles y accesorios
+    {"name": "Almohada Anatómica Napa", "category": "Almohadas", "material": "Napa Siliconada", "price": 82.00},
     {"name": "Almohada Drimer", "category": "Almohadas", "material": "Drimer", "price": 50.00},
-    {"name": "Colchón Zebra 16 Ribeteado 16 kg/m3 2 Plazas 5\"", "category": "Colchones", "material": "Espuma 16 kg/m3", "price": 159.00},
-    {"name": "Colchón Medallón Ergosoft King – Alm y Prot", "category": "Colchones", "material": "Ergosoft", "price": 529.00},
-    {"name": "Colchón Super Star King – Alm y Prot", "category": "Colchones", "material": "Super Star", "price": 699.00},
-    {"name": "Cama de 2 Plazas", "category": "Camas", "material": "Madera", "price": 950.00},
-    {"name": "Cama de 2 Plazas + Sábana en Madera Huyruro", "category": "Camas", "material": "Madera Huyruro", "price": 1380.00},
-    {"name": "Cama de 2 Plazas y Media", "category": "Camas", "material": "Madera", "price": 1650.00},
-    {"name": "Cama Colonial 2 Plazas y Media", "category": "Camas", "material": "Madera Colonial", "price": 1680.00},
-    {"name": "Comedor de 6 Sillas", "category": "Comedores", "material": "Madera", "price": 2100.00},
+    {"name": "Cuna de Bebés", "category": "Cunas", "material": "Madera", "price": 650.00},
+    {"name": "Comedor 3 Sillas", "category": "Comedores", "material": "Madera", "price": 750.00},
+    {"name": "Comedor 6 Sillas", "category": "Comedores", "material": "Madera", "price": 2100.00},
 ]
 
 FOLLOWUP_DAYS = [3, 7]

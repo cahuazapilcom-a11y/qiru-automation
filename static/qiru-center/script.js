@@ -6,18 +6,33 @@
 const PRODUCTS = {
     colchones: [
         {
-            name: 'Medallón Ergosoft King', price: 'S/ 529', includes: 'Almohada + Protector', cat: 'Colchón',
+            name: 'Medallón 2 Plaza Ergosoft Queen', price: 'S/ 790', includes: 'Almohada + Protector', cat: 'Colchón',
+            size: 'Queen', line: 'Premium',
+            featured: true,
+            images: ['Medallon Ergosoft King.jpeg', 'Medallon Ergosoft King1.jpeg', 'Medallon Ergosoft King2.jpeg'],
+            specs: [
+                ['Tela',             'Jacquard'],
+                ['Resortes',         'Cosisoft · Tecnología suiza'],
+                ['Banda',            'Mesh · Mayor flujo de aire'],
+                ['Marco',            'Zebra 25'],
+                ['Lados de uso',     'One Side'],
+                ['Sensación',        'Intermedia'],
+                ['Garantía',         '7 años'],
+            ]
+        },
+        {
+            name: 'Medallón Ergosoft 2 Plazas', price: 'S/ 660', includes: 'Almohada + Protector', cat: 'Colchón',
+            size: '2 Plazas', line: 'Premium',
             featured: true,
             images: ['Medallon Ergosoft King.jpeg', 'Medallon Ergosoft King1.jpeg', 'Medallon Ergosoft King2.jpeg'],
             specs: [
                 ['Marca',            'PARAÍSO'],
-                ['Plazaje',          'Queen'],
+                ['Plazaje',          '2 Plazas'],
                 ['Modelo',           'Medallón'],
                 ['Línea',            'Medallón Premium'],
                 ['Alto (cm)',        '27 cm'],
-                ['Ancho (cm)',       '152 cm'],
-                ['Largo (cm)',       '203 cm'],
-                ['Peso (kg)',        '34.5 kg'],
+                ['Ancho (cm)',       '138 cm'],
+                ['Largo (cm)',       '190 cm'],
                 ['Pillow top',       'Sí'],
                 ['Two sides',        'No'],
                 ['Nivel de firmeza', '3 · Intermedio'],
@@ -25,7 +40,23 @@ const PRODUCTS = {
             ]
         },
         {
-            name: 'Pocket Star Negro King', price: 'S/ 789', includes: '02 Almohadas + Protector', cat: 'Colchón',
+            name: 'Medallón Ergosoft 1.5 Plaza', price: 'S/ 530', includes: 'Almohada + Protector', cat: 'Colchón',
+            size: '1.5 Plazas', line: 'Premium',
+            featured: true,
+            images: ['principal1.5.jpeg', 'Medallon Ergosoft King1.jpeg', 'Medallon Ergosoft King2.jpeg'],
+            specs: [
+                ['Tela',             'Jacquard'],
+                ['Resortes',         'Cosisoft · Tecnología suiza'],
+                ['Banda',            'Mesh · Mayor flujo de aire'],
+                ['Marco',            'Zebra 25'],
+                ['Lados de uso',     'One Side'],
+                ['Sensación',        'Intermedia'],
+                ['Garantía',         '7 años'],
+            ]
+        },
+        {
+            name: 'Pocket Star 2 Plazas Negro King', price: 'S/ 930', includes: '02 Almohadas + Protector', cat: 'Colchón',
+            size: '2 Plazas', line: 'Pocket',
             featured: true,
             images: ['negroprincipal.jpeg', 'negromini1.jpeg', 'negromini3.jpeg'],
             specs: [
@@ -47,7 +78,25 @@ const PRODUCTS = {
             ]
         },
         {
-            name: 'Super Star King', price: 'S/ 699', includes: '2 Almohadas + Protector', cat: 'Colchón',
+            name: 'Super Star King 2 Plazas', price: 'S/ 740', includes: '2 Almohadas + Protector', cat: 'Colchón',
+            size: '2 Plazas', line: 'Standard',
+            featured: true,
+            images: ['superprincipal.jpeg', 'supermini1.jpeg', 'supermini2.jpeg'],
+            specs: [
+                ['Marca',             'PARAÍSO'],
+                ['Modelo',            'Super Star'],
+                ['Plazaje',           '2 Plazas'],
+                ['Resortes',          'Cosisoft'],
+                ['Tela',              'Tejido de punto'],
+                ['Ventilación',       'Sí'],
+                ['Nivel de firmeza',  'Intermedio'],
+                ['Garantía',          '1 año'],
+                ['Incluye',           '2 almohadas de fibra sintética + Protector'],
+            ]
+        },
+        {
+            name: 'Super Star King', price: 'S/ 1,100', includes: '2 Almohadas + Protector', cat: 'Colchón',
+            size: 'King', line: 'Standard',
             featured: true,
             images: ['superprincipal.jpeg', 'supermini1.jpeg', 'supermini2.jpeg'],
             specs: [
@@ -69,7 +118,8 @@ const PRODUCTS = {
             ]
         },
         {
-            name: 'Pocket Star King', price: 'S/ 1,758', includes: 'Almohada + Protector · Resortes pocket', cat: 'Colchón Premium',
+            name: 'Pocket Star King', price: 'S/ 1,420', includes: 'Almohada + Protector · Resortes pocket', cat: 'Colchón Premium',
+            size: 'King', line: 'Pocket',
             featured: true,
             images: ['paraisoprincipal.jpeg', 'paraisomini1.jpeg', 'paraisomini2.jpeg'],
             specs: [
@@ -91,7 +141,8 @@ const PRODUCTS = {
             ]
         },
         {
-            name: 'Royal Prince King', price: 'S/ 2,486', includes: 'Almohada Viscoelástica + Protector', cat: 'Colchón Premium',
+            name: 'Royal Prince 2 Plazas', price: 'S/ 1,770', includes: 'Almohada Viscoelástica + Protector', cat: 'Colchón Premium',
+            size: '2 Plazas', line: 'Royal',
             featured: true,
             images: ['preprincipal.jpeg', 'premini1.jpeg', 'premini2.jpeg'],
             specs: [
@@ -114,7 +165,8 @@ const PRODUCTS = {
             ]
         },
         {
-            name: 'Royal Abrazzo King', price: 'S/ 2,557', includes: 'Almohada Viscoelástica + Protector', cat: 'Colchón Premium',
+            name: 'Royal Abrazzo King', price: 'S/ 2,820', includes: 'Almohada Viscoelástica + Protector', cat: 'Colchón Premium',
+            size: 'King', line: 'Royal',
             featured: true,
             images: ['maprincipal.jpeg', 'mamini1.jpeg', 'mamini2.jpeg'],
             specs: [
@@ -130,23 +182,111 @@ const PRODUCTS = {
             ]
         },
         {
-            name: 'Zebra 16 Ribeteado', price: 'S/ 159', includes: '2 Plazas · 16 kg/m³ · 5 pulgadas', cat: 'Colchón Económico',
+            name: 'Royal Abrazzo Queen', price: 'S/ 2,210', includes: 'Almohada Viscoelástica + Protector', cat: 'Colchón Premium',
+            size: 'Queen', line: 'Royal',
+            featured: true,
+            images: ['maprincipal.jpeg', 'mamini1.jpeg', 'mamini2.jpeg'],
+            specs: [
+                ['Marca',            'PARAÍSO'],
+                ['Modelo',           'Royal Abrazzo'],
+                ['Plazaje',          'Queen'],
+                ['Sensación',        'Muy suave'],
+                ['Lados de uso',     'One Side'],
+                ['Tela',             'Tejido de punto 3D · Higroscópica'],
+                ['Tratamiento',      'Antihongos · Antibacterias · Antiacaros'],
+                ['Viscoelástica',    'Espuma D70 que se adapta al cuerpo'],
+                ['Soporte',          'Doble capa espuma Zebra HR y HD'],
+                ['Garantía',         '2 años'],
+            ]
+        },
+        {
+            name: 'Royal Prince Queen', price: 'S/ 1,400', includes: 'Almohada Viscoelástica + Protector', cat: 'Colchón Premium',
+            size: 'Queen', line: 'Royal',
+            featured: true,
+            images: ['preprincipal.jpeg', 'premini1.jpeg', 'premini2.jpeg'],
+            specs: [
+                ['Marca',            'PARAÍSO'],
+                ['Modelo',           'Royal Prince'],
+                ['Plazaje',          'Queen'],
+                ['Resortes',         'Pocket · 1020 resortes'],
+                ['Tela',             'Tejido de punto'],
+                ['Material',         'Espuma flexible / Espuma Zebra'],
+                ['Ventilación',      'Sí'],
+                ['Nivel de firmeza', 'Firme'],
+                ['Lados de uso',     '1'],
+                ['Garantía',         '10 años'],
+                ['Incluye',          '2 almohadas viscoelásticas'],
+            ]
+        },
+        {
+            name: 'Zebra 16 Ribeteado 2 Plazas 5\'\' Acolchado', price: 'S/ 220', includes: '2 Plazas · 16 kg/m³ · 5 pulgadas', cat: 'Colchón Económico',
+            size: '2 Plazas', line: 'Standard',
             featured: true,
             images: ['zeprincipal.jpeg', 'zemini1.jpeg', 'zemini2.jpeg'],
             specs: [
                 ['Marca',          'PARAÍSO'],
-                ['Modelo',         'Zebra'],
-                ['Código',         'ZEBRA16-085-5RA'],
-                ['Tamaño',         '1 Plaza'],
-                ['Alto',           '12.7 cm'],
-                ['Ancho',          '85 cm'],
-                ['Largo',          '185 cm'],
+                ['Modelo',         'Zebra 16 Ribeteado'],
+                ['Plazaje',        '2 Plazas'],
+                ['Altura',         '5 pulgadas · Acolchado'],
+                ['Densidad',       '16 kg/m³'],
                 ['Relleno',        'Espuma Zebra D16'],
                 ['Tapiz',          'Poliseda'],
                 ['Lados de uso',   'One Side'],
-                ['Pillow top',     'No aplica'],
                 ['Hecho en',       'Perú'],
-                ['Incluye',        'Colchón'],
+                ['Garantía',       '1 año'],
+            ]
+        },
+        {
+            name: 'Zebra 16 Ribeteado 2 Plazas 7\'\' Acolchado', price: 'S/ 270', includes: '2 Plazas · 16 kg/m³ · 7 pulgadas', cat: 'Colchón Económico',
+            size: '2 Plazas', line: 'Standard',
+            featured: true,
+            images: ['zeprincipal.jpeg', 'zemini1.jpeg', 'zemini2.jpeg'],
+            specs: [
+                ['Marca',          'PARAÍSO'],
+                ['Modelo',         'Zebra 16 Ribeteado'],
+                ['Plazaje',        '2 Plazas'],
+                ['Altura',         '7 pulgadas · Acolchado'],
+                ['Densidad',       '16 kg/m³'],
+                ['Relleno',        'Espuma Zebra D16'],
+                ['Tapiz',          'Poliseda'],
+                ['Lados de uso',   'One Side'],
+                ['Hecho en',       'Perú'],
+                ['Garantía',       '1 año'],
+            ]
+        },
+        {
+            name: 'Zebra 16 Ribeteado 1.5 Plaza 5\'\' Acolchado', price: 'S/ 180', includes: '1.5 Plaza · 16 kg/m³ · 5 pulgadas', cat: 'Colchón Económico',
+            size: '1.5 Plazas', line: 'Standard',
+            featured: true,
+            images: ['zeprincipal.jpeg', 'zemini1.jpeg', 'zemini2.jpeg'],
+            specs: [
+                ['Marca',          'PARAÍSO'],
+                ['Modelo',         'Zebra 16 Ribeteado'],
+                ['Plazaje',        '1.5 Plaza'],
+                ['Altura',         '5 pulgadas · Acolchado'],
+                ['Densidad',       '16 kg/m³'],
+                ['Relleno',        'Espuma Zebra D16'],
+                ['Tapiz',          'Poliseda'],
+                ['Lados de uso',   'One Side'],
+                ['Hecho en',       'Perú'],
+                ['Garantía',       '1 año'],
+            ]
+        },
+        {
+            name: 'Zebra 16 Ribeteado 1.5 Plaza 7\'\' Acolchado', price: 'S/ 220', includes: '1.5 Plaza · 16 kg/m³ · 7 pulgadas', cat: 'Colchón Económico',
+            size: '1.5 Plazas', line: 'Standard',
+            featured: true,
+            images: ['zeprincipal.jpeg', 'zemini1.jpeg', 'zemini2.jpeg'],
+            specs: [
+                ['Marca',          'PARAÍSO'],
+                ['Modelo',         'Zebra 16 Ribeteado'],
+                ['Plazaje',        '1.5 Plaza'],
+                ['Altura',         '7 pulgadas · Acolchado'],
+                ['Densidad',       '16 kg/m³'],
+                ['Relleno',        'Espuma Zebra D16'],
+                ['Tapiz',          'Poliseda'],
+                ['Lados de uso',   'One Side'],
+                ['Hecho en',       'Perú'],
                 ['Garantía',       '1 año'],
             ]
         },
@@ -393,7 +533,9 @@ function createCard(p) {
 
     if (p.featured) {
         card.className = 'product-card product-card--featured reveal';
-        card.dataset.cat = p.cat;
+        card.dataset.cat  = p.cat;
+        card.dataset.size = p.size || '';
+        card.dataset.line = p.line || '';
         const thumbsHTML = p.images.map((img, i) =>
             `<img src="${img}" alt="${p.name} ${i+1}" class="fc-thumb${i===0?' fc-thumb--active':''}" data-img="${img}">`
         ).join('');
@@ -433,7 +575,9 @@ function createCard(p) {
     }
 
     card.className = 'product-card reveal';
-    card.dataset.cat = p.cat;
+    card.dataset.cat  = p.cat;
+    card.dataset.size = p.size || '';
+    card.dataset.line = p.line || '';
     card.innerHTML = `
         <div class="card-visual">${visualFor(p.cat)}</div>
         <div class="card-category">${p.cat}</div>
@@ -736,6 +880,42 @@ document.addEventListener('click', function(e) {
 });
 
 // ── FILTER TABS ───────────────────────────────────────────
+function initDualFilters(sizeTabsId, lineTabsId, gridId) {
+    var sizeTabs = document.getElementById(sizeTabsId);
+    var lineTabs = document.getElementById(lineTabsId);
+    var grid     = document.getElementById(gridId);
+    if (!sizeTabs || !lineTabs || !grid) return;
+
+    var activeSize = 'all';
+    var activeLine = 'all';
+
+    function applyFilters() {
+        grid.querySelectorAll('.product-card').forEach(function(card) {
+            var matchSize = activeSize === 'all' || card.dataset.size === activeSize;
+            var matchLine = activeLine === 'all' || card.dataset.line === activeLine;
+            card.style.display = (matchSize && matchLine) ? '' : 'none';
+        });
+    }
+
+    sizeTabs.querySelectorAll('.filter-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            sizeTabs.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
+            tab.classList.add('active');
+            activeSize = tab.dataset.size;
+            applyFilters();
+        });
+    });
+
+    lineTabs.querySelectorAll('.filter-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            lineTabs.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
+            tab.classList.add('active');
+            activeLine = tab.dataset.line;
+            applyFilters();
+        });
+    });
+}
+
 function initFilters(tabsId, gridId) {
     const tabs = document.getElementById(tabsId);
     const grid = document.getElementById(gridId);
@@ -756,7 +936,7 @@ function initFilters(tabsId, gridId) {
     });
 }
 
-initFilters('colchonesTabs', 'colchonesGrid');
+initDualFilters('colchonesSizeTabs', 'colchonesLineTabs', 'colchonesGrid');
 initFilters('camasTabs',     'camasGrid');
 initFilters('mueblesTabs',   'mueblesGrid');
 
