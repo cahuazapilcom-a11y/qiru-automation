@@ -252,6 +252,17 @@
             <a href="#muebles" class="nav-link">Muebles</a>
             <a href="#contacto" class="nav-link">Contacto</a>
         </div>
+
+        <!-- BÚSQUEDA RÁPIDA -->
+        <div class="nav-search" id="navSearch">
+            <div class="nav-search-box">
+                <svg class="nav-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="searchInput" class="nav-search-input" placeholder="¿Qué estás buscando?" autocomplete="off">
+                <button class="nav-search-clear" id="searchClear" style="display:none">✕</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+
         <div class="nav-right">
             <a href="https://wa.me/51931654320" class="nav-cta" target="_blank" rel="noopener">Cotizar</a>
             <button class="nav-cart" id="navCart" aria-label="Carrito">
