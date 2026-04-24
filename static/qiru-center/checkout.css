@@ -226,3 +226,74 @@
     .co-btn-primary, .co-btn-sec, .co-btn-whatsapp { width: 100%; justify-content: center; text-align: center; }
     .co-pay-methods { flex-direction: column; }
 }
+
+/* ── CUOTAS EN CARRITO ──────────────────────────────── */
+.co-cuotas {
+    margin: 24px 0 8px;
+    padding: 20px;
+    background: #f7f4ef;
+    border-radius: 10px;
+    border: 1px solid rgba(26,22,18,0.08);
+}
+.co-cuotas-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #1A1612;
+    letter-spacing: 0.03em;
+    margin-bottom: 14px;
+}
+.co-cuotas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+.co-cuota-card {
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid rgba(26,22,18,0.09);
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.co-cuota-bank {
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    width: fit-content;
+}
+.co-cuota-bank.bcp        { background: #003087; color: #fff; }
+.co-cuota-bank.bbva       { background: #004481; color: #fff; }
+.co-cuota-bank.interbank  { background: #00b14f; color: #fff; }
+.co-cuota-bank.scotiabank { background: #ec111a; color: #fff; }
+.co-cuota-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.co-cuota-options span {
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: #f0ece4;
+    color: #1A1612;
+    border-radius: 4px;
+    padding: 2px 8px;
+    white-space: nowrap;
+}
+.co-cuota-note {
+    font-size: 0.68rem;
+    color: #9b9490;
+    margin: 0;
+}
+.co-cuotas-sub {
+    font-size: 0.74rem;
+    color: #9b9490;
+    margin-top: 12px;
+    text-align: center;
+}
+@media (max-width: 500px) {
+    .co-cuotas-grid { grid-template-columns: 1fr; }
+}
