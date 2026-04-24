@@ -230,6 +230,16 @@
         </div>
     </div>
 
+    <!-- PROMO BANNER -->
+    <div class="promo-banner" id="promoBanner">
+        <div class="promo-banner-inner">
+            <span class="promo-icon">🚚</span>
+            <span class="promo-text"><strong>¡Oferta por tiempo limitado!</strong> Envío gratis a Yurimaguas</span>
+            <span class="promo-countdown" id="promoCountdown"></span>
+            <button class="promo-close" id="promoBannerClose" aria-label="Cerrar">✕</button>
+        </div>
+    </div>
+
     <!-- MOBILE NAV OVERLAY -->
     <div class="mobile-nav" id="mobileNav">
         <button class="mobile-nav-close" id="mobileNavClose">✕</button>
@@ -540,6 +550,42 @@
         </svg>
         <span class="whatsapp-float-label">Soy tu asistente</span>
     </a>
+
+    <!-- PROMO BANNER SCRIPT -->
+    <script>
+    (function() {
+        var start = new Date('2026-04-24T00:00:00');
+        var end   = new Date('2026-06-24T23:59:59');
+        var now   = new Date();
+        if (now < start || now > end) return;
+
+        var banner = document.getElementById('promoBanner');
+        var closeBtn = document.getElementById('promoBannerClose');
+        var countdown = document.getElementById('promoCountdown');
+
+        if (sessionStorage.getItem('promoClosed')) return;
+
+        banner.classList.add('is-visible');
+        document.body.classList.add('promo-active');
+
+        function updateCountdown() {
+            var remaining = end - new Date();
+            if (remaining <= 0) { banner.style.display = 'none'; document.body.classList.remove('promo-active'); return; }
+            var d = Math.floor(remaining / 86400000);
+            var h = Math.floor((remaining % 86400000) / 3600000);
+            var m = Math.floor((remaining % 3600000) / 60000);
+            countdown.textContent = 'Termina en: ' + d + 'd ' + h + 'h ' + m + 'm';
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+
+        closeBtn.addEventListener('click', function() {
+            banner.style.display = 'none';
+            document.body.classList.remove('promo-active');
+            sessionStorage.setItem('promoClosed', '1');
+        });
+    })();
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

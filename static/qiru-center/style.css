@@ -1745,3 +1745,66 @@ img {
     .card-thumbs-strip { opacity: 1; }
     .product-card:hover { transform: none; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
 }
+
+/* ── PROMO BANNER ───────────────────────────────────── */
+.promo-banner {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 10001;
+    background: linear-gradient(90deg, #8B4513 0%, #C09A46 50%, #8B4513 100%);
+    background-size: 200% 100%;
+    animation: promoBannerShift 4s linear infinite;
+    color: #fff;
+    font-family: var(--fb);
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    padding: 0;
+    display: none;
+}
+.promo-banner.is-visible { display: block; }
+@keyframes promoBannerShift {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+.promo-banner-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 9px 48px 9px 16px;
+    position: relative;
+}
+.promo-icon { font-size: 1rem; flex-shrink: 0; }
+.promo-text { text-align: center; }
+.promo-text strong { font-weight: 600; }
+.promo-countdown {
+    background: rgba(0,0,0,0.25);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.promo-close {
+    position: absolute;
+    right: 12px; top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.85rem;
+    line-height: 1;
+    padding: 4px;
+    cursor: pointer;
+}
+.promo-close:hover { color: #fff; }
+body.promo-active { padding-top: 38px; }
+@media (max-width: 600px) {
+    .promo-banner-inner { gap: 6px; padding: 8px 36px 8px 10px; flex-wrap: wrap; }
+    .promo-text { font-size: 0.78rem; }
+    .promo-countdown { font-size: 0.72rem; }
+}
