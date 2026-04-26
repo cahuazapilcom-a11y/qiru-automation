@@ -695,15 +695,22 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
             pdSpecsWrap.appendChild(tbl);
         }
 
-        // Related — same cat, exclude current
+        // Related — same cat first, fill with others if needed
         var allProds = [].concat(PRODUCTS.colchones || [], PRODUCTS.camas || [], PRODUCTS.muebles || []);
-        var related = allProds.filter(function(r) { return r !== p && r.cat === p.cat; }).slice(0, 4);
+        var sameCat = allProds.filter(function(r) { return r !== p && r.cat === p.cat; });
+        var others  = allProds.filter(function(r) { return r !== p && r.cat !== p.cat; });
+        var related = sameCat.concat(others).slice(0, 4);
         pdRelated.innerHTML = '';
         related.forEach(function(r) {
             var card = createCard(r);
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('.btn-add-cart') || e.target.closest('.card-fav-btn') ||
+                    e.target.closest('.card-thumb') || e.target.closest('.btn-specs-toggle') ||
+                    e.target.closest('.card-specs-table')) return;
+                openDetail(r);
+            });
             pdRelated.appendChild(card);
         });
-        document.getElementById('pdRelated-section') && (document.getElementById('pdRelated-section').style.display = related.length ? '' : 'none');
 
         // Cart button
         pdBtnCart.onclick = function() {
@@ -741,6 +748,13 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
     pdNext.addEventListener('click', function() { setImg(currentImgIdx + 1); });
     pdClose.addEventListener('click', closeDetail);
     pdOverlay.addEventListener('click', closeDetail);
+
+    // Cerrar al hacer clic en el fondo del modal (fuera del contenido)
+    pdModal.addEventListener('click', function(e) {
+        if (!e.target.closest('.pd-inner') && !e.target.closest('.pd-related-wrap') && !e.target.closest('.pd-close')) {
+            closeDetail();
+        }
+    });
 
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
