@@ -25,6 +25,40 @@
     <div class="cursor" id="cursor"></div>
     <div class="cursor-follower" id="cursorFollower"></div>
 
+    <!-- PRODUCT DETAIL OVERLAY -->
+    <div class="pd-overlay" id="pdOverlay"></div>
+    <div class="pd-modal" id="pdModal" role="dialog" aria-modal="true">
+        <button class="pd-close" id="pdClose" title="Cerrar">✕</button>
+        <div class="pd-inner">
+            <!-- Galería izquierda -->
+            <div class="pd-gallery">
+                <div class="pd-thumbs" id="pdThumbs"></div>
+                <div class="pd-main-wrap">
+                    <button class="pd-arrow pd-arrow-prev" id="pdPrev">&#8249;</button>
+                    <img class="pd-main-img" id="pdMainImg" src="" alt="">
+                    <button class="pd-arrow pd-arrow-next" id="pdNext">&#8250;</button>
+                </div>
+            </div>
+            <!-- Info derecha -->
+            <div class="pd-info">
+                <p class="pd-cat" id="pdCat"></p>
+                <h2 class="pd-name" id="pdName"></h2>
+                <p class="pd-includes" id="pdIncludes"></p>
+                <p class="pd-price" id="pdPrice"></p>
+                <button class="pd-btn-cart" id="pdBtnCart">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    Agregar al carrito
+                </button>
+                <div class="pd-specs-wrap" id="pdSpecsWrap"></div>
+            </div>
+        </div>
+        <!-- Productos relacionados -->
+        <div class="pd-related-wrap">
+            <h3 class="pd-related-title">Productos relacionados</h3>
+            <div class="pd-related-grid" id="pdRelatedGrid"></div>
+        </div>
+    </div>
+
     <!-- CART OVERLAY -->
     <div class="cart-overlay" id="cartOverlay"></div>
 
@@ -511,6 +545,7 @@
             <button class="filter-tab" data-filter="Almohada">Almohadas</button>
             <button class="filter-tab" data-filter="Comedor">Comedores</button>
             <button class="filter-tab" data-filter="Bebés">Bebés</button>
+            <button class="filter-tab" data-filter="Escritorio">Escritorios</button>
         </div>
         <div class="products-grid" id="mueblesGrid"></div>
     </section>

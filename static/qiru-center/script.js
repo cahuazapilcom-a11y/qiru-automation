@@ -413,6 +413,31 @@ const PRODUCTS = {
                 ['Estilo',      'Clásico moderno · Tono madera natural brillante'],
             ]
         },
+        {
+            name: 'Juego de Mesa Alta + Sillas de Madera', price: 'S/ 1,000', includes: 'Mesa alta + sillas · Diseño moderno tipo bar', cat: 'Comedor',
+            featured: true,
+            images: ['bprincipal.png', 'bmini1.png', 'bmini2.png'],
+            specs: [
+                ['Material',    'Madera de alta calidad · Acabado fino y resistente'],
+                ['Diseño',      'Moderno y elegante · Estilo tipo bar'],
+                ['Ideal para',  'Bares · Cocinas · Terrazas · Espacios modernos'],
+                ['Estructura',  'Sólida · Alta estabilidad'],
+                ['Estilo',      'Estilizado · Sofisticado y funcional'],
+            ]
+        },
+        {
+            name: 'Escritorio de Madera Multifuncional', price: 'S/ 1,000', includes: 'Cajones amplios · Diseño moderno y práctico', cat: 'Escritorio',
+            featured: true,
+            images: ['eprincipal.png', 'emini1.png', 'emini2.png', 'emini3.png'],
+            specs: [
+                ['Material',       'Madera con acabado fino'],
+                ['Cajones',        'Amplios y deslizables · Excelente almacenamiento'],
+                ['Diseño',         'Moderno y práctico'],
+                ['Ideal para',     'Oficina · Estudio · Negocio · Hogar'],
+                ['Estructura',     'Sólida · Alta resistencia y durabilidad'],
+                ['Estilo',         'Cálido y sofisticado'],
+            ]
+        },
     ],
 };
 
@@ -607,6 +632,138 @@ function populateGrid(id, list) {
 populateGrid('colchonesGrid', PRODUCTS.colchones);
 populateGrid('camasGrid',     PRODUCTS.camas);
 populateGrid('mueblesGrid',   PRODUCTS.muebles);
+
+// ── PRODUCT DETAIL MODAL ──────────────────────────────────
+(function() {
+    var pdOverlay    = document.getElementById('pdOverlay');
+    var pdModal      = document.getElementById('pdModal');
+    var pdClose      = document.getElementById('pdClose');
+    var pdMainImg    = document.getElementById('pdMainImg');
+    var pdThumbs     = document.getElementById('pdThumbs');
+    var pdCat        = document.getElementById('pdCat');
+    var pdName       = document.getElementById('pdName');
+    var pdIncludes   = document.getElementById('pdIncludes');
+    var pdPrice      = document.getElementById('pdPrice');
+    var pdBtnCart    = document.getElementById('pdBtnCart');
+    var pdSpecsWrap  = document.getElementById('pdSpecsWrap');
+    var pdRelated    = document.getElementById('pdRelatedGrid');
+    var pdPrev       = document.getElementById('pdPrev');
+    var pdNext       = document.getElementById('pdNext');
+
+    var currentProduct = null;
+    var currentImgIdx  = 0;
+
+    function openDetail(p) {
+        currentProduct = p;
+        currentImgIdx  = 0;
+
+        // Info
+        pdCat.textContent      = p.cat;
+        pdName.textContent     = p.name;
+        pdIncludes.textContent = p.includes || '';
+        pdPrice.innerHTML      = p.price + ' <span>soles</span>';
+
+        // Images
+        var imgs = (p.images && p.images.length) ? p.images : [];
+        pdMainImg.src = imgs[0] || '';
+        pdMainImg.alt = p.name;
+
+        pdThumbs.innerHTML = '';
+        imgs.forEach(function(src, i) {
+            var t = document.createElement('img');
+            t.src = src; t.alt = p.name;
+            t.className = 'pd-thumb' + (i === 0 ? ' active' : '');
+            t.addEventListener('click', function() { setImg(i); });
+            pdThumbs.appendChild(t);
+        });
+
+        // Arrows visibility
+        var showArrows = imgs.length > 1;
+        pdPrev.style.display = showArrows ? '' : 'none';
+        pdNext.style.display = showArrows ? '' : 'none';
+
+        // Specs
+        pdSpecsWrap.innerHTML = '';
+        if (p.specs && p.specs.length) {
+            var tbl = document.createElement('table');
+            tbl.className = 'pd-specs-table';
+            p.specs.forEach(function(row) {
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>' + row[0] + '</td><td>' + row[1] + '</td>';
+                tbl.appendChild(tr);
+            });
+            pdSpecsWrap.appendChild(tbl);
+        }
+
+        // Related — same cat, exclude current
+        var allProds = [].concat(PRODUCTS.colchones || [], PRODUCTS.camas || [], PRODUCTS.muebles || []);
+        var related = allProds.filter(function(r) { return r !== p && r.cat === p.cat; }).slice(0, 4);
+        pdRelated.innerHTML = '';
+        related.forEach(function(r) {
+            var card = createCard(r);
+            pdRelated.appendChild(card);
+        });
+        document.getElementById('pdRelated-section') && (document.getElementById('pdRelated-section').style.display = related.length ? '' : 'none');
+
+        // Cart button
+        pdBtnCart.onclick = function() {
+            var cartIconSVG = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>';
+            addToCart(p, pdBtnCart);
+        };
+
+        pdOverlay.classList.add('open');
+        pdModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        pdModal.scrollTop = 0;
+    }
+
+    function closeDetail() {
+        pdOverlay.classList.remove('open');
+        pdModal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function setImg(idx) {
+        var imgs = (currentProduct && currentProduct.images) ? currentProduct.images : [];
+        if (!imgs.length) return;
+        currentImgIdx = (idx + imgs.length) % imgs.length;
+        pdMainImg.style.opacity = '0';
+        setTimeout(function() {
+            pdMainImg.src = imgs[currentImgIdx];
+            pdMainImg.style.opacity = '1';
+        }, 120);
+        pdThumbs.querySelectorAll('.pd-thumb').forEach(function(t, i) {
+            t.classList.toggle('active', i === currentImgIdx);
+        });
+    }
+
+    pdPrev.addEventListener('click', function() { setImg(currentImgIdx - 1); });
+    pdNext.addEventListener('click', function() { setImg(currentImgIdx + 1); });
+    pdClose.addEventListener('click', closeDetail);
+    pdOverlay.addEventListener('click', closeDetail);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (!pdModal.classList.contains('open')) return;
+        if (e.key === 'Escape')      closeDetail();
+        if (e.key === 'ArrowLeft')   setImg(currentImgIdx - 1);
+        if (e.key === 'ArrowRight')  setImg(currentImgIdx + 1);
+    });
+
+    // Open on card click (but not on button/thumb clicks)
+    document.addEventListener('click', function(e) {
+        var card = e.target.closest('.product-card');
+        if (!card) return;
+        if (e.target.closest('.btn-add-cart') || e.target.closest('.card-fav-btn') ||
+            e.target.closest('.card-thumb') || e.target.closest('.btn-specs-toggle') ||
+            e.target.closest('.card-specs-table')) return;
+        // Find product by name
+        var name = card.querySelector('.card-name') && card.querySelector('.card-name').textContent;
+        var allProds = [].concat(PRODUCTS.colchones || [], PRODUCTS.camas || [], PRODUCTS.muebles || []);
+        var prod = allProds.find(function(p) { return p.name === name; });
+        if (prod) openDetail(prod);
+    });
+})();
 
 // ── LOGO HANDLING ─────────────────────────────────────────
 const logoImg  = document.getElementById('logoImg');
