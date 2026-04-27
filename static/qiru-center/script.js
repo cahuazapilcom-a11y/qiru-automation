@@ -569,6 +569,19 @@ const PRODUCTS = {
             ]
         },
         {
+            name: 'Bramante de Hilo Full', price: 'S/ 80', originalPrice: 'S/ 85', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
+            size: 'Full',
+            images: ['z.png'],
+            specs: [
+                ['Material',      'Bramante de Hilo'],
+                ['Talla',         'Full (2 plazas)'],
+                ['Incluye',       'Sábana elástica · Sobre sábana · 2 fundas de almohada'],
+                ['Total',         '4 piezas'],
+                ['Precio unidad', 'S/ 85'],
+                ['Precio mayor',  'S/ 80'],
+            ]
+        },
+        {
             name: 'Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
             size: 'Twin',
             images: ['h.png'],
