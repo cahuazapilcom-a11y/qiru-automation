@@ -426,6 +426,19 @@ const PRODUCTS = {
             ]
         },
         {
+            name: 'Ropero de Madera con Cajonera', price: 'S/ 1,500', originalPrice: 'S/ 2,000', includes: '2 puertas · 4 cajones deslizables · Diseño elegante', cat: 'Mueble',
+            featured: true,
+            images: ['aprincipal.png', 'amini1.png', 'amini3.png'],
+            specs: [
+                ['Material',       'Madera de alta calidad · Acabado fino'],
+                ['Puertas',        '2 puertas superiores · Espacio para colgar ropa'],
+                ['Cajones',        '4 cajones amplios deslizables · Parte inferior'],
+                ['Medidas',        '90 cm ancho × 50 cm fondo × 210 cm alto'],
+                ['Almacenamiento', 'Amplio · Ideal para prendas y accesorios'],
+                ['Ideal para',     'Dormitorios modernos'],
+            ]
+        },
+        {
             name: 'Cómoda de Madera con Espejo', price: 'S/ 980', originalPrice: 'S/ 1,000', includes: '4 cajones + 2 compartimentos · Espejo central · Diseño moderno', cat: 'Mueble',
             featured: true,
             images: ['cprincipal.png', 'cmini1.png', 'cmini2.png'],
