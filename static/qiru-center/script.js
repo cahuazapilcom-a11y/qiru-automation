@@ -426,6 +426,19 @@ const PRODUCTS = {
             ]
         },
         {
+            name: 'Mesita de Noche de Madera', price: 'S/ 270', originalPrice: 'S/ 310', includes: '2 cajones espaciosos · Tiradores metálicos · Diseño elegante', cat: 'Mueble',
+            featured: true,
+            images: ['m.principal.png', 'm.mini1.png', 'm.mini2.png'],
+            specs: [
+                ['Material',       'Madera resistente · Acabado brillante y duradero'],
+                ['Cajones',        '2 cajones espaciosos · Ideales para objetos personales'],
+                ['Tiradores',      'Metálicos modernos · Toque elegante'],
+                ['Diseño',         'Compacto con patas redondeadas · Estabilidad y estilo'],
+                ['Ideal para',     'Dormitorios modernos o clásicos'],
+                ['Estilo',         'Elegante y funcional'],
+            ]
+        },
+        {
             name: 'Escritorio de Madera Multifuncional', price: 'S/ 1,000', includes: 'Cajones amplios · Diseño moderno y práctico', cat: 'Escritorio',
             featured: true,
             images: ['eprincipal.png', 'emini1.png', 'emini2.png', 'emini3.png'],
@@ -583,7 +596,10 @@ function createCard(p) {
             <div class="card-category">${p.cat}</div>
             <div class="card-name">${p.name}</div>
             <div class="card-desc">${p.includes}</div>
-            <div class="card-price">${p.price} <span>soles</span></div>
+            <div class="card-price">
+                ${p.originalPrice ? `<span style="text-decoration:line-through;color:#aaa;font-size:0.85em;margin-right:6px;">${p.originalPrice}</span>` : ''}
+                <span style="${p.originalPrice ? 'color:#e53935;font-weight:bold;' : ''}">${p.price}</span> <span>soles</span>
+            </div>
             <button class="btn-add-cart">${cartIconSVG} Agregar al carrito</button>
             ${specsHTML ? `
             <button class="btn-specs-toggle">Especificaciones ▾</button>
@@ -661,7 +677,8 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
         pdCat.textContent      = p.cat;
         pdName.textContent     = p.name;
         pdIncludes.textContent = p.includes || '';
-        pdPrice.innerHTML      = p.price + ' <span>soles</span>';
+        pdPrice.innerHTML      = (p.originalPrice ? `<span style="text-decoration:line-through;color:#aaa;font-size:0.85em;margin-right:8px;">${p.originalPrice}</span>` : '') +
+                               `<span style="${p.originalPrice ? 'color:#e53935;font-weight:bold;' : ''}">${p.price}</span> <span>soles</span>`;
 
         // Images
         var imgs = (p.images && p.images.length) ? p.images : [];

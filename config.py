@@ -68,6 +68,8 @@ PRODUCTS = [
     {"name": "Cuna de Bebés", "category": "Cunas", "material": "Madera", "price": 650.00},
     {"name": "Comedor 3 Sillas", "category": "Comedores", "material": "Madera", "price": 750.00},
     {"name": "Comedor 6 Sillas", "category": "Comedores", "material": "Madera", "price": 2100.00},
+    # Muebles de dormitorio
+    {"name": "Mesita de Noche de Madera", "category": "Muebles", "material": "Madera resistente", "price": 270.00},
 ]
 
 FOLLOWUP_DAYS = [3, 7]
