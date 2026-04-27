@@ -900,19 +900,19 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
 
 // ── LOGO HANDLING ─────────────────────────────────────────
 const logoImg  = document.getElementById('logoImg');
-const logoText = document.getElementById('logoText');
+const logoText = document.querySelector('.nav-logo-text');
 if (logoImg) {
     logoImg.addEventListener('load', () => {
-        logoText.style.display = 'none';
-        logoImg.style.display  = 'block';
+        if (logoText) logoText.style.display = 'none';
+        logoImg.style.display = 'block';
     });
     logoImg.addEventListener('error', () => {
-        logoImg.style.display  = 'none';
-        logoText.style.display = 'block';
+        logoImg.style.display = 'none';
+        if (logoText) logoText.style.display = 'block';
     });
     if (logoImg.complete && logoImg.naturalWidth > 0) {
-        logoText.style.display = 'none';
-        logoImg.style.display  = 'block';
+        if (logoText) logoText.style.display = 'none';
+        logoImg.style.display = 'block';
     }
 }
 
