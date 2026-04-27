@@ -69,6 +69,7 @@ PRODUCTS = [
     {"name": "Comedor 3 Sillas", "category": "Comedores", "material": "Madera", "price": 750.00},
     {"name": "Comedor 6 Sillas", "category": "Comedores", "material": "Madera", "price": 2100.00},
     # Muebles de dormitorio
+    {"name": "Alacena Grande de Cocina en Madera", "category": "Muebles", "material": "Madera de alta calidad", "price": 2850.00},
     {"name": "Alacena de Cocina en Madera", "category": "Muebles", "material": "Madera de alta calidad", "price": 1980.00},
     {"name": "Ropero de Madera 3 Puertas con Cajonera", "category": "Muebles", "material": "Madera de alta calidad", "price": 2100.00},
     {"name": "Ropero Grande de Madera con Cajonera", "category": "Muebles", "material": "Madera resistente", "price": 2450.00},

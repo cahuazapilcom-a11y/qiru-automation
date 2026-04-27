@@ -426,6 +426,19 @@ const PRODUCTS = {
             ]
         },
         {
+            name: 'Alacena Grande de Cocina en Madera', price: 'S/ 2,850', originalPrice: 'S/ 3,000', includes: 'Vitrinas con vidrio · Cajones y puertas · 190×45×200 cm', cat: 'Mueble',
+            featured: true,
+            images: ['4principal.jpeg', '4mini1.png', '4mini2.png'],
+            specs: [
+                ['Material',       'Madera de alta calidad · Acabado fino'],
+                ['Vitrinas',       'Superiores con vidrio · Ideal para exhibir utensilios'],
+                ['Superficie',     'Amplia y resistente · Espacio central de trabajo'],
+                ['Cajones',        'Múltiples cajones y puertas prácticas'],
+                ['Medidas',        '190 cm ancho × 45 cm fondo × 200 cm alto'],
+                ['Ideal para',     'Cocinas modernas o clásicas'],
+            ]
+        },
+        {
             name: 'Alacena de Cocina en Madera', price: 'S/ 1,980', originalPrice: 'S/ 2,200', includes: 'Vitrinas con vidrio · Cajones y compartimentos · 120×45×200 cm', cat: 'Mueble',
             featured: true,
             images: ['cprincipal2.png', 'cmini12.png', 'cmini22.png'],
