@@ -126,6 +126,9 @@
 </div>
 
 <script>
+  // Credenciales del admin inyectadas desde el servidor (ya autenticado en este punto)
+  const _authHeader = 'Basic ' + btoa('{{ admin_user }}:{{ admin_pass }}');
+
   // Auto-fill amount from product price
   document.getElementById('p-product').addEventListener('change', function() {
     const price = this.options[this.selectedIndex].dataset.price;
@@ -150,7 +153,11 @@
     };
 
     try {
-      const resp = await fetch('/payment/confirm', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+      const resp = await fetch('/payment/confirm', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Authorization': _authHeader},
+        body: JSON.stringify(body)
+      });
       const data = await resp.json();
       const el = document.getElementById('payment-result');
       if (resp.ok) {
@@ -181,7 +188,11 @@
     };
 
     try {
-      const resp = await fetch('/leads/manual', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+      const resp = await fetch('/leads/manual', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'X-Api-Key': '{{ api_key }}'},
+        body: JSON.stringify(body)
+      });
       const data = await resp.json();
       const el = document.getElementById('result-box');
       el.style.display = 'block';

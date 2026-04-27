@@ -1,6 +1,8 @@
 import uuid
+import secrets
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException, Request, Depends
+from fastapi import FastAPI, HTTPException, Request, Depends, Header
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, FileResponse
@@ -21,6 +23,26 @@ from services.chat_service import process_message, parse_order, clear_conversati
 
 
 Path("data").mkdir(exist_ok=True)
+
+# ── Auth ──────────────────────────────────────────────────────────────────────
+
+_basic = HTTPBasic()
+
+def require_admin(credentials: HTTPBasicCredentials = Depends(_basic)):
+    ok_user = secrets.compare_digest(credentials.username, settings.admin_username)
+    ok_pass = secrets.compare_digest(credentials.password, settings.admin_password)
+    if not (ok_user and ok_pass):
+        raise HTTPException(
+            status_code=401,
+            detail="Credenciales incorrectas",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    return credentials.username
+
+def require_api_key(x_api_key: str = Header(default="")):
+    if not secrets.compare_digest(x_api_key, settings.admin_api_key):
+        raise HTTPException(status_code=403, detail="API key inválida")
+    return x_api_key
 
 
 @asynccontextmanager
@@ -110,7 +132,7 @@ async def tiktok_lead_webhook(payload: ZapierWebhook):
 # ── Manual lead entry ─────────────────────────────────────────────────────────
 
 @app.post("/leads/manual")
-async def add_manual_lead(payload: ZapierWebhook):
+async def add_manual_lead(payload: ZapierWebhook, _: str = Depends(require_api_key)):
     payload.secret = settings.zapier_secret or payload.secret
     return await tiktok_lead_webhook(payload)
 
@@ -167,7 +189,7 @@ async def checkout_lead(data: CheckoutLead):
 # ── Payment confirmation ──────────────────────────────────────────────────────
 
 @app.post("/payment/confirm")
-async def confirm_payment(data: PaymentConfirmation):
+async def confirm_payment(data: PaymentConfirmation, _: str = Depends(require_admin)):
     order_id = data.order_id or f"QC-{uuid.uuid4().hex[:8].upper()}"
 
     success = await send_payment_confirmed_email(
@@ -197,11 +219,14 @@ async def contacto(request: Request):
 
 
 @app.get("/admin", response_class=HTMLResponse)
-async def admin_panel(request: Request):
+async def admin_panel(request: Request, _: str = Depends(require_admin)):
     return templates.TemplateResponse("admin.html", {
         "request": request,
         "products": PRODUCTS,
         "business_name": settings.business_name,
+        "admin_user": settings.admin_username,
+        "admin_pass": settings.admin_password,
+        "api_key": settings.admin_api_key,
     })
 
 

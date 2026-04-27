@@ -29,6 +29,9 @@ class Settings(BaseSettings):
 
     # Security
     zapier_secret: str = ""
+    admin_username: str = "admin"
+    admin_password: str = "qiru2024"
+    admin_api_key: str = "qiru-admin-key-2024"
 
     class Config:
         env_file = ".env"
