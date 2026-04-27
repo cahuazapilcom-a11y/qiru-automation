@@ -426,6 +426,18 @@ const PRODUCTS = {
             ]
         },
         {
+            name: 'Cama de Madera 2 Plazas Reforzada', price: 'S/ 950', originalPrice: 'S/ 1,100', includes: 'Estructura reforzada · Cabecera 100 cm · 140×190 cm', cat: 'Cama',
+            featured: true,
+            images: ['r.png', 'r1.png'],
+            specs: [
+                ['Material',    'Madera de alta calidad · Acabado fino natural'],
+                ['Estructura',  'Refuerzos internos · Soporte firme para colchón'],
+                ['Diseño',      'Moderno y elegante'],
+                ['Medidas',     '140 cm ancho × 190 cm largo × 45 cm alto · Cabecera 100 cm'],
+                ['Ideal para',  'Uso diario · Dormitorio moderno'],
+            ]
+        },
+        {
             name: 'Cama de Madera 3 Plazas', price: 'S/ 1,890', originalPrice: 'S/ 2,000', includes: 'Cabecera y piecera decorativas · Estructura sólida · 190×200 cm', cat: 'Cama',
             featured: true,
             images: ['capri.png', 'capri1.png'],

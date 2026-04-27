@@ -69,6 +69,7 @@ PRODUCTS = [
     {"name": "Comedor 3 Sillas", "category": "Comedores", "material": "Madera", "price": 750.00},
     {"name": "Comedor 6 Sillas", "category": "Comedores", "material": "Madera", "price": 2100.00},
     # Muebles de dormitorio
+    {"name": "Cama de Madera 2 Plazas Reforzada", "category": "Camas", "material": "Madera de alta calidad", "price": 950.00},
     {"name": "Cama de Madera 3 Plazas", "category": "Camas", "material": "Madera de alta calidad", "price": 1890.00},
     {"name": "Alacena Grande de Cocina en Madera", "category": "Muebles", "material": "Madera de alta calidad", "price": 2850.00},
     {"name": "Alacena de Cocina en Madera", "category": "Muebles", "material": "Madera de alta calidad", "price": 1980.00},
