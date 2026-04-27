@@ -84,6 +84,9 @@ PRODUCTS = [
     {"name": "Mesita de Noche de Madera", "category": "Muebles", "material": "Madera resistente", "price": 270.00},
     # Sábanas
     {"name": "Sábanas Bramante de Hilo Twin", "category": "Sábanas", "material": "Bramante de Hilo", "price": 65.00},
+    {"name": "Bramante de Hilo Twin", "category": "Sábanas", "material": "Bramante de Hilo", "price": 65.00},
+    {"name": "Bramante de Hilo Full", "category": "Sábanas", "material": "Bramante de Hilo", "price": 80.00},
+    {"name": "Bramante de Hilo Queen", "category": "Sábanas", "material": "Bramante de Hilo", "price": 90.00},
     {"name": "Sábanas Rayas Beige/Naranja Full", "category": "Sábanas", "material": "Microfibra", "price": 80.00},
     {"name": "Sábanas 1.5 Plazas", "category": "Sábanas", "material": "Microfibra suave", "price": 65.00},
     {"name": "Sábanas 2 Plazas", "category": "Sábanas", "material": "Microfibra suave", "price": 85.00},
