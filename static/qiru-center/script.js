@@ -541,7 +541,7 @@ const PRODUCTS = {
             ]
         },
         {
-            name: 'Escritorio de Madera Multifuncional', price: 'S/ 1,000', includes: 'Cajones amplios · Diseño moderno y práctico', cat: 'Escritorio',
+            name: 'Escritorio de Madera Multifuncional', price: 'S/ 850', originalPrice: 'S/ 900', includes: 'Cajones amplios · Diseño moderno y práctico', cat: 'Escritorio',
             featured: true,
             images: ['eprincipal.png', 'emini1.png', 'emini2.png', 'emini3.png'],
             specs: [
