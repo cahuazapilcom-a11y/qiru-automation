@@ -554,6 +554,49 @@ const PRODUCTS = {
             ]
         },
     ],
+
+    sabanas: [
+        {
+            name: 'Sábana 2 Plazas — Algodón Premium', price: 'S/ 85', includes: '1 sábana encimera + 1 ajustable + 2 fundas', cat: 'Sábana',
+            size: '2 Plazas',
+            specs: [
+                ['Material',    'Algodón 100% · Suave al tacto'],
+                ['Medidas',     '200×240 cm · Sábana encimera'],
+                ['Incluye',     'Sábana encimera · Sábana ajustable · 2 fundas'],
+                ['Ideal para',  'Cama 2 plazas'],
+            ]
+        },
+        {
+            name: 'Sábana 1.5 Plazas — Algodón Premium', price: 'S/ 65', includes: '1 sábana encimera + 1 ajustable + 1 funda', cat: 'Sábana',
+            size: '1.5 Plazas',
+            specs: [
+                ['Material',    'Algodón 100% · Suave al tacto'],
+                ['Medidas',     '160×220 cm · Sábana encimera'],
+                ['Incluye',     'Sábana encimera · Sábana ajustable · 1 funda'],
+                ['Ideal para',  'Cama 1.5 plazas'],
+            ]
+        },
+        {
+            name: 'Sábana Queen — Algodón Premium', price: 'S/ 110', includes: '1 sábana encimera + 1 ajustable + 2 fundas', cat: 'Sábana',
+            size: 'Queen',
+            specs: [
+                ['Material',    'Algodón 100% · Suave al tacto'],
+                ['Medidas',     '220×260 cm · Sábana encimera'],
+                ['Incluye',     'Sábana encimera · Sábana ajustable · 2 fundas'],
+                ['Ideal para',  'Cama Queen'],
+            ]
+        },
+        {
+            name: 'Sábana King — Algodón Premium', price: 'S/ 130', includes: '1 sábana encimera + 1 ajustable + 2 fundas', cat: 'Sábana',
+            size: 'King',
+            specs: [
+                ['Material',    'Algodón 100% · Suave al tacto'],
+                ['Medidas',     '240×280 cm · Sábana encimera'],
+                ['Incluye',     'Sábana encimera · Sábana ajustable · 2 fundas'],
+                ['Ideal para',  'Cama King'],
+            ]
+        },
+    ],
 };
 
 // ── CART ─────────────────────────────────────────────────
@@ -749,6 +792,7 @@ function populateGrid(id, list) {
 
 populateGrid('colchonesGrid', PRODUCTS.colchones);
 populateGrid('camasGrid',     PRODUCTS.camas);
+populateGrid('sabanasGrid',   PRODUCTS.sabanas);
 populateGrid('mueblesGrid',   PRODUCTS.muebles);
 
 // ── PRODUCT DETAIL MODAL ──────────────────────────────────
@@ -1239,6 +1283,7 @@ function initFilters(tabsId, gridId) {
 
 initDualFilters('colchonesSizeTabs', 'colchonesLineTabs', 'colchonesGrid');
 initFilters('camasTabs',     'camasGrid');
+initFilters('sabanasTabs',   'sabanasGrid', 'size');
 initFilters('mueblesTabs',   'mueblesGrid');
 
 // ── SMOOTH SCROLL (anchor links) ─────────────────────────
