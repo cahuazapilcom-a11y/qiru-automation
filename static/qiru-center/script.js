@@ -426,6 +426,19 @@ const PRODUCTS = {
             ]
         },
         {
+            name: 'Cómoda de Madera con Espejo', price: 'S/ 980', originalPrice: 'S/ 1,000', includes: '4 cajones + 2 compartimentos · Espejo central · Diseño moderno', cat: 'Mueble',
+            featured: true,
+            images: ['cprincipal.png', 'cmini1.png', 'cmini2.png'],
+            specs: [
+                ['Material',       'Madera natural de alta calidad · Acabado fino'],
+                ['Cajones',        '4 cajones amplios · 2 compartimentos superiores'],
+                ['Espejo',         'Espejo central incluido · Comodidad y estilo'],
+                ['Diseño',         'Elegante y práctico · Estilo moderno'],
+                ['Almacenamiento', 'Amplio · Ideal para ropa, accesorios o maquillaje'],
+                ['Ideal para',     'Dormitorios modernos · Tocador'],
+            ]
+        },
+        {
             name: 'Mesita de Noche de Madera', price: 'S/ 270', originalPrice: 'S/ 310', includes: '2 cajones espaciosos · Tiradores metálicos · Diseño elegante', cat: 'Mueble',
             featured: true,
             images: ['m.principal.png', 'm.mini1.png', 'm.mini2.png'],
