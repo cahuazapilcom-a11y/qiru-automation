@@ -105,44 +105,49 @@ body:has(.product-card:hover) .cursor-follower {
 /* ── NAVIGATION ────────────────────────────────────── */
 .nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    padding: 1.75rem 5rem;
+    height: 68px;
+    padding: 0 4rem;
     background: #1a1a1a;
-    display: flex; align-items: center; gap: 3rem;
-    transition: background .4s, padding .4s, border-color .4s;
+    display: flex; align-items: center; gap: 2rem;
+    transition: background .4s, box-shadow .4s;
 }
 .nav.scrolled {
     background: rgba(20,20,20,.97);
     backdrop-filter: blur(24px) saturate(120%);
-    padding: 1.1rem 5rem;
-    border-bottom: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 1px 0 rgba(255,255,255,.07);
 }
+
+/* Logo */
 .nav-logo {
     text-decoration: none;
-    display: flex; align-items: center; gap: .75rem;
+    display: flex; align-items: center; gap: .65rem;
+    flex-shrink: 0;
 }
-.nav-brand-name {
+.nav-logo img {
+    height: 38px; width: 38px;
+    border-radius: 50%; object-fit: cover;
+    display: block;
+}
+.nav-logo-text {
     font-family: var(--fh);
-    font-size: 1.6rem;
-    font-weight: 400;
-    letter-spacing: .38em;
+    font-size: 1.15rem; font-weight: 400;
+    letter-spacing: .3em;
     color: #F4F0EA;
     text-transform: uppercase;
-    margin-right: auto;
-    padding-left: 1rem;
     white-space: nowrap;
 }
-.logo-text {
-    font-family: var(--fh); font-size: 1.2rem; font-weight: 500;
-    letter-spacing: .32em; color: #F4F0EA;
+
+/* Links */
+.nav-links {
+    display: flex; gap: 2rem;
+    flex-shrink: 0;
 }
-.nav-logo img { height: 48px; width: 48px; border-radius: 50%; object-fit: cover; }
-.nav-links { display: flex; gap: 2.5rem; }
 .nav-link {
     font-size: .72rem; font-weight: 400;
-    letter-spacing: .18em; text-transform: uppercase;
+    letter-spacing: .16em; text-transform: uppercase;
     color: rgba(244,240,234,.55); text-decoration: none;
     transition: color .3s;
-    position: relative;
+    position: relative; white-space: nowrap;
 }
 .nav-link::after {
     content: ''; position: absolute;
@@ -153,98 +158,92 @@ body:has(.product-card:hover) .cursor-follower {
 }
 .nav-link:hover { color: #F4F0EA; }
 .nav-link:hover::after { width: 100%; }
-.nav-cta {
-    padding: .55rem 1.4rem;
-    border: 1px solid var(--accent); color: var(--accent);
-    font-family: var(--fb); font-size: .7rem;
-    font-weight: 400; letter-spacing: .16em;
-    text-transform: uppercase; text-decoration: none;
-    transition: all .3s;
-    white-space: nowrap;
-}
-.nav-cta:hover { background: var(--accent); color: #fff; }
-.nav-hamburger {
-    display: none; flex-direction: column; gap: 5px;
-    background: none; border: none; padding: 4px;
-}
-.nav-hamburger span {
-    display: block; width: 22px; height: 1px;
-    background: #F4F0EA; transition: all .3s;
-}
 
-/* ── BÚSQUEDA RÁPIDA NAV ────────────────────────────── */
-.nav-search-toggle {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    color: #F4F0EA;
-    cursor: pointer;
-    padding: .3rem;
-    transition: color .2s;
-}
-.nav-search-toggle:hover { color: var(--accent); }
-
-/* Barra móvil desplegable debajo del nav */
-.nav-search-mobile {
-    position: fixed;
-    top: 64px;
-    left: 0; right: 0;
-    background: #1a1a1a;
-    border-bottom: 1px solid rgba(255,255,255,.1);
-    padding: .7rem 1.2rem;
-    z-index: 9990;
-    display: none;
-}
-.nav-search-mobile.open { display: block; }
-.nav-search-mobile .nav-search-box { border-radius: 8px; }
-.nav-search-mobile .search-results {
-    left: 0; right: 0;
-    min-width: unset;
-}
-
+/* Search — ocupa el espacio restante */
 .nav-search {
     position: relative;
     flex: 1;
-    max-width: 320px;
-    margin: 0 1.5rem;
+    max-width: 300px;
+    margin-left: auto;
 }
 .nav-search-box {
-    display: flex;
-    align-items: center;
+    display: flex; align-items: center;
     background: rgba(255,255,255,.1);
-    border: 1px solid rgba(255,255,255,.2);
+    border: 1px solid rgba(255,255,255,.18);
     border-radius: 50px;
-    padding: .4rem .9rem;
-    gap: .5rem;
+    padding: .38rem .9rem; gap: .5rem;
     transition: border-color .3s, background .3s;
 }
 .nav-search-box:focus-within {
     border-color: var(--accent);
     background: rgba(255,255,255,.15);
 }
-.nav-search-icon { color: rgba(244,240,234,.55); flex-shrink: 0; }
+.nav-search-icon { color: rgba(244,240,234,.5); flex-shrink: 0; }
 .nav-search-input {
-    flex: 1;
-    background: none;
-    border: none;
-    outline: none;
-    color: #F4F0EA;
-    font-family: var(--fb);
-    font-size: .78rem;
-    font-weight: 300;
-    letter-spacing: .02em;
+    flex: 1; background: none; border: none; outline: none;
+    color: #F4F0EA; font-family: var(--fb);
+    font-size: .78rem; font-weight: 300; min-width: 0;
 }
-.nav-search-input::placeholder { color: rgba(244,240,234,.45); }
+.nav-search-input::placeholder { color: rgba(244,240,234,.4); }
 .nav-search-clear {
     background: none; border: none;
     color: rgba(244,240,234,.45); font-size: .7rem;
     display: flex; align-items: center;
-    cursor: none; padding: 0;
-    transition: color .2s;
+    cursor: none; padding: 0; transition: color .2s;
 }
 .nav-search-clear:hover { color: #F4F0EA; }
+
+/* Right actions */
+.nav-right {
+    display: flex; align-items: center; gap: .75rem;
+    flex-shrink: 0;
+}
+.nav-cta {
+    padding: .48rem 1.2rem;
+    border: 1px solid var(--accent); color: var(--accent);
+    font-family: var(--fb); font-size: .68rem;
+    font-weight: 500; letter-spacing: .14em;
+    text-transform: uppercase; text-decoration: none;
+    transition: all .3s; white-space: nowrap;
+    border-radius: 3px;
+}
+.nav-cta:hover { background: var(--accent); color: #fff; }
+
+/* Search toggle (solo móvil) */
+.nav-search-toggle {
+    display: none; align-items: center; justify-content: center;
+    background: none; border: none;
+    color: rgba(244,240,234,.7); padding: .3rem;
+    transition: color .2s;
+}
+.nav-search-toggle:hover { color: var(--accent); }
+
+/* Hamburger (tablet + móvil) */
+.nav-hamburger {
+    display: none; flex-direction: column;
+    justify-content: center; gap: 5px;
+    background: none; border: none;
+    padding: 4px; width: 32px; height: 32px;
+}
+.nav-hamburger span {
+    display: block; width: 22px; height: 1.5px;
+    background: #F4F0EA; transition: all .3s;
+    border-radius: 2px;
+}
+
+/* ── BÚSQUEDA MÓVIL (desplegable) ──────────────────── */
+.nav-search-mobile {
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    padding: .65rem 1.2rem;
+    z-index: 999;
+    display: none;
+}
+.nav-search-mobile.open { display: block; }
+.nav-search-mobile .nav-search-box { border-radius: 8px; }
+.nav-search-mobile .search-results { left: 0; right: 0; min-width: unset; }
 
 /* Resultados */
 .search-results {
@@ -1569,12 +1568,11 @@ img {
 /* ── TABLET  (≤ 1100px) ─────────────────────────────── */
 @media (max-width: 1100px) {
     /* Nav */
-    .nav { padding: 1.2rem 3rem; }
-    .nav.scrolled { padding: .85rem 3rem; }
-    .nav-links, .nav-cta { display: none; }
+    .nav { padding: 0 2.5rem; gap: 1.2rem; }
+    .nav-links { display: none; }
+    .nav-search { max-width: 220px; }
     .nav-hamburger { display: flex; }
     .mobile-nav { display: flex; }
-    .nav-search-inline { display: flex; max-width: 220px; margin: 0 .8rem; }
 
     /* Hero */
     .hero { grid-template-columns: 1fr; }
@@ -1625,13 +1623,12 @@ img {
     * { cursor: auto !important; }
 
     /* Nav */
-    .nav { padding: 1rem 1.5rem; }
-    .nav.scrolled { padding: .75rem 1.5rem; }
-    .nav-search-inline { display: none; }
+    .nav { padding: 0 1.2rem; gap: .75rem; }
+    .nav-search { display: none; }
     .nav-search-toggle { display: flex; }
-    .nav-brand { font-size: .75rem; letter-spacing: .25em; }
-    #logoImg { width: 34px; height: 34px; }
     .nav-cta { display: none; }
+    .nav-logo-text { font-size: .95rem; letter-spacing: .22em; }
+    .nav-logo img { height: 32px; width: 32px; }
 
     /* Hero */
     .hero { min-height: auto; padding-bottom: 3rem; }
