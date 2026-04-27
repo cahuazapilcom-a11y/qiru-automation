@@ -426,6 +426,19 @@ const PRODUCTS = {
             ]
         },
         {
+            name: 'Alacena de Cocina en Madera', price: 'S/ 1,980', originalPrice: 'S/ 2,200', includes: 'Vitrinas con vidrio · Cajones y compartimentos · 120×45×200 cm', cat: 'Mueble',
+            featured: true,
+            images: ['cprincipal2.png', 'cmini12.png', 'cmini22.png'],
+            specs: [
+                ['Material',       'Madera de alta calidad · Acabado fino'],
+                ['Vitrinas',       'Superiores con vidrio · Ideal para exhibir utensilios'],
+                ['Superficie',     'Amplia superficie central de trabajo'],
+                ['Cajones',        'Múltiples cajones y compartimentos inferiores'],
+                ['Medidas',        '120 cm ancho × 45 cm fondo × 200 cm alto'],
+                ['Ideal para',     'Cocina o comedor'],
+            ]
+        },
+        {
             name: 'Ropero de Madera 3 Puertas con Cajonera', price: 'S/ 2,100', originalPrice: 'S/ 2,800', includes: '3 puertas · 8 cajones deslizables · 120×50×200 cm', cat: 'Mueble',
             featured: true,
             images: ['oprincipal.png', 'omini1.png', 'omini2.png'],
