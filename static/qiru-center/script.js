@@ -426,6 +426,19 @@ const PRODUCTS = {
             ]
         },
         {
+            name: 'Ropero Grande de Madera con Cajonera', price: 'S/ 2,450', originalPrice: 'S/ 3,000', includes: '3 puertas · 6 cajones · 150×50×210 cm · Gran capacidad', cat: 'Mueble',
+            featured: true,
+            images: ['rprincipal.png', 'rmini1.png', 'rmini2.png'],
+            specs: [
+                ['Material',       'Madera resistente · Acabado fino natural'],
+                ['Puertas',        '3 puertas amplias · Espacio para colgar ropa'],
+                ['Cajones',        '2 cajones superiores + 4 cajones inferiores'],
+                ['Medidas',        '150 cm ancho × 50 cm fondo × 210 cm alto'],
+                ['Capacidad',      'Gran capacidad · Ideal para ropa y accesorios'],
+                ['Ideal para',     'Dormitorios grandes'],
+            ]
+        },
+        {
             name: 'Ropero de Madera con Cajonera', price: 'S/ 1,500', originalPrice: 'S/ 2,000', includes: '2 puertas · 4 cajones deslizables · Diseño elegante', cat: 'Mueble',
             featured: true,
             images: ['aprincipal.png', 'amini1.png', 'amini3.png'],
