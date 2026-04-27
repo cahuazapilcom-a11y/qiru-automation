@@ -426,7 +426,7 @@ const PRODUCTS = {
             ]
         },
         {
-            name: 'Cama de Madera 2 Plazas', price: 'S/ 1,890', originalPrice: 'S/ 2,000', includes: 'Cabecera y piecera decorativas · Estructura sólida · 190×200 cm', cat: 'Cama',
+            name: 'Cama de Madera 3 Plazas', price: 'S/ 1,890', originalPrice: 'S/ 2,000', includes: 'Cabecera y piecera decorativas · Estructura sólida · 190×200 cm', cat: 'Cama',
             featured: true,
             images: ['capri.png', 'capri1.png'],
             specs: [
