@@ -426,6 +426,18 @@ const PRODUCTS = {
             ]
         },
         {
+            name: 'Cama de Madera 2 Plazas', price: 'S/ 1,890', originalPrice: 'S/ 2,000', includes: 'Cabecera y piecera decorativas · Estructura sólida · 190×200 cm', cat: 'Cama',
+            featured: true,
+            images: ['capri.png', 'capri1.png'],
+            specs: [
+                ['Material',    'Madera de alta calidad · Acabado fino natural'],
+                ['Diseño',      'Detalles en relieve · Cabecera y piecera decorativas'],
+                ['Medidas',     '190 cm ancho × 200 cm largo × 55 cm alto'],
+                ['Estructura',  'Sólida y resistente · Alta durabilidad'],
+                ['Ideal para',  'Dormitorio moderno'],
+            ]
+        },
+        {
             name: 'Alacena Grande de Cocina en Madera', price: 'S/ 2,850', originalPrice: 'S/ 3,000', includes: 'Vitrinas con vidrio · Cajones y puertas · 190×45×200 cm', cat: 'Mueble',
             featured: true,
             images: ['4principal.jpeg', '4mini1.png', '4mini2.png'],
