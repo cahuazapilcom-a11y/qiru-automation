@@ -569,6 +569,18 @@ const PRODUCTS = {
             ]
         },
         {
+            name: 'Sábanas Rayas Beige/Naranja Full', price: 'S/ 80', originalPrice: 'S/ 85', priceLabel: true, includes: 'Juego de sábanas · 4 piezas', cat: 'Sábana',
+            size: 'Full',
+            images: ['full.png'],
+            specs: [
+                ['Modelo',        'Rayas Beige/Naranja'],
+                ['Talla',         'Full'],
+                ['Incluye',       'Juego de sábanas · 4 piezas'],
+                ['Precio unidad', 'S/ 85'],
+                ['Precio mayor',  'S/ 80'],
+            ]
+        },
+        {
             name: 'Sábana 2 Plazas — Algodón Premium', price: 'S/ 85', includes: '1 sábana encimera + 1 ajustable + 2 fundas', cat: 'Sábana',
             size: '2 Plazas',
             specs: [
