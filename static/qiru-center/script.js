@@ -557,6 +557,19 @@ const PRODUCTS = {
 
     sabanas: [
         {
+            name: 'Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
+            size: 'Twin',
+            images: ['x.png'],
+            specs: [
+                ['Material',      'Bramante de Hilo'],
+                ['Talla',         'Twin (1½ plaza)'],
+                ['Incluye',       'Sábana elástica · Sobre sábana · 2 fundas de almohada'],
+                ['Total',         '4 piezas'],
+                ['Precio unidad', 'S/ 70'],
+                ['Precio mayor',  'S/ 65'],
+            ]
+        },
+        {
             name: 'Sábanas Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada', cat: 'Sábana',
             size: 'Twin',
             images: ['twin.png'],
