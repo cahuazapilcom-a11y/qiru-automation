@@ -941,13 +941,17 @@ document.addEventListener('mousemove', e => {
 })();
 
 // ── LOADER ────────────────────────────────────────────────
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        const loader = document.getElementById('loader');
-        if (loader) loader.classList.add('out');
+function dismissLoader() {
+    const loader = document.getElementById('loader');
+    if (loader && !loader.classList.contains('out')) {
+        loader.classList.add('out');
         startHeroAnims();
-    }, 2100);
-});
+    }
+}
+// Espera a que cargue todo, máximo 1.8s
+window.addEventListener('load', () => setTimeout(dismissLoader, 1800));
+// Fallback: si en 4s no cargó, lo quita igual
+setTimeout(dismissLoader, 4000);
 
 // ── HERO ENTRANCE ANIMATIONS ──────────────────────────────
 function startHeroAnims() {
