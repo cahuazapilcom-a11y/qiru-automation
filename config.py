@@ -83,6 +83,7 @@ PRODUCTS = [
     {"name": "Cómoda de Madera con Espejo", "category": "Muebles", "material": "Madera natural", "price": 980.00},
     {"name": "Mesita de Noche de Madera", "category": "Muebles", "material": "Madera resistente", "price": 270.00},
     # Sábanas
+    {"name": "Sábanas Bramante de Hilo Twin", "category": "Sábanas", "material": "Bramante de Hilo", "price": 65.00},
     {"name": "Sábanas 1.5 Plazas", "category": "Sábanas", "material": "Microfibra suave", "price": 65.00},
     {"name": "Sábanas 2 Plazas", "category": "Sábanas", "material": "Microfibra suave", "price": 85.00},
     {"name": "Sábanas Queen", "category": "Sábanas", "material": "Microfibra suave", "price": 110.00},
