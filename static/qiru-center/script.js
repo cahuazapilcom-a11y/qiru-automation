@@ -557,7 +557,7 @@ const PRODUCTS = {
 
     sabanas: [
         {
-            name: 'Sábanas Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada', cat: 'Sábana',
+            name: 'Sábanas Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada', cat: 'Sábana',
             size: 'Twin',
             images: ['twin.png'],
             specs: [
@@ -754,8 +754,10 @@ function createCard(p) {
             <div class="card-name">${p.name}</div>
             <div class="card-desc">${p.includes}</div>
             <div class="card-price">
-                ${p.originalPrice ? `<span style="text-decoration:line-through;color:#aaa;font-size:0.85em;margin-right:6px;">${p.originalPrice}</span>` : ''}
-                <span style="${p.originalPrice ? 'color:#e53935;font-weight:bold;' : ''}">${p.price}</span> <span>soles</span>
+                ${p.priceLabel
+                    ? `<span style="font-size:0.82em;color:#555;">Precio unidad <strong>${p.originalPrice}</strong></span>&nbsp;<span style="color:#e53935;font-weight:bold;">→ ${p.price}</span>&nbsp;<span style="font-size:0.82em;color:#555;">precio mayor</span>`
+                    : (p.originalPrice ? `<span style="text-decoration:line-through;color:#aaa;font-size:0.85em;margin-right:6px;">${p.originalPrice}</span><span style="color:#e53935;font-weight:bold;">${p.price}</span> <span>soles</span>` : `<span>${p.price}</span> <span>soles</span>`)
+                }
             </div>
             <button class="btn-add-cart">${cartIconSVG} Agregar al carrito</button>
             ${specsHTML ? `
