@@ -1029,6 +1029,29 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
     });
 })();
 
+// ── NAV LINKS — close all modals before navigating ───────
+document.querySelectorAll('.nav-link, .mobile-nav-link, .nav-logo').forEach(function(link) {
+    link.addEventListener('click', function() {
+        // Close product detail modal
+        var pdOverlay = document.getElementById('pdOverlay');
+        var pdModal   = document.getElementById('pdModal');
+        if (pdOverlay) pdOverlay.classList.remove('open');
+        if (pdModal)   pdModal.classList.remove('open');
+        // Close checkout
+        var coOverlay = document.getElementById('coOverlay');
+        var coModal   = document.getElementById('coModal');
+        if (coOverlay) coOverlay.classList.remove('open');
+        if (coModal)   coModal.classList.remove('open');
+        // Close cart sidebar
+        var cartSidebar = document.getElementById('cartSidebar');
+        var cartOverlay = document.getElementById('cartOverlay');
+        if (cartSidebar) cartSidebar.classList.remove('open');
+        if (cartOverlay) cartOverlay.classList.remove('open');
+        // Restore scroll
+        document.body.style.overflow = '';
+    });
+});
+
 // ── LOGO HANDLING ─────────────────────────────────────────
 const logoImg  = document.getElementById('logoImg');
 const logoText = document.querySelector('.nav-logo-text');
