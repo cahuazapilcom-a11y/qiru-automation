@@ -558,6 +558,33 @@ const PRODUCTS = {
     sabanas: [
         {
             name: 'Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
+            size: 'Twin', images: ['a.png'],
+            specs: [
+                ['Material','Bramante de Hilo'],['Talla','Twin (1½ plaza)'],
+                ['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas'],
+                ['Precio unidad','S/ 70'],['Precio mayor','S/ 65'],
+            ]
+        },
+        {
+            name: 'Bramante de Hilo Full', price: 'S/ 80', originalPrice: 'S/ 85', priceLabel: true, outOfStock: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
+            size: 'Full', images: ['a.png'],
+            specs: [
+                ['Material','Bramante de Hilo'],['Talla','Full (2 plazas)'],
+                ['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas'],
+                ['Precio unidad','S/ 85'],['Precio mayor','S/ 80'],['Disponibilidad','Agotado'],
+            ]
+        },
+        {
+            name: 'Bramante de Hilo Queen', price: 'S/ 90', originalPrice: 'S/ 95', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
+            size: 'Queen', images: ['a.png'],
+            specs: [
+                ['Material','Bramante de Hilo'],['Talla','Queen (2½ plazas)'],
+                ['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas'],
+                ['Precio unidad','S/ 95'],['Precio mayor','S/ 90'],
+            ]
+        },
+        {
+            name: 'Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
             size: 'Twin', images: ['y.png'],
             specs: [
                 ['Material','Bramante de Hilo'],['Talla','Twin (1½ plaza)'],
@@ -863,7 +890,10 @@ function createCard(p) {
                     : (p.originalPrice ? `<span style="text-decoration:line-through;color:#aaa;font-size:0.85em;margin-right:6px;">${p.originalPrice}</span><span style="color:#e53935;font-weight:bold;">${p.price}</span> <span>soles</span>` : `<span>${p.price}</span> <span>soles</span>`)
                 }
             </div>
-            <button class="btn-add-cart">${cartIconSVG} Agregar al carrito</button>
+            ${p.outOfStock
+                ? `<button class="btn-add-cart" disabled style="background:#aaa;cursor:not-allowed;opacity:0.7;">Agotado</button>`
+                : `<button class="btn-add-cart">${cartIconSVG} Agregar al carrito</button>`
+            }
             ${specsHTML ? `
             <button class="btn-specs-toggle">Especificaciones ▾</button>
             <table class="card-specs-table hidden"><tbody>${specsHTML}</tbody></table>` : ''}
