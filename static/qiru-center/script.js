@@ -945,6 +945,8 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
         pdRelated.innerHTML = '';
         related.forEach(function(r) {
             var card = createCard(r);
+            // Make visible immediately (no IntersectionObserver needed inside modal)
+            card.classList.add('visible');
             card.addEventListener('click', function(e) {
                 if (e.target.closest('.btn-add-cart') || e.target.closest('.card-fav-btn') ||
                     e.target.closest('.card-thumb') || e.target.closest('.btn-specs-toggle') ||
@@ -1428,6 +1430,11 @@ var PERU = {
 
 function openCheckout() {
     closeCart();
+    // Close product detail modal if open
+    var pdO = document.getElementById('pdOverlay');
+    var pdM = document.getElementById('pdModal');
+    if (pdO) pdO.classList.remove('open');
+    if (pdM) pdM.classList.remove('open');
     coRenderAll();
     document.getElementById('coOverlay').classList.add('open');
     document.getElementById('coModal').classList.add('open');
@@ -1449,6 +1456,11 @@ function openCheckout() {
 function closeCheckout() {
     document.getElementById('coOverlay').classList.remove('open');
     document.getElementById('coModal').classList.remove('open');
+    // Also close product detail modal if open
+    var pdOverlay = document.getElementById('pdOverlay');
+    var pdModal   = document.getElementById('pdModal');
+    if (pdOverlay) pdOverlay.classList.remove('open');
+    if (pdModal)   pdModal.classList.remove('open');
     document.body.style.overflow = '';
 };
 
