@@ -791,7 +791,8 @@ function renderCart() {
 }
 function addToCart(product, btnEl) {
     var priceNum = parseFloat(product.price.replace('S/ ', '').replace(',', '')) || 0;
-    _cart.push({ name: product.name, price: priceNum, priceStr: product.price + ' soles', img: product.images ? product.images[0] : '', qty: 1 });
+    var _ib = '/static/qiru-center/';
+    _cart.push({ name: product.name, price: priceNum, priceStr: product.price + ' soles', img: product.images ? _ib + product.images[0] : '', qty: 1 });
     renderCart();
     openCart();
     if (btnEl) {
@@ -861,14 +862,15 @@ function createCard(p) {
     const cartIconSVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>`;
     const heartSVG   = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`;
 
-    const mainImg   = p.images && p.images[0] ? p.images[0] : '';
+    const imgBase   = '/static/qiru-center/';
+    const mainImg   = p.images && p.images[0] ? imgBase + p.images[0] : '';
     const specsHTML = p.specs ? p.specs.map(([k,v]) =>
         `<tr><td class="spec-key">${k}</td><td class="spec-val">${v}</td></tr>`
     ).join('') : '';
 
     const thumbsHTML = p.images && p.images.length > 1
         ? p.images.map((img, i) =>
-            `<img src="${img}" class="card-thumb${i===0?' card-thumb--active':''}" data-img="${img}" alt="${p.name}">`
+            `<img src="${imgBase+img}" class="card-thumb${i===0?' card-thumb--active':''}" data-img="${imgBase+img}" alt="${p.name}">`
           ).join('')
         : '';
 
@@ -975,7 +977,8 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
                                `<span style="${p.originalPrice ? 'color:#e53935;font-weight:bold;' : ''}">${p.price}</span> <span>soles</span>`;
 
         // Images
-        var imgs = (p.images && p.images.length) ? p.images : [];
+        var _ib2 = '/static/qiru-center/';
+        var imgs = (p.images && p.images.length) ? p.images.map(function(i){ return _ib2+i; }) : [];
         pdMainImg.src = imgs[0] || '';
         pdMainImg.alt = p.name;
 
@@ -1042,7 +1045,8 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
     }
 
     function setImg(idx) {
-        var imgs = (currentProduct && currentProduct.images) ? currentProduct.images : [];
+        var _ib3 = '/static/qiru-center/';
+        var imgs = (currentProduct && currentProduct.images) ? currentProduct.images.map(function(i){ return _ib3+i; }) : [];
         if (!imgs.length) return;
         currentImgIdx = (idx + imgs.length) % imgs.length;
         pdMainImg.style.opacity = '0';
@@ -1734,7 +1738,7 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
         }
 
         matches.forEach(function(p) {
-            var img   = p.images && p.images[0] ? p.images[0] : '';
+            var img   = p.images && p.images[0] ? '/static/qiru-center/' + p.images[0] : '';
             var section = SECTION_MAP[p.name] || 'colchones';
             var item  = document.createElement('div');
             item.className = 'sr-item';
