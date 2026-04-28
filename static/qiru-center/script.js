@@ -557,187 +557,66 @@ const PRODUCTS = {
 
     sabanas: [
         {
-            name: 'Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
-            size: 'Twin', images: ['a.png'],
-            specs: [
-                ['Material','Bramante de Hilo'],['Talla','Twin (1½ plaza)'],
-                ['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas'],
-                ['Precio unidad','S/ 70'],['Precio mayor','S/ 65'],
-            ]
+            name: 'Bramante de Hilo', cat: 'Sábana', images: ['a.png'],
+            includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas',
+            variants: [
+                { size: 'Twin',  price: 'S/ 65', originalPrice: 'S/ 70' },
+                { size: 'Full',  price: 'S/ 80', originalPrice: 'S/ 85', outOfStock: true },
+                { size: 'Queen', price: 'S/ 90', originalPrice: 'S/ 95' },
+            ],
+            specs: [['Material','Bramante de Hilo'],['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas']],
         },
         {
-            name: 'Bramante de Hilo Full', price: 'S/ 80', originalPrice: 'S/ 85', priceLabel: true, outOfStock: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
-            size: 'Full', images: ['a.png'],
-            specs: [
-                ['Material','Bramante de Hilo'],['Talla','Full (2 plazas)'],
-                ['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas'],
-                ['Precio unidad','S/ 85'],['Precio mayor','S/ 80'],['Disponibilidad','Agotado'],
-            ]
+            name: 'Bramante de Hilo', cat: 'Sábana', images: ['y.png'],
+            includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas',
+            variants: [
+                { size: 'Twin',  price: 'S/ 65', originalPrice: 'S/ 70' },
+                { size: 'Full',  price: 'S/ 80', originalPrice: 'S/ 85' },
+                { size: 'Queen', price: 'S/ 90', originalPrice: 'S/ 95' },
+            ],
+            specs: [['Material','Bramante de Hilo'],['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas']],
         },
         {
-            name: 'Bramante de Hilo Queen', price: 'S/ 90', originalPrice: 'S/ 95', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
-            size: 'Queen', images: ['a.png'],
-            specs: [
-                ['Material','Bramante de Hilo'],['Talla','Queen (2½ plazas)'],
-                ['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas'],
-                ['Precio unidad','S/ 95'],['Precio mayor','S/ 90'],
-            ]
+            name: 'Bramante de Hilo', cat: 'Sábana', images: ['h.png'],
+            includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas',
+            variants: [
+                { size: 'Twin',  price: 'S/ 65', originalPrice: 'S/ 70' },
+                { size: 'Full',  price: 'S/ 80', originalPrice: 'S/ 85' },
+                { size: 'Queen', price: 'S/ 90', originalPrice: 'S/ 95' },
+            ],
+            specs: [['Material','Bramante de Hilo'],['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas']],
         },
         {
-            name: 'Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
-            size: 'Twin', images: ['y.png'],
-            specs: [
-                ['Material','Bramante de Hilo'],['Talla','Twin (1½ plaza)'],
-                ['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas'],
-                ['Precio unidad','S/ 70'],['Precio mayor','S/ 65'],
-            ]
+            name: 'Bramante de Hilo', cat: 'Sábana', images: ['twin.png'],
+            includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas',
+            variants: [
+                { size: 'Twin', price: 'S/ 65', originalPrice: 'S/ 70' },
+            ],
+            specs: [['Material','Bramante de Hilo'],['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas']],
         },
         {
-            name: 'Bramante de Hilo Full', price: 'S/ 80', originalPrice: 'S/ 85', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
-            size: 'Full', images: ['y.png'],
-            specs: [
-                ['Material','Bramante de Hilo'],['Talla','Full (2 plazas)'],
-                ['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas'],
-                ['Precio unidad','S/ 85'],['Precio mayor','S/ 80'],
-            ]
+            name: 'Bramante de Hilo', cat: 'Sábana', images: ['x.png'],
+            includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas',
+            variants: [
+                { size: 'Twin', price: 'S/ 65', originalPrice: 'S/ 70' },
+            ],
+            specs: [['Material','Bramante de Hilo'],['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas']],
         },
         {
-            name: 'Bramante de Hilo Queen', price: 'S/ 90', originalPrice: 'S/ 95', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
-            size: 'Queen', images: ['y.png'],
-            specs: [
-                ['Material','Bramante de Hilo'],['Talla','Queen (2½ plazas)'],
-                ['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas'],
-                ['Precio unidad','S/ 95'],['Precio mayor','S/ 90'],
-            ]
+            name: 'Bramante de Hilo', cat: 'Sábana', images: ['z.png'],
+            includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas',
+            variants: [
+                { size: 'Full', price: 'S/ 80', originalPrice: 'S/ 85' },
+            ],
+            specs: [['Material','Bramante de Hilo'],['Incluye','Sábana elástica · Sobre sábana · 2 fundas de almohada'],['Total','4 piezas']],
         },
         {
-            name: 'Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
-            size: 'Twin',
-            images: ['x.png'],
-            specs: [
-                ['Material',      'Bramante de Hilo'],
-                ['Talla',         'Twin (1½ plaza)'],
-                ['Incluye',       'Sábana elástica · Sobre sábana · 2 fundas de almohada'],
-                ['Total',         '4 piezas'],
-                ['Precio unidad', 'S/ 70'],
-                ['Precio mayor',  'S/ 65'],
-            ]
-        },
-        {
-            name: 'Sábanas Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada', cat: 'Sábana',
-            size: 'Twin',
-            images: ['twin.png'],
-            specs: [
-                ['Material',    'Bramante de Hilo · Suave y duradero'],
-                ['Talla',       'Twin (1½ Plazas)'],
-                ['Incluye',     'Sábana elástica · Sobre sábana · 2 fundas de almohada'],
-                ['Precio unidad', 'S/ 70'],
-                ['Precio mayor',  'S/ 65'],
-            ]
-        },
-        {
-            name: 'Bramante de Hilo Full', price: 'S/ 80', originalPrice: 'S/ 85', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
-            size: 'Full',
-            images: ['z.png'],
-            specs: [
-                ['Material',      'Bramante de Hilo'],
-                ['Talla',         'Full (2 plazas)'],
-                ['Incluye',       'Sábana elástica · Sobre sábana · 2 fundas de almohada'],
-                ['Total',         '4 piezas'],
-                ['Precio unidad', 'S/ 85'],
-                ['Precio mayor',  'S/ 80'],
-            ]
-        },
-        {
-            name: 'Bramante de Hilo Twin', price: 'S/ 65', originalPrice: 'S/ 70', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
-            size: 'Twin',
-            images: ['h.png'],
-            specs: [
-                ['Material',      'Bramante de Hilo'],
-                ['Talla',         'Twin (1½ plaza)'],
-                ['Incluye',       'Sábana elástica · Sobre sábana · 2 fundas de almohada'],
-                ['Total',         '4 piezas'],
-                ['Precio unidad', 'S/ 70'],
-                ['Precio mayor',  'S/ 65'],
-            ]
-        },
-        {
-            name: 'Bramante de Hilo Full', price: 'S/ 80', originalPrice: 'S/ 85', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
-            size: 'Full',
-            images: ['h.png'],
-            specs: [
-                ['Material',      'Bramante de Hilo'],
-                ['Talla',         'Full (2 plazas)'],
-                ['Incluye',       'Sábana elástica · Sobre sábana · 2 fundas de almohada'],
-                ['Total',         '4 piezas'],
-                ['Precio unidad', 'S/ 85'],
-                ['Precio mayor',  'S/ 80'],
-            ]
-        },
-        {
-            name: 'Bramante de Hilo Queen', price: 'S/ 90', originalPrice: 'S/ 95', priceLabel: true, includes: 'Sábana elástica · Sobre sábana · 2 fundas de almohada · 4 piezas', cat: 'Sábana',
-            size: 'Queen',
-            images: ['h.png'],
-            specs: [
-                ['Material',      'Bramante de Hilo'],
-                ['Talla',         'Queen (2½ plazas)'],
-                ['Incluye',       'Sábana elástica · Sobre sábana · 2 fundas de almohada'],
-                ['Total',         '4 piezas'],
-                ['Precio unidad', 'S/ 95'],
-                ['Precio mayor',  'S/ 90'],
-            ]
-        },
-        {
-            name: 'Sábanas Rayas Beige/Naranja Full', price: 'S/ 80', originalPrice: 'S/ 85', priceLabel: true, includes: 'Juego de sábanas · 4 piezas', cat: 'Sábana',
-            size: 'Full',
-            images: ['full.png'],
-            specs: [
-                ['Modelo',        'Rayas Beige/Naranja'],
-                ['Talla',         'Full'],
-                ['Incluye',       'Juego de sábanas · 4 piezas'],
-                ['Precio unidad', 'S/ 85'],
-                ['Precio mayor',  'S/ 80'],
-            ]
-        },
-        {
-            name: 'Sábana 2 Plazas — Algodón Premium', price: 'S/ 85', includes: '1 sábana encimera + 1 ajustable + 2 fundas', cat: 'Sábana',
-            size: '2 Plazas',
-            specs: [
-                ['Material',    'Algodón 100% · Suave al tacto'],
-                ['Medidas',     '200×240 cm · Sábana encimera'],
-                ['Incluye',     'Sábana encimera · Sábana ajustable · 2 fundas'],
-                ['Ideal para',  'Cama 2 plazas'],
-            ]
-        },
-        {
-            name: 'Sábana 1.5 Plazas — Algodón Premium', price: 'S/ 65', includes: '1 sábana encimera + 1 ajustable + 1 funda', cat: 'Sábana',
-            size: '1.5 Plazas',
-            specs: [
-                ['Material',    'Algodón 100% · Suave al tacto'],
-                ['Medidas',     '160×220 cm · Sábana encimera'],
-                ['Incluye',     'Sábana encimera · Sábana ajustable · 1 funda'],
-                ['Ideal para',  'Cama 1.5 plazas'],
-            ]
-        },
-        {
-            name: 'Sábana Queen — Algodón Premium', price: 'S/ 110', includes: '1 sábana encimera + 1 ajustable + 2 fundas', cat: 'Sábana',
-            size: 'Queen',
-            specs: [
-                ['Material',    'Algodón 100% · Suave al tacto'],
-                ['Medidas',     '220×260 cm · Sábana encimera'],
-                ['Incluye',     'Sábana encimera · Sábana ajustable · 2 fundas'],
-                ['Ideal para',  'Cama Queen'],
-            ]
-        },
-        {
-            name: 'Sábana King — Algodón Premium', price: 'S/ 130', includes: '1 sábana encimera + 1 ajustable + 2 fundas', cat: 'Sábana',
-            size: 'King',
-            specs: [
-                ['Material',    'Algodón 100% · Suave al tacto'],
-                ['Medidas',     '240×280 cm · Sábana encimera'],
-                ['Incluye',     'Sábana encimera · Sábana ajustable · 2 fundas'],
-                ['Ideal para',  'Cama King'],
-            ]
+            name: 'Rayas Beige/Naranja', cat: 'Sábana', images: ['full.png'],
+            includes: 'Juego de sábanas · 4 piezas',
+            variants: [
+                { size: 'Full', price: 'S/ 80', originalPrice: 'S/ 85' },
+            ],
+            specs: [['Modelo','Rayas Beige/Naranja'],['Incluye','Juego de sábanas · 4 piezas']],
         },
     ],
 };
@@ -855,9 +734,11 @@ function createCard(p) {
 
     const card = document.createElement('div');
     card.className = 'product-card reveal';
-    card.dataset.cat  = p.cat;
-    card.dataset.size = p.size || '';
-    card.dataset.line = p.line || '';
+    card.dataset.cat   = p.cat;
+    // For variant cards, expose all sizes for filter matching
+    card.dataset.sizes = p.variants ? p.variants.map(v => v.size).join(' ') : (p.size || '');
+    card.dataset.size  = p.variants ? p.variants[0].size : (p.size || '');
+    card.dataset.line  = p.line || '';
 
     const cartIconSVG = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>`;
     const heartSVG   = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`;
@@ -874,6 +755,24 @@ function createCard(p) {
           ).join('')
         : '';
 
+    // For variant cards, use first variant as default
+    const activeVariant = p.variants ? p.variants[0] : null;
+    const displayPrice    = activeVariant ? activeVariant.price        : p.price;
+    const displayOriginal = activeVariant ? activeVariant.originalPrice : p.originalPrice;
+    const displayOOS      = activeVariant ? !!activeVariant.outOfStock  : !!p.outOfStock;
+
+    const variantBtnsHTML = p.variants ? `
+        <div class="card-size-btns">
+            ${p.variants.map((v, i) => `
+                <button class="card-size-btn${i===0?' active':''}"
+                        data-price="${v.price}"
+                        data-orig="${v.originalPrice||''}"
+                        data-size="${v.size}"
+                        ${v.outOfStock ? 'data-oos="1"' : ''}>
+                    ${v.size}
+                </button>`).join('')}
+        </div>` : '';
+
     card.innerHTML = `
         <div class="card-img-wrap">
             ${mainImg
@@ -886,16 +785,11 @@ function createCard(p) {
             <div class="card-category">${p.cat}</div>
             <div class="card-name">${p.name}</div>
             <div class="card-desc">${p.includes}</div>
+            ${variantBtnsHTML}
             <div class="card-price">
-                ${p.priceLabel
-                    ? `<span style="font-size:0.82em;color:#555;">Precio unidad <strong>${p.originalPrice}</strong></span>&nbsp;<span style="color:#e53935;font-weight:bold;">→ ${p.price}</span>&nbsp;<span style="font-size:0.82em;color:#555;">precio mayor</span>`
-                    : (p.originalPrice ? `<span style="text-decoration:line-through;color:#aaa;font-size:0.85em;margin-right:6px;">${p.originalPrice}</span><span style="color:#e53935;font-weight:bold;">${p.price}</span> <span>soles</span>` : `<span>${p.price}</span> <span>soles</span>`)
-                }
+                <span style="font-size:0.82em;color:#555;">Precio unidad <strong class="cp-orig">${displayOriginal || displayPrice}</strong></span>&nbsp;<span class="cp-mayor" style="color:#e53935;font-weight:bold;">→ <span class="cp-price">${displayPrice}</span></span>&nbsp;<span style="font-size:0.82em;color:#555;">precio mayor</span>
             </div>
-            ${p.outOfStock
-                ? `<button class="btn-add-cart" disabled style="background:#aaa;cursor:not-allowed;opacity:0.7;">Agotado</button>`
-                : `<button class="btn-add-cart">${cartIconSVG} Agregar al carrito</button>`
-            }
+            <button class="btn-add-cart"${displayOOS ? ' disabled style="background:#aaa;cursor:not-allowed;opacity:0.7;"' : ''}>${displayOOS ? 'Agotado' : cartIconSVG + ' Agregar al carrito'}</button>
             ${specsHTML ? `
             <button class="btn-specs-toggle">Especificaciones ▾</button>
             <table class="card-specs-table hidden"><tbody>${specsHTML}</tbody></table>` : ''}
@@ -916,6 +810,33 @@ function createCard(p) {
     favBtn && favBtn.addEventListener('click', function(e) {
         e.stopPropagation();
         favBtn.classList.toggle('active');
+    });
+
+    // Botones de talla (variants)
+    card.querySelectorAll('.card-size-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            card.querySelectorAll('.card-size-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            var price = btn.dataset.price;
+            var orig  = btn.dataset.orig;
+            var oos   = btn.dataset.oos === '1';
+            card.dataset.size = btn.dataset.size;
+            card.querySelector('.cp-orig').textContent  = orig || price;
+            card.querySelector('.cp-price').textContent = price;
+            var addBtn2 = card.querySelector('.btn-add-cart');
+            if (addBtn2) {
+                if (oos) {
+                    addBtn2.disabled = true;
+                    addBtn2.textContent = 'Agotado';
+                    addBtn2.style.cssText = 'background:#aaa;cursor:not-allowed;opacity:0.7;';
+                } else {
+                    addBtn2.disabled = false;
+                    addBtn2.innerHTML = cartIconSVG + ' Agregar al carrito';
+                    addBtn2.style.cssText = '';
+                }
+            }
+        });
     });
 
     // Agregar al carrito
@@ -1423,10 +1344,14 @@ function initFilters(tabsId, gridId) {
             tab.classList.add('active');
             const filter = tab.dataset.filter;
             grid.querySelectorAll('.product-card').forEach(card => {
-                if (filter === 'all' || card.dataset.cat === filter) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
+                const sizes = (card.dataset.sizes || card.dataset.size || '').split(' ');
+                const match = filter === 'all' || sizes.includes(filter) || card.dataset.cat === filter;
+                card.style.display = match ? '' : 'none';
+                // Auto-activate the matching size button
+                if (match && filter !== 'all') {
+                    card.querySelectorAll('.card-size-btn').forEach(function(btn) {
+                        if (btn.dataset.size === filter) btn.click();
+                    });
                 }
             });
         });

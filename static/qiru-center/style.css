@@ -555,6 +555,33 @@ body:has(.product-card:hover) .cursor-follower {
     box-shadow: 0 4px 20px rgba(200,16,46,.3);
 }
 
+/* ── Size selector buttons on cards ── */
+.card-size-btns {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin: 8px 0 6px;
+}
+.card-size-btn {
+    padding: 4px 12px;
+    border: 1.5px solid #d0d0d0;
+    border-radius: 4px;
+    background: #fff;
+    color: #333;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    user-select: none;
+}
+.card-size-btn:hover {
+    border-color: #1a1a1a;
+    color: #1a1a1a;
+}
+.card-size-btn.active {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: #fff;
+}
+
 @media (max-width: 768px) {
     .filter-tabs { padding: 0 2rem 2rem; }
     .filter-dual { padding: 0 2rem 2rem; }
