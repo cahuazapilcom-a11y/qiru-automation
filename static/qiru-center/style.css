@@ -128,6 +128,18 @@ body:has(.product-card:hover) .cursor-follower {
     border-radius: 50%; object-fit: cover;
     display: block;
 }
+.nav-brand-title {
+    font-family: var(--fh);
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: .25em;
+    color: #fff;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex: 1;
+    text-align: center;
+    pointer-events: none;
+}
 .nav-logo-text {
     font-family: var(--fh);
     font-size: 1.15rem; font-weight: 400;
