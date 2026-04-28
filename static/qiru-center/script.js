@@ -931,9 +931,16 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
         }
 
         // Related — same cat first, fill with others if needed
-        var allProds = [].concat(PRODUCTS.colchones || [], PRODUCTS.camas || [], PRODUCTS.muebles || []);
+        var allProds = [].concat(
+            PRODUCTS.colchones || [],
+            PRODUCTS.camas     || [],
+            PRODUCTS.sabanas   || [],
+            PRODUCTS.muebles   || []
+        );
         var sameCat = allProds.filter(function(r) { return r !== p && r.cat === p.cat; });
         var others  = allProds.filter(function(r) { return r !== p && r.cat !== p.cat; });
+        // shuffle same-cat so it's not always the same order
+        sameCat.sort(function() { return Math.random() - 0.5; });
         var related = sameCat.concat(others).slice(0, 4);
         pdRelated.innerHTML = '';
         related.forEach(function(r) {
@@ -941,7 +948,7 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
             card.addEventListener('click', function(e) {
                 if (e.target.closest('.btn-add-cart') || e.target.closest('.card-fav-btn') ||
                     e.target.closest('.card-thumb') || e.target.closest('.btn-specs-toggle') ||
-                    e.target.closest('.card-specs-table')) return;
+                    e.target.closest('.card-specs-table') || e.target.closest('.card-size-btn')) return;
                 openDetail(r);
             });
             pdRelated.appendChild(card);
@@ -1006,10 +1013,15 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
         if (!card) return;
         if (e.target.closest('.btn-add-cart') || e.target.closest('.card-fav-btn') ||
             e.target.closest('.card-thumb') || e.target.closest('.btn-specs-toggle') ||
-            e.target.closest('.card-specs-table')) return;
-        // Find product by name
-        var name = card.querySelector('.card-name') && card.querySelector('.card-name').textContent;
-        var allProds = [].concat(PRODUCTS.colchones || [], PRODUCTS.camas || [], PRODUCTS.muebles || []);
+            e.target.closest('.card-specs-table') || e.target.closest('.card-size-btn')) return;
+        // Find product by name across all sections
+        var name = card.querySelector('.card-name') && card.querySelector('.card-name').textContent.trim();
+        var allProds = [].concat(
+            PRODUCTS.colchones || [],
+            PRODUCTS.camas     || [],
+            PRODUCTS.sabanas   || [],
+            PRODUCTS.muebles   || []
+        );
         var prod = allProds.find(function(p) { return p.name === name; });
         if (prod) openDetail(prod);
     });
