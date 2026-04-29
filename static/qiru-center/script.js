@@ -841,7 +841,18 @@ function createCard(p) {
 
     // Agregar al carrito
     var addBtn = card.querySelector('.btn-add-cart');
-    addBtn && addBtn.addEventListener('click', function() { addToCart(p, addBtn); });
+    addBtn && addBtn.addEventListener('click', function() {
+        var activeBtn = card.querySelector('.card-size-btn.active');
+        var productForCart = p;
+        if (activeBtn) {
+            productForCart = Object.assign({}, p, {
+                price: activeBtn.dataset.price,
+                originalPrice: activeBtn.dataset.orig || activeBtn.dataset.price,
+                size: activeBtn.dataset.size
+            });
+        }
+        addToCart(productForCart, addBtn);
+    });
 
     // Toggle especificaciones
     var specsToggle = card.querySelector('.btn-specs-toggle');
@@ -886,16 +897,31 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
     var currentProduct = null;
     var currentImgIdx  = 0;
 
+    var _pdSelectedVariant = null;
+
+    function pdRenderPrice(variant, product) {
+        var price = variant ? variant.price : product.price;
+        var orig  = variant ? variant.originalPrice : product.originalPrice;
+        pdPrice.innerHTML = (orig ? `<span style="text-decoration:line-through;color:#aaa;font-size:0.85em;margin-right:8px;">${orig}</span>` : '') +
+            `<span style="${orig ? 'color:#e53935;font-weight:bold;' : ''}">${price || ''}</span> <span>soles</span>`;
+        var oos = variant ? !!variant.outOfStock : !!product.outOfStock;
+        pdBtnCart.disabled = oos;
+        pdBtnCart.style.cssText = oos ? 'background:#aaa;cursor:not-allowed;opacity:0.7;' : '';
+        pdBtnCart.innerHTML = oos
+            ? 'Agotado'
+            : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg> Agregar al carrito';
+    }
+
     function openDetail(p) {
         currentProduct = p;
         currentImgIdx  = 0;
+        _pdSelectedVariant = p.variants ? p.variants[0] : null;
 
         // Info
         pdCat.textContent      = p.cat;
         pdName.textContent     = p.name;
         pdIncludes.textContent = p.includes || '';
-        pdPrice.innerHTML      = (p.originalPrice ? `<span style="text-decoration:line-through;color:#aaa;font-size:0.85em;margin-right:8px;">${p.originalPrice}</span>` : '') +
-                               `<span style="${p.originalPrice ? 'color:#e53935;font-weight:bold;' : ''}">${p.price}</span> <span>soles</span>`;
+        pdRenderPrice(_pdSelectedVariant, p);
 
         // Images
         var _ib2 = '/static/qiru-center/';
@@ -916,6 +942,37 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
         var showArrows = imgs.length > 1;
         pdPrev.style.display = showArrows ? '' : 'none';
         pdNext.style.display = showArrows ? '' : 'none';
+
+        // Variant size selector
+        var pdVariantsEl = document.getElementById('pdVariants');
+        if (!pdVariantsEl) {
+            pdVariantsEl = document.createElement('div');
+            pdVariantsEl.id = 'pdVariants';
+            pdVariantsEl.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;';
+            pdBtnCart.parentNode.insertBefore(pdVariantsEl, pdBtnCart);
+        }
+        pdVariantsEl.innerHTML = '';
+        if (p.variants && p.variants.length > 1) {
+            p.variants.forEach(function(v, i) {
+                var btn = document.createElement('button');
+                btn.textContent = v.size;
+                btn.style.cssText = 'padding:6px 14px;border:1.5px solid ' + (i===0?'#8b0000':'#ccc') + ';background:' + (i===0?'#8b0000':'transparent') + ';color:' + (i===0?'#fff':'#333') + ';border-radius:4px;cursor:pointer;font-size:0.85em;';
+                if (v.outOfStock) { btn.style.opacity = '0.5'; btn.title = 'Agotado'; }
+                btn.addEventListener('click', function() {
+                    _pdSelectedVariant = v;
+                    pdVariantsEl.querySelectorAll('button').forEach(function(b) {
+                        b.style.background = 'transparent';
+                        b.style.color = '#333';
+                        b.style.borderColor = '#ccc';
+                    });
+                    btn.style.background = '#8b0000';
+                    btn.style.color = '#fff';
+                    btn.style.borderColor = '#8b0000';
+                    pdRenderPrice(v, p);
+                });
+                pdVariantsEl.appendChild(btn);
+            });
+        }
 
         // Specs
         pdSpecsWrap.innerHTML = '';
@@ -958,8 +1015,10 @@ populateGrid('mueblesGrid',   PRODUCTS.muebles);
 
         // Cart button
         pdBtnCart.onclick = function() {
-            var cartIconSVG = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>';
-            addToCart(p, pdBtnCart);
+            var productForCart = _pdSelectedVariant
+                ? Object.assign({}, p, { price: _pdSelectedVariant.price, originalPrice: _pdSelectedVariant.originalPrice, size: _pdSelectedVariant.size })
+                : p;
+            addToCart(productForCart, pdBtnCart);
         };
 
         pdOverlay.classList.add('open');
@@ -1685,11 +1744,13 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
     var ALL_PRODUCTS = []
         .concat(PRODUCTS.colchones || [])
         .concat(PRODUCTS.camas     || [])
+        .concat(PRODUCTS.sabanas   || [])
         .concat(PRODUCTS.muebles   || []);
 
     var SECTION_MAP = {};
     (PRODUCTS.colchones || []).forEach(function(p) { SECTION_MAP[p.name] = 'colchones'; });
     (PRODUCTS.camas     || []).forEach(function(p) { SECTION_MAP[p.name] = 'camas'; });
+    (PRODUCTS.sabanas   || []).forEach(function(p) { SECTION_MAP[p.name] = 'sabanas'; });
     (PRODUCTS.muebles   || []).forEach(function(p) { SECTION_MAP[p.name] = 'muebles'; });
 
     function showResults(query) {
@@ -1720,7 +1781,7 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
                   '<div class="sr-name">' + p.name + '</div>' +
                   '<div class="sr-cat">' + p.cat + '</div>' +
                 '</div>' +
-                '<div class="sr-price">' + p.price + '</div>';
+                '<div class="sr-price">' + (p.variants ? p.variants[0].price : (p.price || '')) + '</div>';
             item.addEventListener('click', function() {
                 var target = document.getElementById(section);
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1729,7 +1790,8 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
                 results.classList.remove('open');
                 results.innerHTML = '';
                 // Agregar al carrito directamente
-                addToCart(p, null);
+                var productForCart = p.variants ? Object.assign({}, p, { price: p.variants[0].price, size: p.variants[0].size }) : p;
+                addToCart(productForCart, null);
             });
             results.appendChild(item);
         });
@@ -1772,11 +1834,13 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
     var ALL_PRODUCTS = []
         .concat(PRODUCTS.colchones || [])
         .concat(PRODUCTS.camas     || [])
+        .concat(PRODUCTS.sabanas   || [])
         .concat(PRODUCTS.muebles   || []);
 
     var SECTION_MAP = {};
     (PRODUCTS.colchones || []).forEach(function(p) { SECTION_MAP[p.name] = 'colchones'; });
     (PRODUCTS.camas     || []).forEach(function(p) { SECTION_MAP[p.name] = 'camas'; });
+    (PRODUCTS.sabanas   || []).forEach(function(p) { SECTION_MAP[p.name] = 'sabanas'; });
     (PRODUCTS.muebles   || []).forEach(function(p) { SECTION_MAP[p.name] = 'muebles'; });
 
     function showResultsM(query) {
@@ -1800,14 +1864,15 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
             item.innerHTML =
                 (img ? '<img src="' + img + '" class="sr-img" alt="' + p.name + '">' : '<div class="sr-img sr-img--placeholder"></div>') +
                 '<div class="sr-info"><div class="sr-name">' + p.name + '</div><div class="sr-cat">' + p.cat + '</div></div>' +
-                '<div class="sr-price">' + p.price + '</div>';
+                '<div class="sr-price">' + (p.variants ? p.variants[0].price : (p.price || '')) + '</div>';
             item.addEventListener('click', function() {
                 var target = document.getElementById(section);
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 inputM.value = ''; clearM.style.display = 'none';
                 resultsM.classList.remove('open'); resultsM.innerHTML = '';
                 bar.classList.remove('open');
-                addToCart(p, null);
+                var productForCart = p.variants ? Object.assign({}, p, { price: p.variants[0].price, size: p.variants[0].size }) : p;
+                addToCart(productForCart, null);
             });
             resultsM.appendChild(item);
         });
