@@ -787,7 +787,7 @@ function createCard(p) {
             <div class="card-desc">${p.includes}</div>
             ${variantBtnsHTML}
             <div class="card-price">
-                <span style="font-size:0.82em;color:#555;">Precio unidad <strong class="cp-orig">${displayOriginal || displayPrice}</strong></span>&nbsp;<span class="cp-mayor" style="color:#e53935;font-weight:bold;">→ <span class="cp-price">${displayPrice}</span></span>&nbsp;<span style="font-size:0.82em;color:#555;">precio mayor</span>
+                <span class="cp-mayor" style="color:#e53935;font-weight:bold;font-size:1.05em;"><span class="cp-price">${displayPrice}</span></span><span class="cp-orig" style="display:none">${displayOriginal || displayPrice}</span>
             </div>
             <button class="btn-add-cart"${displayOOS ? ' disabled style="background:#aaa;cursor:not-allowed;opacity:0.7;"' : ''}>${displayOOS ? 'Agotado' : cartIconSVG + ' Agregar al carrito'}</button>
             ${specsHTML ? `
@@ -822,7 +822,6 @@ function createCard(p) {
             var orig  = btn.dataset.orig;
             var oos   = btn.dataset.oos === '1';
             card.dataset.size = btn.dataset.size;
-            card.querySelector('.cp-orig').textContent  = orig || price;
             card.querySelector('.cp-price').textContent = price;
             var addBtn2 = card.querySelector('.btn-add-cart');
             if (addBtn2) {
