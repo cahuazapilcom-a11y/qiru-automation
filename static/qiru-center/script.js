@@ -1752,15 +1752,17 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
     (PRODUCTS.sabanas   || []).forEach(function(p) { SECTION_MAP[p.name] = 'sabanas'; });
     (PRODUCTS.muebles   || []).forEach(function(p) { SECTION_MAP[p.name] = 'muebles'; });
 
+    function norm(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
     function showResults(query) {
-        query = query.trim().toLowerCase();
+        query = norm(query.trim());
         results.innerHTML = '';
         if (!query) { results.classList.remove('open'); return; }
 
         var matches = ALL_PRODUCTS.filter(function(p) {
-            return p.name.toLowerCase().includes(query) ||
-                   p.cat.toLowerCase().includes(query)  ||
-                   (p.includes && p.includes.toLowerCase().includes(query));
+            return norm(p.name).includes(query) ||
+                   norm(p.cat).includes(query)  ||
+                   norm(p.includes).includes(query);
         }).slice(0, 8);
 
         if (matches.length === 0) {
@@ -1842,14 +1844,16 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
     (PRODUCTS.sabanas   || []).forEach(function(p) { SECTION_MAP[p.name] = 'sabanas'; });
     (PRODUCTS.muebles   || []).forEach(function(p) { SECTION_MAP[p.name] = 'muebles'; });
 
+    function normM(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+
     function showResultsM(query) {
-        query = query.trim().toLowerCase();
+        query = normM(query.trim());
         resultsM.innerHTML = '';
         if (!query) { resultsM.classList.remove('open'); return; }
         var matches = ALL_PRODUCTS.filter(function(p) {
-            return p.name.toLowerCase().includes(query) ||
-                   p.cat.toLowerCase().includes(query)  ||
-                   (p.includes && p.includes.toLowerCase().includes(query));
+            return normM(p.name).includes(query) ||
+                   normM(p.cat).includes(query)  ||
+                   normM(p.includes).includes(query);
         }).slice(0, 8);
         if (matches.length === 0) {
             resultsM.innerHTML = '<div class="sr-empty">No se encontraron productos</div>';
