@@ -1954,8 +1954,25 @@ document.querySelectorAll('.nav-drop-item').forEach(function(item) {
             var tabsMap = { camas:'camasTabs', sabanas:'sabanasTabs', muebles:'mueblesTabs', accesorios:'accesoriosTabs' };
             var tabsEl = document.getElementById(tabsMap[section]);
             if (tabsEl) {
-                var btn = tabsEl.querySelector('[data-filter="' + val + '"]');
-                if (btn) btn.click();
+                // sub-filters like Bebés-1.5 → filter by Bebés then show placeholder for size
+                var baseVal = val.split('-')[0];
+                var subSize = val.includes('-') ? val.split('-')[1] : null;
+                var btn = tabsEl.querySelector('[data-filter="' + baseVal + '"]');
+                if (btn) {
+                    btn.click();
+                    if (subSize) {
+                        var grid = document.getElementById(tabsMap[section].replace('Tabs','Grid'));
+                        if (grid) {
+                            grid.querySelectorAll('.product-card').forEach(function(c) {
+                                if (c.style.display !== 'none') {
+                                    var sz = (c.dataset.size || c.dataset.sizes || '');
+                                    if (!sz.includes(subSize === '1.5' ? '1.5' : '2 Plazas')) c.style.display = 'none';
+                                }
+                            });
+                            showGridPlaceholder(grid, subSize === '1.5' ? '1.5 Plazas' : '2 Plazas');
+                        }
+                    }
+                }
             }
         }
     });

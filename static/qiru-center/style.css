@@ -189,6 +189,9 @@ body:has(.product-card:hover) .cursor-follower {
     white-space: nowrap;
 }
 .nav-drop-item:hover { color: var(--accent); background: rgba(200,16,46,.05); }
+.nav-drop-sub { padding-left: 2rem; font-size: .72rem; color: #777; }
+.nav-drop-sub:hover { color: var(--accent); }
+.mobile-nav-sub-indent { padding-left: 2rem; font-size: 1rem; color: rgba(244,240,234,.45); }
 
 /* Mobile nav sub */
 .mobile-nav-item { width: 100%; }
