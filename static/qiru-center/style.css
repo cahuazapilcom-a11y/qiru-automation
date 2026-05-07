@@ -1441,11 +1441,11 @@ body:has(.product-card:hover) .cursor-follower {
 }
 .light-section .card-desc { color: var(--tm); }
 .card-price {
-    font-family: var(--fp); font-size: 1.55rem; font-weight: 500;
-    color: var(--td); line-height: 1; margin-bottom: .75rem;
+    font-family: var(--fp); font-size: 1.65rem; font-weight: 700;
+    color: #c8102e; line-height: 1; margin-bottom: .75rem;
     height: 1.6rem;
 }
-.light-section .card-price { color: var(--td); }
+.light-section .card-price { color: #c8102e; }
 .card-price span {
     font-size: .75rem; font-family: var(--fb);
     font-weight: 400; color: var(--tm); margin-left: .2rem;
