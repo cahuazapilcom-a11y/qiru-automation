@@ -1403,11 +1403,14 @@ function initDualFilters(sizeTabsId, lineTabsId, gridId) {
     var activeLine = 'all';
 
     function applyFilters() {
+        var ph = grid.querySelector('.placeholder-card');
+        if (ph) ph.remove();
         grid.querySelectorAll('.product-card').forEach(function(card) {
             var matchSize = activeSize === 'all' || card.dataset.size === activeSize;
             var matchLine = activeLine === 'all' || card.dataset.line === activeLine;
             card.style.display = (matchSize && matchLine) ? '' : 'none';
         });
+        showGridPlaceholder(grid, 'Próximamente');
     }
 
     sizeTabs.querySelectorAll('.filter-tab').forEach(function(tab) {
@@ -1429,6 +1432,19 @@ function initDualFilters(sizeTabsId, lineTabsId, gridId) {
     });
 }
 
+function showGridPlaceholder(grid, label) {
+    var existing = grid.querySelector('.placeholder-card');
+    if (existing) existing.remove();
+    var cards = grid.querySelectorAll('.product-card');
+    var visible = Array.from(cards).filter(c => c.style.display !== 'none').length;
+    if (visible === 0) {
+        var ph = document.createElement('div');
+        ph.className = 'placeholder-card';
+        ph.innerHTML = '<div class="placeholder-inner"><div class="placeholder-icon">📷</div><p class="placeholder-label">' + (label || 'Próximamente') + '</p><p class="placeholder-sub">Imagen en camino</p></div>';
+        grid.appendChild(ph);
+    }
+}
+
 function initFilters(tabsId, gridId) {
     const tabs = document.getElementById(tabsId);
     const grid = document.getElementById(gridId);
@@ -1438,19 +1454,23 @@ function initFilters(tabsId, gridId) {
             tabs.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             const filter = tab.dataset.filter;
+            var ph = grid.querySelector('.placeholder-card');
+            if (ph) ph.remove();
             grid.querySelectorAll('.product-card').forEach(card => {
                 const sizes = (card.dataset.sizes || card.dataset.size || '').split(' ');
                 const match = filter === 'all' || sizes.includes(filter) || card.dataset.cat === filter;
                 card.style.display = match ? '' : 'none';
-                // Auto-activate the matching size button
                 if (match && filter !== 'all') {
                     card.querySelectorAll('.card-size-btn').forEach(function(btn) {
                         if (btn.dataset.size === filter) btn.click();
                     });
                 }
             });
+            showGridPlaceholder(grid, tab.textContent.trim());
         });
     });
+    // show placeholder on load if grid is empty
+    showGridPlaceholder(grid, 'Próximamente');
 }
 
 initDualFilters('colchonesSizeTabs', 'colchonesLineTabs', 'colchonesGrid');
