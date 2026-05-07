@@ -619,6 +619,39 @@ const PRODUCTS = {
             specs: [['Modelo','Rayas Beige/Naranja'],['Incluye','Juego de sábanas · 4 piezas']],
         },
     ],
+
+    accesorios: [
+        {
+            name: 'Jaladera Metálica Dorada', price: 'S/ 15', originalPrice: 'S/ 20',
+            includes: 'Jaladera decorativa · Tornillos incluidos', cat: 'Jaladera',
+            images: [],
+            specs: [
+                ['Material', 'Metal dorado · Acabado brillante'],
+                ['Dimensión', '10 cm de largo'],
+                ['Incluye', 'Tornillos de instalación'],
+            ]
+        },
+        {
+            name: 'Jaladera Metálica Negra', price: 'S/ 15', originalPrice: 'S/ 20',
+            includes: 'Jaladera decorativa · Tornillos incluidos', cat: 'Jaladera',
+            images: [],
+            specs: [
+                ['Material', 'Metal negro mate · Acabado moderno'],
+                ['Dimensión', '10 cm de largo'],
+                ['Incluye', 'Tornillos de instalación'],
+            ]
+        },
+        {
+            name: 'Velador de Madera Compacto', price: 'S/ 180', originalPrice: 'S/ 220',
+            includes: '1 cajón · Diseño compacto · Ideal para dormitorios', cat: 'Velador',
+            images: [],
+            specs: [
+                ['Material', 'Madera con acabado laminado'],
+                ['Cajones', '1 cajón espacioso'],
+                ['Dimensión', 'Compacto · Ideal para espacios pequeños'],
+            ]
+        },
+    ],
 };
 
 // ── CART ─────────────────────────────────────────────────
@@ -893,10 +926,11 @@ function populateGrid(id, list) {
     list.forEach(p => grid.appendChild(createCard(p)));
 }
 
-populateGrid('colchonesGrid', PRODUCTS.colchones);
-populateGrid('camasGrid',     PRODUCTS.camas);
-populateGrid('sabanasGrid',   PRODUCTS.sabanas);
-populateGrid('mueblesGrid',   PRODUCTS.muebles);
+populateGrid('colchonesGrid',   PRODUCTS.colchones);
+populateGrid('camasGrid',       PRODUCTS.camas);
+populateGrid('sabanasGrid',     PRODUCTS.sabanas);
+populateGrid('mueblesGrid',     PRODUCTS.muebles);
+populateGrid('accesoriosGrid',  PRODUCTS.accesorios);
 
 // ── PRODUCT DETAIL MODAL ──────────────────────────────────
 (function() {
@@ -1783,16 +1817,18 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
     if (!input || !results) return;
 
     var ALL_PRODUCTS = []
-        .concat(PRODUCTS.colchones || [])
-        .concat(PRODUCTS.camas     || [])
-        .concat(PRODUCTS.sabanas   || [])
-        .concat(PRODUCTS.muebles   || []);
+        .concat(PRODUCTS.colchones   || [])
+        .concat(PRODUCTS.camas       || [])
+        .concat(PRODUCTS.sabanas     || [])
+        .concat(PRODUCTS.muebles     || [])
+        .concat(PRODUCTS.accesorios  || []);
 
     var SECTION_MAP = {};
-    (PRODUCTS.colchones || []).forEach(function(p) { SECTION_MAP[p.name] = 'colchones'; });
-    (PRODUCTS.camas     || []).forEach(function(p) { SECTION_MAP[p.name] = 'camas'; });
-    (PRODUCTS.sabanas   || []).forEach(function(p) { SECTION_MAP[p.name] = 'sabanas'; });
-    (PRODUCTS.muebles   || []).forEach(function(p) { SECTION_MAP[p.name] = 'muebles'; });
+    (PRODUCTS.colchones  || []).forEach(function(p) { SECTION_MAP[p.name] = 'colchones'; });
+    (PRODUCTS.camas      || []).forEach(function(p) { SECTION_MAP[p.name] = 'camas'; });
+    (PRODUCTS.sabanas    || []).forEach(function(p) { SECTION_MAP[p.name] = 'sabanas'; });
+    (PRODUCTS.muebles    || []).forEach(function(p) { SECTION_MAP[p.name] = 'muebles'; });
+    (PRODUCTS.accesorios || []).forEach(function(p) { SECTION_MAP[p.name] = 'accesorios'; });
 
     function norm(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
 
@@ -1875,16 +1911,18 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
     if (!toggle || !bar || !inputM) return;
 
     var ALL_PRODUCTS = []
-        .concat(PRODUCTS.colchones || [])
-        .concat(PRODUCTS.camas     || [])
-        .concat(PRODUCTS.sabanas   || [])
-        .concat(PRODUCTS.muebles   || []);
+        .concat(PRODUCTS.colchones   || [])
+        .concat(PRODUCTS.camas       || [])
+        .concat(PRODUCTS.sabanas     || [])
+        .concat(PRODUCTS.muebles     || [])
+        .concat(PRODUCTS.accesorios  || []);
 
     var SECTION_MAP = {};
-    (PRODUCTS.colchones || []).forEach(function(p) { SECTION_MAP[p.name] = 'colchones'; });
-    (PRODUCTS.camas     || []).forEach(function(p) { SECTION_MAP[p.name] = 'camas'; });
-    (PRODUCTS.sabanas   || []).forEach(function(p) { SECTION_MAP[p.name] = 'sabanas'; });
-    (PRODUCTS.muebles   || []).forEach(function(p) { SECTION_MAP[p.name] = 'muebles'; });
+    (PRODUCTS.colchones  || []).forEach(function(p) { SECTION_MAP[p.name] = 'colchones'; });
+    (PRODUCTS.camas      || []).forEach(function(p) { SECTION_MAP[p.name] = 'camas'; });
+    (PRODUCTS.sabanas    || []).forEach(function(p) { SECTION_MAP[p.name] = 'sabanas'; });
+    (PRODUCTS.muebles    || []).forEach(function(p) { SECTION_MAP[p.name] = 'muebles'; });
+    (PRODUCTS.accesorios || []).forEach(function(p) { SECTION_MAP[p.name] = 'accesorios'; });
 
     function normM(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
 
