@@ -1908,6 +1908,80 @@ document.getElementById('coOverlay').addEventListener('click', closeCheckout);
     });
 })();
 
+// ── NAV DROPDOWNS ─────────────────────────────────────────
+document.querySelectorAll('.nav-drop-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+        var section = this.dataset.section;
+        var type    = this.dataset.type;
+        var val     = this.dataset.val;
+        if (!section || !type || !val) return;
+
+        if (section === 'colchones') {
+            var sizeTabs = document.getElementById('colchonesSizeTabs');
+            var lineTabs = document.getElementById('colchonesLineTabs');
+            if (type === 'size' && sizeTabs) {
+                sizeTabs.querySelectorAll('.filter-tab').forEach(function(t) {
+                    t.classList.toggle('active', t.dataset.size === val);
+                });
+                sizeTabs.querySelector('[data-size="' + val + '"]').click();
+            } else if (type === 'line' && lineTabs) {
+                lineTabs.querySelectorAll('.filter-tab').forEach(function(t) {
+                    t.classList.toggle('active', t.dataset.line === val);
+                });
+                lineTabs.querySelector('[data-line="' + val + '"]').click();
+            }
+        } else {
+            var tabsMap = { camas:'camasTabs', sabanas:'sabanasTabs', muebles:'mueblesTabs', accesorios:'accesoriosTabs' };
+            var tabsEl = document.getElementById(tabsMap[section]);
+            if (tabsEl) {
+                var btn = tabsEl.querySelector('[data-filter="' + val + '"]');
+                if (btn) btn.click();
+            }
+        }
+    });
+});
+
+// ── MOBILE NAV TOGGLES ────────────────────────────────────
+document.querySelectorAll('.mobile-nav-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        var target = document.getElementById(this.dataset.target);
+        if (target) target.classList.toggle('open');
+    });
+});
+document.querySelectorAll('.mobile-nav-sub-link').forEach(function(item) {
+    item.addEventListener('click', function() {
+        document.getElementById('mobileNav').classList.remove('open');
+        document.body.style.overflow = '';
+        var section = this.dataset.section;
+        var type    = this.dataset.type;
+        var val     = this.dataset.val;
+        if (!section || !type || !val) return;
+        setTimeout(function() {
+            if (section === 'colchones') {
+                var sizeTabs = document.getElementById('colchonesSizeTabs');
+                var lineTabs = document.getElementById('colchonesLineTabs');
+                if (type === 'size' && sizeTabs) {
+                    var b = sizeTabs.querySelector('[data-size="' + val + '"]');
+                    if (b) b.click();
+                } else if (type === 'line' && lineTabs) {
+                    var b = lineTabs.querySelector('[data-line="' + val + '"]');
+                    if (b) b.click();
+                }
+            } else {
+                var tabsMap = { camas:'camasTabs', sabanas:'sabanasTabs', muebles:'mueblesTabs', accesorios:'accesoriosTabs' };
+                var tabsEl = document.getElementById(tabsMap[section]);
+                if (tabsEl) {
+                    var b = tabsEl.querySelector('[data-filter="' + val + '"]');
+                    if (b) b.click();
+                }
+            }
+        }, 300);
+    });
+});
+
+// ── ACCESORIOS SECTION INIT ───────────────────────────────
+initFilters('accesoriosTabs', 'accesoriosGrid');
+
 // ── CTA FLOATING GLOW PULSE ───────────────────────────────
 const glowBtn = document.querySelector('.btn-primary.glow');
 if (glowBtn) {

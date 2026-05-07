@@ -280,10 +280,59 @@
     <!-- MOBILE NAV OVERLAY -->
     <div class="mobile-nav" id="mobileNav">
         <button class="mobile-nav-close" id="mobileNavClose">✕</button>
-        <a href="#colchones" class="mobile-nav-link">Colchones</a>
-        <a href="#camas" class="mobile-nav-link">Camas</a>
-        <a href="#sabanas" class="mobile-nav-link">Sábanas</a>
-        <a href="#muebles" class="mobile-nav-link">Muebles</a>
+        <div class="mobile-nav-item">
+            <button class="mobile-nav-link mobile-nav-toggle" data-target="mob-colchones">Colchones <span>▾</span></button>
+            <div class="mobile-nav-sub" id="mob-colchones">
+                <a href="#colchones" class="mobile-nav-sub-link" data-section="colchones" data-type="size" data-val="all">Todos</a>
+                <a href="#colchones" class="mobile-nav-sub-link" data-section="colchones" data-type="size" data-val="1.5 Plazas">1.5 Plazas</a>
+                <a href="#colchones" class="mobile-nav-sub-link" data-section="colchones" data-type="size" data-val="2 Plazas">2 Plazas</a>
+                <a href="#colchones" class="mobile-nav-sub-link" data-section="colchones" data-type="size" data-val="Queen">Queen</a>
+                <a href="#colchones" class="mobile-nav-sub-link" data-section="colchones" data-type="size" data-val="King">King</a>
+                <a href="#colchones" class="mobile-nav-sub-link" data-section="colchones" data-type="line" data-val="Royal">Línea Royal</a>
+                <a href="#colchones" class="mobile-nav-sub-link" data-section="colchones" data-type="line" data-val="Pocket">Línea Pocket</a>
+                <a href="#colchones" class="mobile-nav-sub-link" data-section="colchones" data-type="line" data-val="Premium">Línea Premium</a>
+                <a href="#colchones" class="mobile-nav-sub-link" data-section="colchones" data-type="line" data-val="Standard">Línea Standard</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <button class="mobile-nav-link mobile-nav-toggle" data-target="mob-camas">Camas <span>▾</span></button>
+            <div class="mobile-nav-sub" id="mob-camas">
+                <a href="#camas" class="mobile-nav-sub-link" data-section="camas" data-type="filter" data-val="all">Todas</a>
+                <a href="#camas" class="mobile-nav-sub-link" data-section="camas" data-type="filter" data-val="Cama">2 Plazas</a>
+                <a href="#camas" class="mobile-nav-sub-link" data-section="camas" data-type="filter" data-val="Cama Artesanal">Artesanal</a>
+                <a href="#camas" class="mobile-nav-sub-link" data-section="camas" data-type="filter" data-val="Cama Colonial">Colonial</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <button class="mobile-nav-link mobile-nav-toggle" data-target="mob-sabanas">Sábanas <span>▾</span></button>
+            <div class="mobile-nav-sub" id="mob-sabanas">
+                <a href="#sabanas" class="mobile-nav-sub-link" data-section="sabanas" data-type="filter" data-val="all">Todas</a>
+                <a href="#sabanas" class="mobile-nav-sub-link" data-section="sabanas" data-type="filter" data-val="Twin">Twin</a>
+                <a href="#sabanas" class="mobile-nav-sub-link" data-section="sabanas" data-type="filter" data-val="Full">Full</a>
+                <a href="#sabanas" class="mobile-nav-sub-link" data-section="sabanas" data-type="filter" data-val="1.5 Plazas">1.5 Plazas</a>
+                <a href="#sabanas" class="mobile-nav-sub-link" data-section="sabanas" data-type="filter" data-val="2 Plazas">2 Plazas</a>
+                <a href="#sabanas" class="mobile-nav-sub-link" data-section="sabanas" data-type="filter" data-val="Queen">Queen</a>
+                <a href="#sabanas" class="mobile-nav-sub-link" data-section="sabanas" data-type="filter" data-val="King">King</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <button class="mobile-nav-link mobile-nav-toggle" data-target="mob-muebles">Muebles <span>▾</span></button>
+            <div class="mobile-nav-sub" id="mob-muebles">
+                <a href="#muebles" class="mobile-nav-sub-link" data-section="muebles" data-type="filter" data-val="all">Todos</a>
+                <a href="#muebles" class="mobile-nav-sub-link" data-section="muebles" data-type="filter" data-val="Comedor">Comedores</a>
+                <a href="#muebles" class="mobile-nav-sub-link" data-section="muebles" data-type="filter" data-val="Bebés">De Bebé</a>
+                <a href="#muebles" class="mobile-nav-sub-link" data-section="muebles" data-type="filter" data-val="Escritorio">Escritorios</a>
+                <a href="#muebles" class="mobile-nav-sub-link" data-section="muebles" data-type="filter" data-val="Almohada">Almohadas</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <button class="mobile-nav-link mobile-nav-toggle" data-target="mob-accesorios">Accesorios <span>▾</span></button>
+            <div class="mobile-nav-sub" id="mob-accesorios">
+                <a href="#accesorios" class="mobile-nav-sub-link" data-section="accesorios" data-type="filter" data-val="all">Todos</a>
+                <a href="#accesorios" class="mobile-nav-sub-link" data-section="accesorios" data-type="filter" data-val="Jaladeras">Jaladeras</a>
+                <a href="#accesorios" class="mobile-nav-sub-link" data-section="accesorios" data-type="filter" data-val="Veladores">Veladores</a>
+            </div>
+        </div>
         <a href="#contacto" class="mobile-nav-link">Contacto</a>
     </div>
 
@@ -297,10 +346,61 @@
 
         <!-- Links desktop -->
         <div class="nav-links">
-            <a href="#colchones" class="nav-link">Colchones</a>
-            <a href="#camas" class="nav-link">Camas</a>
-            <a href="#sabanas" class="nav-link">Sábanas</a>
-            <a href="#muebles" class="nav-link">Muebles</a>
+            <div class="nav-item">
+                <a href="#colchones" class="nav-link">Colchones <span class="nav-arrow">▾</span></a>
+                <div class="nav-dropdown">
+                    <a class="nav-drop-item" href="#colchones" data-section="colchones" data-type="size" data-val="all">Todos</a>
+                    <div class="nav-drop-group">Tamaños</div>
+                    <a class="nav-drop-item" href="#colchones" data-section="colchones" data-type="size" data-val="1.5 Plazas">1.5 Plazas</a>
+                    <a class="nav-drop-item" href="#colchones" data-section="colchones" data-type="size" data-val="2 Plazas">2 Plazas</a>
+                    <a class="nav-drop-item" href="#colchones" data-section="colchones" data-type="size" data-val="Queen">Queen</a>
+                    <a class="nav-drop-item" href="#colchones" data-section="colchones" data-type="size" data-val="King">King</a>
+                    <div class="nav-drop-group">Líneas</div>
+                    <a class="nav-drop-item" href="#colchones" data-section="colchones" data-type="line" data-val="Royal">Royal</a>
+                    <a class="nav-drop-item" href="#colchones" data-section="colchones" data-type="line" data-val="Pocket">Pocket</a>
+                    <a class="nav-drop-item" href="#colchones" data-section="colchones" data-type="line" data-val="Premium">Premium</a>
+                    <a class="nav-drop-item" href="#colchones" data-section="colchones" data-type="line" data-val="Standard">Standard</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#camas" class="nav-link">Camas <span class="nav-arrow">▾</span></a>
+                <div class="nav-dropdown">
+                    <a class="nav-drop-item" href="#camas" data-section="camas" data-type="filter" data-val="all">Todas</a>
+                    <a class="nav-drop-item" href="#camas" data-section="camas" data-type="filter" data-val="Cama">2 Plazas</a>
+                    <a class="nav-drop-item" href="#camas" data-section="camas" data-type="filter" data-val="Cama Artesanal">Artesanal</a>
+                    <a class="nav-drop-item" href="#camas" data-section="camas" data-type="filter" data-val="Cama Colonial">Colonial</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#sabanas" class="nav-link">Sábanas <span class="nav-arrow">▾</span></a>
+                <div class="nav-dropdown">
+                    <a class="nav-drop-item" href="#sabanas" data-section="sabanas" data-type="filter" data-val="all">Todas</a>
+                    <a class="nav-drop-item" href="#sabanas" data-section="sabanas" data-type="filter" data-val="Twin">Twin</a>
+                    <a class="nav-drop-item" href="#sabanas" data-section="sabanas" data-type="filter" data-val="Full">Full</a>
+                    <a class="nav-drop-item" href="#sabanas" data-section="sabanas" data-type="filter" data-val="1.5 Plazas">1.5 Plazas</a>
+                    <a class="nav-drop-item" href="#sabanas" data-section="sabanas" data-type="filter" data-val="2 Plazas">2 Plazas</a>
+                    <a class="nav-drop-item" href="#sabanas" data-section="sabanas" data-type="filter" data-val="Queen">Queen</a>
+                    <a class="nav-drop-item" href="#sabanas" data-section="sabanas" data-type="filter" data-val="King">King</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#muebles" class="nav-link">Muebles <span class="nav-arrow">▾</span></a>
+                <div class="nav-dropdown">
+                    <a class="nav-drop-item" href="#muebles" data-section="muebles" data-type="filter" data-val="all">Todos</a>
+                    <a class="nav-drop-item" href="#muebles" data-section="muebles" data-type="filter" data-val="Comedor">Comedores</a>
+                    <a class="nav-drop-item" href="#muebles" data-section="muebles" data-type="filter" data-val="Bebés">De Bebé</a>
+                    <a class="nav-drop-item" href="#muebles" data-section="muebles" data-type="filter" data-val="Escritorio">Escritorios</a>
+                    <a class="nav-drop-item" href="#muebles" data-section="muebles" data-type="filter" data-val="Almohada">Almohadas</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#accesorios" class="nav-link">Accesorios <span class="nav-arrow">▾</span></a>
+                <div class="nav-dropdown">
+                    <a class="nav-drop-item" href="#accesorios" data-section="accesorios" data-type="filter" data-val="all">Todos</a>
+                    <a class="nav-drop-item" href="#accesorios" data-section="accesorios" data-type="filter" data-val="Jaladeras">Jaladeras</a>
+                    <a class="nav-drop-item" href="#accesorios" data-section="accesorios" data-type="filter" data-val="Veladores">Veladores</a>
+                </div>
+            </div>
             <a href="#contacto" class="nav-link">Contacto</a>
         </div>
 
@@ -532,6 +632,26 @@
             <button class="filter-tab" data-filter="Escritorio">Escritorios</button>
         </div>
         <div class="products-grid" id="mueblesGrid"></div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- ACCESORIOS -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="products-section light-section" id="accesorios">
+        <div class="section-header dark">
+            <div class="section-label">
+                <span class="section-num">05</span>
+                <span class="section-tag">Accesorios</span>
+            </div>
+            <h2 class="section-title dark">Detalles <em>Especiales</em></h2>
+            <p class="section-sub dark">Complementa tu hogar con los accesorios perfectos</p>
+        </div>
+        <div class="filter-tabs" id="accesoriosTabs">
+            <button class="filter-tab active" data-filter="all">Todos</button>
+            <button class="filter-tab" data-filter="Jaladeras">Jaladeras</button>
+            <button class="filter-tab" data-filter="Veladores">Veladores</button>
+        </div>
+        <div class="products-grid" id="accesoriosGrid"></div>
     </section>
 
     <!-- ═══════════════════════════════════════ -->

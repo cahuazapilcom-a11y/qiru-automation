@@ -152,6 +152,59 @@ body:has(.product-card:hover) .cursor-follower {
     white-space: nowrap;
 }
 
+/* Dropdown nav */
+.nav-item { position: relative; }
+.nav-arrow { font-size: .55rem; opacity: .6; margin-left: .2rem; transition: transform .25s; }
+.nav-item:hover .nav-arrow { transform: rotate(180deg); }
+.nav-dropdown {
+    position: absolute; top: calc(100% + 14px); left: 50%;
+    transform: translateX(-50%);
+    background: #1a1612; border: 1px solid rgba(244,240,234,.1);
+    border-radius: 10px; padding: .5rem 0;
+    min-width: 170px;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .22s, transform .22s;
+    transform: translateX(-50%) translateY(-6px);
+    z-index: 200;
+    box-shadow: 0 12px 32px rgba(0,0,0,.45);
+}
+.nav-item:hover .nav-dropdown {
+    opacity: 1; visibility: visible; pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+}
+.nav-drop-group {
+    font-family: var(--fm); font-size: .55rem; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--accent); padding: .6rem 1.2rem .2rem;
+}
+.nav-drop-item {
+    display: block; padding: .55rem 1.2rem;
+    font-family: var(--fb); font-size: .78rem; font-weight: 400;
+    color: rgba(244,240,234,.7); text-decoration: none;
+    transition: color .2s, background .2s;
+    white-space: nowrap;
+}
+.nav-drop-item:hover { color: #F4F0EA; background: rgba(244,240,234,.06); }
+
+/* Mobile nav sub */
+.mobile-nav-item { width: 100%; }
+.mobile-nav-toggle {
+    background: none; border: none; cursor: pointer;
+    width: 100%; text-align: left;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.mobile-nav-sub {
+    display: none; padding-left: 1.5rem;
+    flex-direction: column; gap: .2rem;
+}
+.mobile-nav-sub.open { display: flex; }
+.mobile-nav-sub-link {
+    font-family: var(--fb); font-size: 1.2rem; font-weight: 400;
+    color: rgba(244,240,234,.65); text-decoration: none;
+    padding: .4rem 0; transition: color .2s;
+}
+.mobile-nav-sub-link:hover { color: var(--accent); }
+
 /* Links */
 .nav-links {
     display: flex; gap: 2rem;
