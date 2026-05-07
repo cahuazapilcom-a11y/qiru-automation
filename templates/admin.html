@@ -4,30 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin - {{ business_name }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@500&family=Montserrat:wght@400;500&family=Poppins:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: Arial, sans-serif; background: #f0f2f5; min-height: 100vh; }
+  body { font-family: 'DM Sans', sans-serif; background: #f0f2f5; min-height: 100vh; }
   .navbar { background: #1a1a2e; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
-  .navbar h1 { font-size: 20px; color: #e8c848; }
-  .navbar span { font-size: 13px; color: #ccc; }
+  .navbar h1 { font-size: 20px; color: #e8c848; font-family: 'Cormorant Garamond', serif; font-weight: 600; letter-spacing: 1px; }
+  .navbar span { font-size: 13px; color: #ccc; font-family: 'Montserrat', sans-serif; font-weight: 500; }
   .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
   .card { background: white; border-radius: 10px; padding: 25px 30px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-  .card h2 { color: #1a1a2e; font-size: 18px; margin-bottom: 20px; border-bottom: 2px solid #e8c848; padding-bottom: 10px; }
-  label { display: block; font-size: 13px; color: #555; margin-bottom: 5px; font-weight: bold; }
-  input, select { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; margin-bottom: 15px; }
+  .card h2 { color: #1a1a2e; font-size: 18px; margin-bottom: 20px; border-bottom: 2px solid #e8c848; padding-bottom: 10px; font-family: 'Montserrat', sans-serif; font-weight: 500; }
+  label { display: block; font-size: 13px; color: #555; margin-bottom: 5px; font-weight: 500; font-family: 'DM Sans', sans-serif; }
+  input, select { width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; margin-bottom: 15px; font-family: 'DM Sans', sans-serif; }
   input:focus, select:focus { outline: none; border-color: #e8c848; }
-  .btn { background: #1a1a2e; color: #e8c848; border: none; padding: 12px 25px; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; width: 100%; }
+  .btn { background: #1a1a2e; color: #e8c848; border: none; padding: 12px 25px; border-radius: 6px; font-size: 15px; font-weight: 500; cursor: pointer; width: 100%; font-family: 'Poppins', sans-serif; }
   .btn:hover { background: #2d2d4e; }
   .btn-success { background: #27ae60; color: white; }
-  .alert { padding: 12px 16px; border-radius: 6px; margin-bottom: 15px; font-size: 14px; display: none; }
+  .alert { padding: 12px 16px; border-radius: 6px; margin-bottom: 15px; font-size: 14px; display: none; font-family: 'DM Sans', sans-serif; }
   .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
   .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; font-family: 'Poppins', sans-serif; }
   .badge-caliente { background: #ff4444; color: white; }
   .badge-tibio { background: #ff9800; color: white; }
   .badge-frio { background: #2196F3; color: white; }
-  #result-box { background: #f8f9fa; border: 1px solid #ddd; border-radius: 6px; padding: 15px; margin-top: 15px; display: none; font-size: 14px; }
+  #result-box { background: #f8f9fa; border: 1px solid #ddd; border-radius: 6px; padding: 15px; margin-top: 15px; display: none; font-size: 14px; font-family: 'DM Sans', sans-serif; }
+  @media (max-width: 600px) {
+    .navbar { padding: 12px 16px; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .navbar h1 { font-size: 17px; }
+    .container { padding: 0 10px; margin: 16px auto; }
+    .card { padding: 18px 14px; }
+    .grid2 { grid-template-columns: 1fr; }
+    .btn { font-size: 14px; padding: 12px 16px; }
+  }
+  @media (min-width: 900px) {
+    .container { max-width: 960px; }
+    .navbar h1 { font-size: 22px; }
+  }
 </style>
 </head>
 <body>

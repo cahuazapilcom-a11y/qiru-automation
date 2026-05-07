@@ -4,32 +4,53 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Qiru Center - Contáctanos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@500&family=Montserrat:wght@400;500&family=Poppins:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Arial, sans-serif; background: #f5f5f5; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
-  .header { background: #1a1a2e; width: 100%; padding: 20px; text-align: center; }
-  .header h1 { color: #e8c848; font-size: 26px; }
-  .header p { color: #ccc; font-size: 13px; margin-top: 4px; }
+  body { font-family: 'DM Sans', sans-serif; background: #f5f5f5; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+  .header { background: #1a1a2e; width: 100%; padding: 24px 20px; text-align: center; }
+  .header h1 { color: #e8c848; font-size: 28px; font-family: 'Cormorant Garamond', serif; font-weight: 600; letter-spacing: 2px; }
+  .header .tagline-big { color: #ffffff; font-size: 20px; font-family: 'Playfair Display', serif; font-weight: 500; margin-top: 4px; }
+  .header .tagline-sub { color: #cccccc; font-size: 14px; font-family: 'Cormorant Garamond', serif; font-style: italic; margin-top: 2px; }
+  .header p { color: #ccc; font-size: 13px; margin-top: 4px; font-family: 'DM Sans', sans-serif; }
   .container { max-width: 480px; width: 100%; padding: 30px 20px; }
   .card { background: white; border-radius: 16px; padding: 30px 24px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); text-align: center; }
-  .card h2 { color: #1a1a2e; font-size: 18px; margin-bottom: 8px; }
-  .card p { color: #666; font-size: 14px; margin-bottom: 20px; line-height: 1.5; }
-  .btn-whatsapp { display: block; background: #25D366; color: white; text-decoration: none; padding: 16px 24px; border-radius: 12px; font-size: 18px; font-weight: bold; margin-bottom: 12px; transition: background 0.2s; }
+  .card h2 { color: #1a1a2e; font-size: 18px; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-weight: 500; }
+  .card p { color: #666; font-size: 14px; margin-bottom: 20px; line-height: 1.5; font-family: 'DM Sans', sans-serif; }
+  .btn-whatsapp { display: block; background: #25D366; color: white; text-decoration: none; padding: 16px 24px; border-radius: 12px; font-size: 17px; font-weight: 500; margin-bottom: 12px; transition: background 0.2s; font-family: 'Poppins', sans-serif; }
   .btn-whatsapp:hover { background: #1ebe57; }
-  .btn-maps { display: block; background: #4285F4; color: white; text-decoration: none; padding: 14px 24px; border-radius: 12px; font-size: 16px; font-weight: bold; transition: background 0.2s; }
+  .btn-maps { display: block; background: #4285F4; color: white; text-decoration: none; padding: 14px 24px; border-radius: 12px; font-size: 16px; font-weight: 500; transition: background 0.2s; font-family: 'Poppins', sans-serif; }
   .btn-maps:hover { background: #3367d6; }
   .horario { background: #fff8e1; border-radius: 12px; padding: 16px 20px; margin-bottom: 16px; text-align: left; }
-  .horario h3 { color: #1a1a2e; font-size: 15px; margin-bottom: 8px; }
-  .horario p { color: #555; font-size: 14px; line-height: 1.8; }
-  .footer { color: #aaa; font-size: 12px; text-align: center; padding: 20px; }
+  .horario h3 { color: #1a1a2e; font-size: 15px; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-weight: 500; }
+  .horario p { color: #555; font-size: 14px; line-height: 1.8; font-family: 'DM Sans', sans-serif; }
+  .footer { color: #aaa; font-size: 12px; text-align: center; padding: 20px; font-family: 'DM Sans', sans-serif; }
   .logo-img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 12px; object-fit: cover; }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 22px; }
+    .header .tagline-big { font-size: 16px; }
+    .container { padding: 20px 14px; }
+    .card { padding: 22px 16px; }
+    .btn-whatsapp { font-size: 15px; padding: 14px 16px; }
+    .btn-maps { font-size: 14px; padding: 13px 16px; }
+  }
+  @media (min-width: 900px) {
+    .container { max-width: 520px; }
+    .card { padding: 36px 32px; }
+    .header h1 { font-size: 32px; }
+    .header .tagline-big { font-size: 22px; }
+  }
 </style>
 </head>
 <body>
 
 <div class="header">
   <h1>🏠 QIRU CENTER</h1>
-  <p>Tu Hogar Bonito — Yurimaguas, Loreto, Perú</p>
+  <div class="tagline-big">El Descanso</div>
+  <div class="tagline-sub">es un Arte</div>
+  <p>Yurimaguas, Loreto, Perú</p>
 </div>
 
 <div class="container">

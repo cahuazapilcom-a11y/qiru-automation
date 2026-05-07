@@ -3,36 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@500&family=Montserrat:wght@400;500&family=Poppins:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  body { margin: 0; padding: 0; font-family: Arial, sans-serif; background: #f5f5f5; }
-  .wrapper { max-width: 600px; margin: 0 auto; background: #ffffff; }
+  body { margin: 0; padding: 0; font-family: 'DM Sans', sans-serif; background: #f5f5f5; }
+  .wrapper { max-width: 600px; margin: 0 auto; background: #ffffff; width: 100%; }
   .header { background: #1a1a2e; padding: 30px 40px; text-align: center; }
-  .header h1 { color: #e8c848; margin: 0; font-size: 24px; letter-spacing: 1px; }
-  .header p { color: #cccccc; margin: 5px 0 0; font-size: 13px; }
+  .header h1 { color: #e8c848; margin: 0; font-size: 28px; letter-spacing: 2px; font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+  .header .tagline-big { color: #ffffff; font-size: 22px; font-family: 'Playfair Display', serif; font-weight: 500; margin: 6px 0 0; }
+  .header .tagline-sub { color: #cccccc; font-size: 15px; font-family: 'Cormorant Garamond', serif; font-style: italic; margin: 2px 0 0; }
+  .header p { color: #cccccc; margin: 5px 0 0; font-size: 13px; font-family: 'DM Sans', sans-serif; }
   .body { padding: 35px 40px; }
-  .body h2 { color: #1a1a2e; font-size: 20px; margin-top: 0; }
-  .body p { color: #444444; line-height: 1.7; font-size: 15px; }
-  .product-card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px 20px; margin: 10px 0; display: flex; justify-content: space-between; align-items: center; }
-  .product-name { font-weight: bold; color: #1a1a2e; font-size: 15px; }
-  .product-detail { color: #666; font-size: 13px; }
-  .product-price { color: #e8c848; font-weight: bold; font-size: 18px; background: #1a1a2e; padding: 5px 12px; border-radius: 5px; }
-  .cta-button { display: inline-block; background: #e8c848; color: #1a1a2e; padding: 14px 30px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 16px; margin: 20px 0; }
-  .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+  .body h2 { color: #1a1a2e; font-size: 20px; margin-top: 0; font-family: 'Montserrat', sans-serif; font-weight: 500; }
+  .body p { color: #444444; line-height: 1.7; font-size: 15px; font-family: 'DM Sans', sans-serif; }
+  .product-card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px 20px; margin: 10px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .product-name { font-weight: 500; color: #1a1a2e; font-size: 15px; font-family: 'DM Sans', sans-serif; }
+  .product-detail { color: #666; font-size: 13px; font-family: 'DM Sans', sans-serif; }
+  .product-price { color: #e8c848; font-weight: 500; font-size: 18px; background: #1a1a2e; padding: 5px 12px; border-radius: 5px; font-family: 'Poppins', sans-serif; }
+  .cta-button { display: inline-block; background: #e8c848; color: #1a1a2e; padding: 14px 30px; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 16px; margin: 20px 0; font-family: 'Poppins', sans-serif; }
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; font-family: 'Poppins', sans-serif; }
   .badge-hot { background: #ff4444; color: white; }
   .badge-warm { background: #ff9800; color: white; }
   .badge-cold { background: #2196F3; color: white; }
   .footer { background: #1a1a2e; padding: 25px 40px; text-align: center; }
-  .footer p { color: #999999; font-size: 12px; margin: 4px 0; }
+  .footer p { color: #999999; font-size: 12px; margin: 4px 0; font-family: 'DM Sans', sans-serif; }
   .footer a { color: #e8c848; text-decoration: none; }
   .divider { border: none; border-top: 1px solid #eeeeee; margin: 25px 0; }
-  .highlight-box { background: #fff8e1; border-left: 4px solid #e8c848; padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; }
+  .highlight-box { background: #fff8e1; border-left: 4px solid #e8c848; padding: 15px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; font-family: 'DM Sans', sans-serif; }
+  @media (max-width: 600px) {
+    .header { padding: 24px 20px; }
+    .header h1 { font-size: 22px; }
+    .header .tagline-big { font-size: 17px; }
+    .body { padding: 24px 18px; }
+    .body h2 { font-size: 17px; }
+    .body p { font-size: 14px; }
+    .cta-button { font-size: 15px; padding: 13px 20px; width: 100%; text-align: center; box-sizing: border-box; }
+    .product-card { flex-direction: column; align-items: flex-start; }
+    .footer { padding: 20px; }
+  }
 </style>
 </head>
 <body>
 <div class="wrapper">
   <div class="header">
     <h1>QIRU CENTER</h1>
-    <p>Tu Hogar Bonito</p>
+    <div class="tagline-big">El Descanso</div>
+    <div class="tagline-sub">es un Arte</div>
   </div>
   <div class="body">
     {% block content %}{% endblock %}
