@@ -2241,9 +2241,16 @@ body.promo-active { padding-top: 44px; }
 @media (min-width: 1101px) {
     .nav-brand-title { font-size: 1.3rem; }
     .products-grid { grid-template-columns: repeat(4, 1fr); }
-    .card-price { font-size: 1rem; }
+    .card-price { font-size: 1.15rem; }
     .card-size-btns { gap: 8px; }
     .card-size-btn { font-size: .78rem; padding: 5px 14px; }
+    /* Firmness slider — compact para 4 columnas */
+    .card-firmness { margin: .4rem 0 .5rem; }
+    .cf-label { font-size: .62rem; }
+    .cf-track { height: 5px; }
+    .cf-dot { width: 11px; height: 11px; }
+    .cf-ends { font-size: .58rem; }
+    .btn-add-cart { font-size: .7rem; padding: .6rem .8rem; }
 }
 
 /* ── TABLET (768px – 1100px) ─────────────────────────── */
@@ -2256,8 +2263,14 @@ body.promo-active { padding-top: 44px; }
 
     /* Tarjetas */
     .card-img-wrap { height: 220px; }
-    .card-price { font-size: .95rem; line-height: 1.4; }
+    .card-price { font-size: 1.3rem; line-height: 1.4; }
     .card-size-btn { font-size: .72rem; padding: 4px 11px; }
+    .btn-add-cart { font-size: .78rem; padding: .75rem 1rem; }
+
+    /* Firmness slider — tablet */
+    .card-firmness { margin: .45rem 0 .55rem; }
+    .cf-label { font-size: .65rem; }
+    .cf-track { height: 6px; }
 
     /* Secciones */
     .section-header { padding: 0 2rem; }
@@ -2273,17 +2286,25 @@ body.promo-active { padding-top: 44px; }
     /* Ocultar título central en nav (espacio limitado) */
     .nav-brand-title { display: none; }
 
-    /* Grilla 1 columna */
-    .products-grid { grid-template-columns: 1fr; gap: 1.2rem; padding: 0 .9rem 2rem; }
+    /* Grilla 2 columnas en iPhone horizontal / móvil mediano */
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 0 .8rem 2rem; }
 
     /* Tarjetas */
-    .card-img-wrap { height: 200px; }
-    .card-price { font-size: .85rem; line-height: 1.5; flex-wrap: wrap; gap: 2px; }
+    .card-img-wrap { height: 180px; }
+    .card-price { font-size: 1.1rem; line-height: 1.4; flex-wrap: wrap; gap: 2px; }
     .card-size-btns { gap: 5px; margin: 6px 0 5px; }
     .card-size-btn { font-size: .7rem; padding: 4px 10px; }
+    .btn-add-cart { font-size: .72rem; padding: .65rem .7rem; }
 
     /* Precio unidad/mayor — apilar en móvil */
     .card-price span { display: inline; }
+
+    /* Firmness slider — móvil */
+    .card-firmness { margin: .4rem 0 .5rem; }
+    .cf-label { font-size: .62rem; margin-bottom: .28rem; }
+    .cf-track { height: 5px; }
+    .cf-dot { width: 11px; height: 11px; }
+    .cf-ends { font-size: .58rem; }
 
     /* Filtros horizontales scrollables */
     .filter-tabs {
@@ -2300,12 +2321,18 @@ body.promo-active { padding-top: 44px; }
     .pd-related-grid { grid-template-columns: 1fr; }
 }
 
-/* ── PEQUEÑO MÓVIL (≤ 480px) ────────────────────────── */
+/* ── PEQUEÑO MÓVIL / iPhone (≤ 480px) ───────────────── */
 @media (max-width: 480px) {
-    .products-grid { padding: 0 .6rem 1.5rem; gap: 1rem; }
-    .card-body { padding: .7rem .7rem .6rem; }
-    .card-name { font-size: .85rem; }
-    .card-price { font-size: .8rem; }
-    .card-size-btn { font-size: .65rem; padding: 3px 8px; }
-    .btn-add-cart { font-size: .68rem; padding: .6rem; }
+    /* 1 columna en iPhones pequeños */
+    .products-grid { grid-template-columns: 1fr; padding: 0 .7rem 1.5rem; gap: 1rem; }
+    .card-img-wrap { height: 220px; }
+    .card-body { padding: .8rem .8rem .7rem; }
+    .card-name { font-size: .9rem; }
+    .card-price { font-size: 1.25rem; }
+    .card-size-btn { font-size: .68rem; padding: 4px 10px; }
+    .btn-add-cart { font-size: .72rem; padding: .68rem; }
+    /* Firmness slider — iPhone */
+    .cf-label { font-size: .6rem; }
+    .cf-dot { width: 10px; height: 10px; }
+    .cf-ends { font-size: .56rem; }
 }
