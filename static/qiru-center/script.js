@@ -637,6 +637,19 @@ function cartRemove(idx) {
     _cart.splice(idx, 1);
     renderCart();
 }
+function cartSetQty(idx, val) {
+    var n = parseInt(val);
+    if (n === 0) { cartRemove(idx); return; }
+    if (!isNaN(n) && n > 0) { _cart[idx].qty = n; renderCart(); }
+}
+function _buildQtySelect(idx, qty) {
+    var opts = '<option value="0">0 - Retirar</option>';
+    for (var i = 1; i <= 9; i++) {
+        opts += '<option value="' + i + '"' + (qty === i ? ' selected' : '') + '>' + i + '</option>';
+    }
+    opts += '<option value="10"' + (qty >= 10 ? ' selected' : '') + '>10 +</option>';
+    return '<select class="cart-qty-select" onchange="cartSetQty(' + idx + ', this.value)">' + opts + '</select>';
+}
 function renderCart() {
     var badge   = document.getElementById('cartBadge');
     var totalEl = document.getElementById('cartTotal');
@@ -644,24 +657,33 @@ function renderCart() {
     var emptyEl = document.getElementById('cartEmpty');
     if (!badge || !totalEl || !itemsEl) return;
     var total = 0;
-    _cart.forEach(function(i) { total += i.price * (i.qty || 1); });
+    var totalQty = 0;
+    _cart.forEach(function(i) { var q = i.qty || 1; total += i.price * q; totalQty += q; });
     totalEl.textContent = 'S/ ' + total.toLocaleString('es-PE');
-    badge.textContent   = _cart.length;
+    badge.textContent   = totalQty;
     itemsEl.querySelectorAll('.cart-item').forEach(function(e) { e.remove(); });
     if (_cart.length === 0) {
         if (emptyEl) emptyEl.style.display = 'block';
     } else {
         if (emptyEl) emptyEl.style.display = 'none';
         _cart.forEach(function(item, idx) {
+            var qty = item.qty || 1;
+            var subtotal = 'S/ ' + (item.price * qty).toLocaleString('es-PE');
             var el = document.createElement('div');
             el.className = 'cart-item';
             el.innerHTML =
                 '<img src="' + item.img + '" alt="' + item.name + '" class="cart-item-img">' +
                 '<div class="cart-item-info">' +
                   '<div class="cart-item-name">' + item.name + '</div>' +
-                  '<div class="cart-item-price">' + item.priceStr + '</div>' +
+                  '<div class="cart-item-meta">' +
+                    (item.size ? '<span>Medida: ' + item.size + '</span>' : '') +
+                  '</div>' +
+                  '<div class="cart-item-row">' +
+                    _buildQtySelect(idx, qty) +
+                    '<span class="cart-item-price">' + subtotal + '</span>' +
+                  '</div>' +
                 '</div>' +
-                '<button class="cart-item-remove" onclick="cartRemove(' + idx + ')">✕</button>';
+                '<button class="cart-item-remove" onclick="cartRemove(' + idx + ')" title="Eliminar">🗑</button>';
             itemsEl.appendChild(el);
         });
     }
