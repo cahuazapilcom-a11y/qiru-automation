@@ -7,7 +7,7 @@ const PRODUCTS = {
     colchones: [
         {
             name: 'Medallón 2 Plaza Ergosoft Queen', price: 'S/ 790', includes: 'Almohada + Protector', cat: 'Colchón',
-            size: 'Queen', line: 'Premium',
+            size: 'Queen', line: 'Premium', firmness: 50,
             featured: true,
             images: ['Medallon Ergosoft King.jpeg', 'Medallon Ergosoft King1.jpeg', 'Medallon Ergosoft King2.jpeg'],
             specs: [
@@ -22,7 +22,7 @@ const PRODUCTS = {
         },
         {
             name: 'Medallón Ergosoft 2 Plazas', price: 'S/ 660', includes: 'Almohada + Protector', cat: 'Colchón',
-            size: '2 Plazas', line: 'Premium',
+            size: '2 Plazas', line: 'Premium', firmness: 50,
             featured: true,
             images: ['Medallon Ergosoft King.jpeg', 'Medallon Ergosoft King1.jpeg', 'Medallon Ergosoft King2.jpeg'],
             specs: [
@@ -41,7 +41,7 @@ const PRODUCTS = {
         },
         {
             name: 'Medallón Ergosoft 1.5 Plaza', price: 'S/ 530', includes: 'Almohada + Protector', cat: 'Colchón',
-            size: '1.5 Plazas', line: 'Premium',
+            size: '1.5 Plazas', line: 'Premium', firmness: 50,
             featured: true,
             images: ['principal1.5.jpeg', 'Medallon Ergosoft King1.jpeg', 'Medallon Ergosoft King2.jpeg'],
             specs: [
@@ -56,7 +56,7 @@ const PRODUCTS = {
         },
         {
             name: 'Pocket Star 2 Plazas Negro King', price: 'S/ 930', includes: '02 Almohadas + Protector', cat: 'Colchón',
-            size: '2 Plazas', line: 'Pocket',
+            size: '2 Plazas', line: 'Pocket', firmness: 30,
             featured: true,
             images: ['negroprincipal.jpeg', 'negromini1.jpeg', 'negromini3.jpeg'],
             specs: [
@@ -79,7 +79,7 @@ const PRODUCTS = {
         },
         {
             name: 'Super Star King 2 Plazas', price: 'S/ 740', includes: '2 Almohadas + Protector', cat: 'Colchón',
-            size: '2 Plazas', line: 'Standard',
+            size: '2 Plazas', line: 'Standard', firmness: 50,
             featured: true,
             images: ['superprincipal.jpeg', 'supermini1.jpeg', 'supermini2.jpeg'],
             specs: [
@@ -96,7 +96,7 @@ const PRODUCTS = {
         },
         {
             name: 'Super Star King', price: 'S/ 1,100', includes: '2 Almohadas + Protector', cat: 'Colchón',
-            size: 'King', line: 'Standard',
+            size: 'King', line: 'Standard', firmness: 50,
             featured: true,
             images: ['superprincipal.jpeg', 'supermini1.jpeg', 'supermini2.jpeg'],
             specs: [
@@ -119,7 +119,7 @@ const PRODUCTS = {
         },
         {
             name: 'Pocket Star King', price: 'S/ 1,420', includes: 'Almohada + Protector · Resortes pocket', cat: 'Colchón Premium',
-            size: 'King', line: 'Pocket',
+            size: 'King', line: 'Pocket', firmness: 50,
             featured: true,
             images: ['paraisoprincipal.jpeg', 'paraisomini1.jpeg', 'paraisomini2.jpeg'],
             specs: [
@@ -142,7 +142,7 @@ const PRODUCTS = {
         },
         {
             name: 'Royal Prince 2 Plazas', price: 'S/ 1,770', includes: 'Almohada Viscoelástica + Protector', cat: 'Colchón Premium',
-            size: '2 Plazas', line: 'Royal',
+            size: '2 Plazas', line: 'Royal', firmness: 20,
             featured: true,
             images: ['preprincipal.jpeg', 'premini1.jpeg', 'premini2.jpeg'],
             specs: [
@@ -166,7 +166,7 @@ const PRODUCTS = {
         },
         {
             name: 'Royal Abrazzo King', price: 'S/ 2,820', includes: 'Almohada Viscoelástica + Protector', cat: 'Colchón Premium',
-            size: 'King', line: 'Royal',
+            size: 'King', line: 'Royal', firmness: 90,
             featured: true,
             images: ['maprincipal.jpeg', 'mamini1.jpeg', 'mamini2.jpeg'],
             specs: [
@@ -183,7 +183,7 @@ const PRODUCTS = {
         },
         {
             name: 'Royal Abrazzo Queen', price: 'S/ 2,210', includes: 'Almohada Viscoelástica + Protector', cat: 'Colchón Premium',
-            size: 'Queen', line: 'Royal',
+            size: 'Queen', line: 'Royal', firmness: 90,
             featured: true,
             images: ['maprincipal.jpeg', 'mamini1.jpeg', 'mamini2.jpeg'],
             specs: [
@@ -201,7 +201,7 @@ const PRODUCTS = {
         },
         {
             name: 'Royal Prince Queen', price: 'S/ 1,400', includes: 'Almohada Viscoelástica + Protector', cat: 'Colchón Premium',
-            size: 'Queen', line: 'Royal',
+            size: 'Queen', line: 'Royal', firmness: 20,
             featured: true,
             images: ['preprincipal.jpeg', 'premini1.jpeg', 'premini2.jpeg'],
             specs: [
@@ -220,7 +220,7 @@ const PRODUCTS = {
         },
         {
             name: 'Zebra 16 Ribeteado 2 Plazas 5\'\' Acolchado', price: 'S/ 220', includes: '2 Plazas · 16 kg/m³ · 5 pulgadas', cat: 'Colchón Económico',
-            size: '2 Plazas', line: 'Standard',
+            size: '2 Plazas', line: 'Standard', firmness: 20,
             featured: true,
             images: ['zeprincipal.jpeg', 'zemini1.jpeg', 'zemini2.jpeg'],
             specs: [
@@ -238,7 +238,7 @@ const PRODUCTS = {
         },
         {
             name: 'Zebra 16 Ribeteado 2 Plazas 7\'\' Acolchado', price: 'S/ 270', includes: '2 Plazas · 16 kg/m³ · 7 pulgadas', cat: 'Colchón Económico',
-            size: '2 Plazas', line: 'Standard',
+            size: '2 Plazas', line: 'Standard', firmness: 20,
             featured: true,
             images: ['zeprincipal.jpeg', 'zemini1.jpeg', 'zemini2.jpeg'],
             specs: [
@@ -256,7 +256,7 @@ const PRODUCTS = {
         },
         {
             name: 'Zebra 16 Ribeteado 1.5 Plaza 5\'\' Acolchado', price: 'S/ 180', includes: '1.5 Plaza · 16 kg/m³ · 5 pulgadas', cat: 'Colchón Económico',
-            size: '1.5 Plazas', line: 'Standard',
+            size: '1.5 Plazas', line: 'Standard', firmness: 20,
             featured: true,
             images: ['zeprincipal.jpeg', 'zemini1.jpeg', 'zemini2.jpeg'],
             specs: [
@@ -274,7 +274,7 @@ const PRODUCTS = {
         },
         {
             name: 'Zebra 16 Ribeteado 1.5 Plaza 7\'\' Acolchado', price: 'S/ 220', includes: '1.5 Plaza · 16 kg/m³ · 7 pulgadas', cat: 'Colchón Económico',
-            size: '1.5 Plazas', line: 'Standard',
+            size: '1.5 Plazas', line: 'Standard', firmness: 20,
             featured: true,
             images: ['zeprincipal.jpeg', 'zemini1.jpeg', 'zemini2.jpeg'],
             specs: [
@@ -816,6 +816,16 @@ function createCard(p) {
     const displayOriginal = activeVariant ? activeVariant.originalPrice : p.originalPrice;
     const displayOOS      = activeVariant ? !!activeVariant.outOfStock  : !!p.outOfStock;
 
+    const firmnessHTML = (p.firmness != null) ? `
+        <div class="card-firmness">
+            <div class="cf-label">Sensación del colchón</div>
+            <div class="cf-track">
+                <div class="cf-fill" style="width:${p.firmness}%"></div>
+                <div class="cf-dot" style="left:${p.firmness}%"></div>
+            </div>
+            <div class="cf-ends"><span>MUY FIRME</span><span>MUY SUAVE</span></div>
+        </div>` : '';
+
     const variantBtnsHTML = p.variants ? `
         <div class="card-size-btns">
             ${p.variants.map((v, i) => `
@@ -840,6 +850,7 @@ function createCard(p) {
             <div class="card-category">${p.cat}</div>
             <div class="card-name">${p.name}</div>
             <div class="card-desc">${p.includes}</div>
+            ${firmnessHTML}
             ${variantBtnsHTML}
             <div class="card-price">
                 <span class="cp-mayor" style="color:#e53935;font-weight:bold;font-size:1.05em;"><span class="cp-price">${displayPrice}</span></span><span class="cp-orig" style="display:none">${displayOriginal || displayPrice}</span>

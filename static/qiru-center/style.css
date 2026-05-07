@@ -1440,6 +1440,15 @@ body:has(.product-card:hover) .cursor-follower {
     overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
 }
 .light-section .card-desc { color: var(--tm); }
+
+/* ── FIRMNESS SLIDER ────────────────────────────────── */
+.card-firmness { margin: .5rem 0 .65rem; }
+.cf-label { font-family: var(--fm); font-size: .7rem; font-weight: 600; color: #1a1a2e; margin-bottom: .35rem; letter-spacing: .03em; text-transform: uppercase; }
+.cf-track { position: relative; height: 6px; background: #e0e0e0; border-radius: 4px; margin-bottom: .25rem; }
+.cf-fill { position: absolute; left: 0; top: 0; height: 100%; background: linear-gradient(90deg, #1a1a2e 0%, #c8102e 100%); border-radius: 4px; }
+.cf-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 13px; height: 13px; background: #c8102e; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 1px 4px rgba(0,0,0,.3); }
+.cf-ends { display: flex; justify-content: space-between; font-family: var(--fb); font-size: .62rem; color: #888; }
+
 .card-price {
     font-family: var(--fp); font-size: 1.65rem; font-weight: 700;
     color: #c8102e; line-height: 1; margin-bottom: .75rem;
