@@ -132,18 +132,7 @@ body:has(.product-card:hover) .cursor-follower {
     display: block;
 }
 .nav-brand-title {
-    font-family: var(--fm);
-    font-size: 1.25rem;
-    font-weight: 500;
-    letter-spacing: .25em;
-    color: #fff;
-    text-transform: uppercase;
-    white-space: nowrap;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
-    z-index: -1;
+    display: none;
 }
 .nav-logo-text {
     font-family: var(--fh);
