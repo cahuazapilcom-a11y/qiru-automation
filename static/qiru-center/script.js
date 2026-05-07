@@ -2019,6 +2019,43 @@ document.querySelectorAll('.mobile-nav-sub-link').forEach(function(item) {
 // ── ACCESORIOS SECTION INIT ───────────────────────────────
 initFilters('accesoriosTabs', 'accesoriosGrid');
 
+// ── BEBÉS SUB-SIZE TABS ───────────────────────────────────
+(function() {
+    var mueblesTabs  = document.getElementById('mueblesTabs');
+    var bebesSizeTabs = document.getElementById('bebesSizeTabs');
+    var grid = document.getElementById('mueblesGrid');
+    if (!mueblesTabs || !bebesSizeTabs || !grid) return;
+
+    mueblesTabs.querySelectorAll('.filter-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            if (tab.dataset.filter === 'Bebés') {
+                bebesSizeTabs.style.display = '';
+                // reset sub-tabs
+                bebesSizeTabs.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
+                bebesSizeTabs.querySelector('[data-size-bebe="all"]').classList.add('active');
+            } else {
+                bebesSizeTabs.style.display = 'none';
+            }
+        });
+    });
+
+    bebesSizeTabs.querySelectorAll('.filter-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+            bebesSizeTabs.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
+            tab.classList.add('active');
+            var sz = tab.dataset.sizeBebe;
+            var ph = grid.querySelector('.placeholder-card');
+            if (ph) ph.remove();
+            grid.querySelectorAll('.product-card').forEach(function(card) {
+                if (card.dataset.cat !== 'Bebés') { card.style.display = 'none'; return; }
+                var cardSize = (card.dataset.size || card.dataset.sizes || '');
+                card.style.display = (sz === 'all' || cardSize.includes(sz)) ? '' : 'none';
+            });
+            showGridPlaceholder(grid, tab.textContent.trim());
+        });
+    });
+})();
+
 // ── CTA FLOATING GLOW PULSE ───────────────────────────────
 const glowBtn = document.querySelector('.btn-primary.glow');
 if (glowBtn) {

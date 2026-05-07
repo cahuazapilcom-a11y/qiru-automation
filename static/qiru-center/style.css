@@ -1351,6 +1351,8 @@ body:has(.product-card:hover) .cursor-follower {
 .light-section .spec-key { color: var(--tm); }
 .light-section .spec-val { color: var(--td); }
 
+.filter-subtabs { margin-top: -.5rem; padding-left: 1rem; border-left: 3px solid var(--accent); }
+
 /* Placeholder card */
 .placeholder-card {
     grid-column: 1 / -1;
