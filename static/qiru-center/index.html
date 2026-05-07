@@ -341,11 +341,41 @@
 
     <!-- NAV -->
     <nav class="nav" id="nav">
-        <!-- Logo -->
-        <a href="#" class="nav-logo">
-            <img src="logo.jpeg" alt="Qiru Center" id="logoImg">
-            <span class="nav-logo-text">QIRU CENTER</span>
-        </a>
+        <!-- Utility bar -->
+        <div class="nav-utility">
+            <span class="nav-util-item">📞 939 975 894</span>
+            <a href="/contacto" class="nav-util-item">Nuestra tienda</a>
+            <a href="https://wa.me/51939975894" class="nav-util-item">Rastrear mi pedido</a>
+        </div>
+
+        <!-- Logo bar -->
+        <div class="nav-logo-bar">
+            <a href="#" class="nav-logo">
+                <img src="logo.jpeg" alt="Qiru Center" id="logoImg">
+            </a>
+            <a href="#" class="nav-logo-main">QIRU CENTER</a>
+            <div class="nav-logo-bar-right">
+                <div class="nav-search" id="navSearch">
+                    <div class="nav-search-box">
+                        <svg class="nav-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="searchInput" class="nav-search-input" placeholder="Buscar producto..." autocomplete="off">
+                        <button class="nav-search-clear" id="searchClear" style="display:none">✕</button>
+                    </div>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+                <button class="nav-search-toggle" id="searchToggle" aria-label="Buscar">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </button>
+                <a href="https://wa.me/51939975894?text=Hola%2C%20quiero%20cotizar%20un%20producto" class="nav-cta">Cotizar</a>
+                <button class="nav-cart" id="navCart" aria-label="Carrito">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                <button class="nav-hamburger" id="hamburger" aria-label="Menú">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
 
         <!-- Links desktop -->
         <div class="nav-links">
@@ -409,33 +439,6 @@
             </div>
         </div>
 
-        <!-- Título central -->
-        <span class="nav-brand-title">QIRU CENTER</span>
-
-        <!-- Buscador desktop/tablet -->
-        <div class="nav-search" id="navSearch">
-            <div class="nav-search-box">
-                <svg class="nav-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <input type="text" id="searchInput" class="nav-search-input" placeholder="Buscar producto..." autocomplete="off">
-                <button class="nav-search-clear" id="searchClear" style="display:none">✕</button>
-            </div>
-            <div class="search-results" id="searchResults"></div>
-        </div>
-
-        <!-- Acciones derechas -->
-        <div class="nav-right">
-            <a href="https://wa.me/51939975894?text=Hola%2C%20quiero%20cotizar%20un%20producto" class="nav-cta" onclick="window.location.href='https://wa.me/51939975894?text=Hola%2C%20quiero%20cotizar%20un%20producto';return false;">Cotizar</a>
-            <button class="nav-search-toggle" id="searchToggle" aria-label="Buscar">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            </button>
-            <button class="nav-cart" id="navCart" aria-label="Carrito">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-                <span class="cart-badge" id="cartBadge">0</span>
-            </button>
-            <button class="nav-hamburger" id="hamburger" aria-label="Menú">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
     </nav>
 
     <!-- Buscador móvil (desplegable bajo el nav) -->
