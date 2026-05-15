@@ -1456,7 +1456,7 @@ body:has(.product-card:hover) .cursor-follower {
 .cf-ends { display: flex; justify-content: space-between; font-family: var(--fb); font-size: .62rem; color: #888; }
 
 .card-price {
-    font-family: var(--fp); font-size: 1.65rem; font-weight: 700;
+    font-family: var(--fm); font-size: 1.65rem; font-weight: 700;
     color: #c8102e; line-height: 1; margin-bottom: .75rem;
     height: 1.6rem;
 }
@@ -2160,7 +2160,7 @@ body.promo-active { padding-top: 44px; }
     font-family: var(--fb);
 }
 .pd-price {
-    font-family: var(--fh);
+    font-family: var(--fm);
     font-size: 2.4rem;
     color: var(--td);
     font-weight: 500;
