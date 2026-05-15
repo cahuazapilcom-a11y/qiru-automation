@@ -756,7 +756,7 @@ body:has(.product-card:hover) .cursor-follower {
 
 .hero-title {
     font-family: var(--fm);
-    font-size: clamp(4rem,7vw,7.5rem);
+    font-size: clamp(2.8rem,5vw,5rem);
     font-weight: 700; line-height: .93;
     color: #F4F0EA; margin-bottom: 1.6rem;
     overflow: hidden;
