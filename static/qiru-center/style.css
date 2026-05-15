@@ -755,11 +755,12 @@ body:has(.product-card:hover) .cursor-follower {
 .hero-tag.show { opacity: 1; transform: translateY(0); }
 
 .hero-title {
-    font-family: var(--fh2);
+    font-family: var(--fm);
     font-size: clamp(4rem,7vw,7.5rem);
-    font-weight: 500; line-height: .93;
+    font-weight: 700; line-height: .93;
     color: #F4F0EA; margin-bottom: 1.6rem;
     overflow: hidden;
+    letter-spacing: -0.02em;
 }
 .hero-title .line-1,
 .hero-title .line-2 {
@@ -767,11 +768,11 @@ body:has(.product-card:hover) .cursor-follower {
     opacity: 0; transform: translateY(90px);
     transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
 }
-.hero-title .line-1 { font-family: var(--fh2); font-weight: 500; }
-.hero-title .line-2 { font-family: var(--fh); font-weight: 300; }
+.hero-title .line-1 { font-family: var(--fm); font-weight: 700; text-transform: uppercase; }
+.hero-title .line-2 { font-family: var(--fm); font-weight: 400; }
 .hero-title .line-1.show { opacity: 1; transform: translateY(0); }
 .hero-title .line-2.show { opacity: 1; transform: translateY(0); }
-.hero-title em { font-style: italic; font-family: var(--fh); color: var(--wood); }
+.hero-title em { font-style: normal; font-family: var(--fm); font-weight: 400; color: var(--wood); }
 
 .hero-desc {
     font-size: .95rem; font-weight: 300;
@@ -1113,12 +1114,13 @@ body:has(.product-card:hover) .cursor-follower {
     text-transform: uppercase; color: var(--wood);
 }
 .section-title {
-    font-family: var(--fh);
+    font-family: var(--fm);
     font-size: clamp(3rem, 5.5vw, 5.5rem);
-    font-weight: 300; line-height: .97;
+    font-weight: 700; line-height: .97;
+    letter-spacing: -0.02em; text-transform: uppercase;
     color: var(--td); margin-bottom: 1rem;
 }
-.section-title em { font-style: italic; color: var(--accent); }
+.section-title em { font-style: normal; font-weight: 400; text-transform: none; color: var(--accent); }
 .section-title.dark { color: var(--td); }
 .section-sub { font-size: .88rem; font-weight: 300; color: var(--tm); }
 .section-sub.dark { color: var(--tm); }
@@ -1504,12 +1506,13 @@ body:has(.product-card:hover) .cursor-follower {
     margin-bottom: 1.2rem;
 }
 .ambiente-title {
-    font-family: var(--fh);
+    font-family: var(--fm);
     font-size: clamp(2.4rem, 4vw, 4rem);
-    font-weight: 300; line-height: 1.08;
+    font-weight: 700; line-height: 1.08;
+    letter-spacing: -0.02em; text-transform: uppercase;
     color: var(--td); margin-bottom: 1.5rem;
 }
-.ambiente-title em { font-style: italic; color: var(--accent); }
+.ambiente-title em { font-style: normal; font-weight: 400; text-transform: none; color: var(--accent); }
 .ambiente-desc {
     font-size: .92rem; color: var(--tm);
     line-height: 1.85; max-width: 400px; margin-bottom: 2.5rem;
@@ -1624,12 +1627,13 @@ body:has(.product-card:hover) .cursor-follower {
     margin-bottom: 1.5rem;
 }
 .contacto-title {
-    font-family: var(--fh);
+    font-family: var(--fm);
     font-size: clamp(3rem, 6vw, 6.5rem);
-    font-weight: 300; line-height: .97;
+    font-weight: 700; line-height: .97;
+    letter-spacing: -0.02em; text-transform: uppercase;
     color: #F4F0EA; margin-bottom: 1.5rem;
 }
-.contacto-title em { font-style: italic; color: var(--accent); }
+.contacto-title em { font-style: normal; font-weight: 400; text-transform: none; color: var(--accent); }
 .contacto-desc { font-size: .95rem; color: rgba(244,240,234,.6); margin-bottom: 3rem; }
 .contacto-actions {
     display: flex; gap: 1.5rem; justify-content: center;
